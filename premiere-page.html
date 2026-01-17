@@ -7,20 +7,20 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- VARIABLES --- */
         :root {
             --bg-color: #FAF9F6;
-            --card-bg-color: #ffffff;
             --gold-color: #C5A059;
-            --text-color: #C5A059; 
+            --gold-light: #FBE29D;
+            --text-color: #4A4A4A; 
             
             --font-script: 'Pinyon Script', cursive;
             --font-serif: 'Cormorant Garamond', serif;
-            --font-title: 'Cinzel Decorative', serif;
+            --font-modern: 'Montserrat', sans-serif;
             --waze-color: #58949C;
         }
 
@@ -29,297 +29,194 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: var(--font-serif);
-            line-height: 1.6;
+            font-family: var(--font-modern);
+            line-height: 1.5;
             overflow-x: hidden;
-            padding-top: 80px;
+            padding-top: 60px;
             font-weight: 300;
-            opacity: 0; /* Pour l'animation d'ouverture */
-            animation: pageFadeIn 1.5s ease-out forwards;
-        }
-
-        /* --- ANIMATIONS KEYFRAMES --- */
-        @keyframes pageFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- CLASSES D'ANIMATION (JS) --- */
-        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+            animation: pageFadeIn 1.2s ease-out forwards;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        /* --- ANIMATIONS DOUCES --- */
+        @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+        
+        /* Animation d'apparition au scroll (Reveal) */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); /* Courbe très fluide */
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        .delay-100 { transition-delay: 0.15s; }
+        .delay-200 { transition-delay: 0.3s; }
+
+        /* --- EFFET SCINTILLEMENT DORÉ (SHIMMER) --- */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
-        /* Délais pour l'effet cascade */
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-        .delay-400 { transition-delay: 0.4s; }
+        .gold-shimmer {
+            background: linear-gradient(to right, var(--gold-color) 20%, var(--gold-light) 50%, var(--gold-color) 80%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+            display: inline-block;
+        }
 
-        /* Titres généraux */
-        h2, h3, h4 { font-weight: 400; line-height: 1.3; color: var(--text-color); margin-bottom: 25px; }
-        p { font-size: 1.15rem; margin-bottom: 20px; color: var(--text-color); font-weight: 300; }
+        /* --- TYPO --- */
+        h3 { 
+            font-family: var(--font-modern); font-weight: 400; 
+            text-transform: uppercase; letter-spacing: 3px; font-size: 1.1rem; margin-bottom: 10px;
+        }
+        /* Applique l'effet doré aux titres h3 */
+        h3.shimmer-text { @extend .gold-shimmer; }
 
-        /* --- NAVIGATION --- */
+        .couple-names {
+            font-family: var(--font-script); font-size: 3rem; margin: 5px 0; line-height: 1.2;
+            /* Effet doré sur les prénoms */
+            background: linear-gradient(to right, var(--gold-color) 10%, #E6C880 50%, var(--gold-color) 90%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s linear infinite reverse;
+        }
+
+        p { font-size: 0.9rem; margin-bottom: 8px; color: #666; }
+        .serif-italic { font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; color: #888; }
+
+        /* --- NAV --- */
         nav {
-            position: fixed; top: 0; width: 100%;
-            background-color: rgba(250, 249, 246, 0.98);
-            padding: 25px 0; text-align: center; z-index: 1000;
-            box-shadow: 0 1px 10px rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
-            /* Animation d'arrivée */
-            animation: slideDown 1s ease-out 0.5s backwards;
+            position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.92);
+            padding: 15px 0; z-index: 1000; box-shadow: 0 1px 10px rgba(0,0,0,0.03);
+            display: flex; justify-content: center; gap: 20px; animation: slideDown 0.8s ease-out;
+            backdrop-filter: blur(5px);
         }
-
         nav a {
-            text-decoration: none; color: var(--text-color);
-            margin: 0 30px; font-family: var(--font-title);
-            text-transform: uppercase; letter-spacing: 3px;
-            font-size: 0.8rem; font-weight: 400; transition: all 0.4s ease;
-            position: relative;
+            text-decoration: none; color: var(--text-color); font-family: var(--font-modern);
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; font-weight: 500;
+            transition: color 0.3s;
         }
-        
-        /* Petit trait qui apparaît sous le lien au survol */
-        nav a::after {
-            content: ''; position: absolute; width: 0; height: 1px;
-            bottom: -5px; left: 50%; background-color: var(--gold-color);
-            transition: all 0.3s ease; transform: translateX(-50%);
-        }
-        nav a:hover::after { width: 100%; }
-        nav a:hover { color: #a88544; letter-spacing: 4px; }
+        nav a:hover { color: var(--gold-color); }
 
-        /* --- CONTENEUR --- */
+        /* --- WRAPPER --- */
         .main-wrapper {
-            max-width: 1000px; margin: 0 auto; padding: 40px 20px;
+            max-width: 600px; margin: 0 auto; padding: 30px 15px;
+            display: flex; flex-direction: column; gap: 40px;
         }
 
-        /* --- SECTIONS (CARTES GÉANTES) --- */
-        .section-card {
-            background-size: cover; background-position: center;
-            /* EFFET PARALLAXE : L'image reste fixe */
-            background-attachment: fixed; 
-            padding: 120px 40px;
-            border-radius: 30px;
-            margin-bottom: 60px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            display: flex; justify-content: center; align-items: center;
-            position: relative; overflow: hidden;
+        /* --- CARTES --- */
+        .card {
+            position: relative;
+            padding: 60px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.1); /* Ombre dorée très légère */
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            background-size: cover;
+            background-position: center;
             
-            /* Animation initiale de la section */
-            opacity: 0; transform: scale(0.98);
-            transition: opacity 1.2s ease, transform 1.2s ease;
+            /* Transition douce au survol (pas de tilt bizarre) */
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
         
-        .section-card.active { opacity: 1; transform: scale(1); }
+        /* Légère élévation au survol */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(197, 160, 89, 0.2);
+        }
 
-        .bg-overlay::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); z-index: 0;
-        }
-        
         #mairie { background-image: url('fleur.png'); }
         #houppa { background-image: url('houppa.png'); }
-        #confirmation { background-color: var(--bg-color); border: 1px solid rgba(197, 160, 89, 0.2); box-shadow: none; background-attachment: scroll; }
+        #confirmation { background-color: #fff; }
 
-        /* --- CARTES BLANCHES INTERNES --- */
-        .card-box {
-            background-color: var(--card-bg-color);
-            padding: 80px 50px;
-            max-width: 700px; width: 100%;
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            text-align: center; position: relative; z-index: 1;
-            border-radius: 15px;
+        /* --- FILTRE OPACITÉ 75% --- */
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(255, 255, 255, 0.75); /* OPACITÉ À 75% COMME DEMANDÉ */
+            z-index: 1;
         }
         
-        #confirmation .card-box { background-color: transparent; border: none; box-shadow: none; padding: 40px 20px; }
+        .card > * { position: relative; z-index: 2; }
 
         /* --- ELEMENTS --- */
-        .hebrew-final-img {
-            width: 500px; max-width: 100%; margin-bottom: 60px;
-            display: block; margin-left: auto; margin-right: auto;
-            filter: saturate(0.7) opacity(0.85);
-        }
-
-        .rings-icon {
-            width: 60px; height: auto; margin-bottom: 40px;
-            color: var(--text-color); opacity: 1; display: block; margin-left: auto; margin-right: auto;
-            transition: transform 0.8s ease;
-        }
-        /* Petite rotation au survol de la carte */
-        .card-box:hover .rings-icon { transform: rotate(180deg); }
-
-        .card-title {
-            font-family: var(--font-title); font-weight: 400; font-size: 1.8rem;
-            text-transform: uppercase; letter-spacing: 6px; color: var(--text-color);
-            margin-bottom: 25px; position: relative; display: inline-block; padding-bottom: 30px;
-        }
-        .card-title::after {
-            content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); width: 0; height: 1px;
-            background-color: var(--text-color); opacity: 0.5;
-            transition: width 1s ease 0.5s; /* Trait qui s'agrandit */
-        }
-        .section-card.active .card-title::after { width: 100px; }
-
-        .couple-names-card {
-            font-family: var(--font-script); font-size: 5.5rem;
-            color: var(--text-color); margin: 35px 0 25px;
-            line-height: 1; font-weight: 400; 
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
+        .rings-icon { width: 45px; height: auto; margin-bottom: 15px; color: var(--gold-color); filter: drop-shadow(0 2px 4px rgba(197, 160, 89, 0.2)); }
         
-        .hebrew-names {
-            font-family: var(--font-serif); font-size: 2.2rem;
-            color: var(--text-color); margin-bottom: 50px; font-weight: 400;
+        /* MODIFICATION ICI POUR L'IMAGE HÉBREU */
+        .hebrew-img { 
+            width: 100%; /* Pleine largeur du bloc */
+            /* max-width: 100%;  - Inutile si width est à 100% */
+            margin: 0 auto 25px; 
+            display: block; 
+            opacity: 0.6; /* Plus transparent (au lieu de 0.9) */
+            filter: drop-shadow(0 4px 6px rgba(197, 160, 89, 0.2));
         }
 
-        .card-phrase {
-            font-family: var(--font-serif); font-size: 1.6rem;
-            font-style: italic; color: var(--text-color);
-            margin-bottom: 50px; opacity: 1; font-weight: 300;
-        }
+        .divider { width: 50px; height: 1px; background: var(--gold-color); margin: 25px auto; opacity: 0.5; }
 
-        .card-divider {
-            border: 0; border-top: 1px solid rgba(197, 160, 89, 0.25);
-            margin: 50px auto; width: 0; transition: width 1.5s ease;
+        .date-block { margin: 25px 0; }
+        .date-main { 
+            font-family: var(--font-modern); font-weight: 500; font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--gold-color);
         }
-        .section-card.active .card-divider { width: 50%; }
+        .date-sub { font-family: var(--font-serif); font-style: italic; color: #888; font-size: 1rem; margin-top: 5px; }
 
-        .card-date {
-            font-family: var(--font-title); font-weight: 400;
-            font-size: 1.7rem; text-transform: uppercase;
-            letter-spacing: 5px; color: var(--text-color); margin: 0;
-        }
-
-        .card-venue {
-            font-family: var(--font-title); font-weight: 400; font-size: 1.5rem;
-            text-transform: uppercase; letter-spacing: 4px;
-            margin-bottom: 15px; color: var(--text-color); margin-top: 50px;
-        }
-
-        .card-address {
-            font-family: var(--font-serif); font-size: 1.4rem;
-            font-style: italic; color: var(--text-color); opacity: 0.9;
-            margin-bottom: 60px; font-weight: 300;
-        }
+        .address-name { font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; color: #555; }
 
         .btn-waze {
-            display: inline-flex; align-items: center; justify-content: center;
-            background-color: var(--waze-color); color: #fff;
-            padding: 16px 45px; border-radius: 50px;
-            text-decoration: none; font-family: var(--font-title);
-            font-weight: 400; text-transform: uppercase;
-            letter-spacing: 3px; font-size: 0.9rem;
-            transition: all 0.3s ease;
+            display: inline-block; background: rgba(255,255,255,0.8); color: var(--waze-color);
+            border: 1px solid var(--waze-color); padding: 12px 35px; border-radius: 50px;
+            text-decoration: none; font-family: var(--font-modern); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(88, 148, 156, 0.15);
+        }
+        .btn-waze:hover { 
+            background: var(--waze-color); color: #fff; 
+            transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(88, 148, 156, 0.3);
         }
-        .btn-waze:hover {
-            background-color: #477a80; transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(88, 148, 156, 0.5);
+
+        /* --- HOUPPA GRID --- */
+        .parents-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            margin-bottom: 25px; border-bottom: 1px solid rgba(197, 160, 89, 0.15); padding-bottom: 20px;
         }
-        .btn-waze i { margin-right: 12px; font-size: 1.2rem; }
+        .parent-col { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #666; line-height: 1.4; }
+
+        /* --- FORMULAIRE --- */
+        form { display: flex; flex-direction: column; gap: 20px; text-align: left; margin-top: 25px; }
+        input, textarea, select {
+            width: 100%; padding: 15px 0; border: none; border-bottom: 1px solid #d0d0d0;
+            background: transparent; font-family: var(--font-modern); font-size: 0.95rem;
+            border-radius: 0; transition: all 0.3s;
+        }
+        input:focus, textarea:focus { outline: none; border-bottom-color: var(--gold-color); background: rgba(197, 160, 89, 0.02); }
         
-        .parents-container {
-            display: flex; justify-content: space-between;
-            margin-bottom: 40px; padding: 0 10px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.25);
-        }
-        .parents-block { text-align: center; flex: 1; }
-        .parents-names {
-            font-family: var(--font-title); font-size: 1.1rem;
-            text-transform: uppercase; letter-spacing: 3px;
-            color: var(--text-color); font-weight: 400;
-        }
-        .invitation-text {
-            font-family: var(--font-serif); font-size: 1.5rem; font-style: italic;
-            margin: 50px 0; color: var(--text-color); line-height: 1.5; opacity: 1; font-weight: 300;
-        }
-        
-        .houppa-title-script {
-             font-family: var(--font-script); font-size: 4.5rem;
-             color: var(--text-color); margin-bottom: 50px; line-height: 1;
-             text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
+        .radio-group { display: flex; gap: 30px; margin-top: 8px; }
+        .radio-label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; color: #555; }
+        input[type="radio"] { accent-color: var(--gold-color); transform: scale(1.2); }
 
-        .dedication-text {
-            font-family: var(--font-serif); font-size: 1rem; font-style: italic;
-            color: var(--text-color); margin-top: 60px; border-top: 1px solid rgba(197, 160, 89, 0.25); padding-top: 30px;
-            line-height: 1.6; opacity: 0.8; font-weight: 300;
+        .btn-submit {
+            background: linear-gradient(to right, var(--gold-color), #d4af6a); color: #fff; border: none; padding: 18px; width: 100%;
+            font-family: var(--font-modern); text-transform: uppercase; letter-spacing: 3px;
+            font-size: 0.85rem; cursor: pointer; margin-top: 15px;
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+            transition: all 0.3s; border-radius: 4px;
         }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4); opacity: 0.95; }
 
-        /* --- CONFIRMATION --- */
-        .rsvp-container { max-width: 700px; margin: 0 auto; }
-        form { display: flex; flex-direction: column; gap: 35px; margin-top: 30px; text-align: left; }
-        .form-group { display: flex; flex-direction: column; gap: 12px; }
-        
-        label {
-            font-family: var(--font-title); font-weight: 400;
-            text-transform: uppercase; letter-spacing: 3px; font-size: 0.95rem; color: var(--text-color);
-        }
-        
-        input[type="text"], textarea, select {
-            padding: 20px; border: 1px solid rgba(197, 160, 89, 0.3);
-            background-color: #fff; font-family: var(--font-serif);
-            font-size: 1.1rem; width: 100%; transition: all 0.3s;
-            color: var(--text-color); font-weight: 300; border-radius: 4px;
-        }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold-color); box-shadow: 0 0 15px rgba(197, 160, 89, 0.1); transform: translateY(-2px); }
-
-        .radio-options { display: flex; gap: 40px; margin-top: 10px; }
-        .radio-label {
-            display: flex; align-items: center; gap: 12px;
-            font-family: var(--font-serif); font-size: 1.1rem; cursor: pointer;
-            color: var(--text-color); font-weight: 300;
-        }
-        input[type="radio"] { accent-color: var(--gold-color); transform: scale(1.3); cursor: pointer; }
-
-        .guest-count { margin-top: 25px; display: none; animation: fadeInUp 0.5s ease-out; }
-
-        .btn {
-            display: inline-block; background-color: var(--gold-color); color: #fff;
-            padding: 18px 50px; border: none; cursor: pointer;
-            font-family: var(--font-title); text-transform: uppercase;
-            letter-spacing: 4px; font-size: 1rem; font-weight: 400;
-            border-radius: 50px; align-self: center; margin-top: 30px; transition: all 0.3s;
-            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
-        }
-        .btn:hover { background-color: #a88544; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(197, 160, 89, 0.4); }
-
-        footer { padding: 50px; font-size: 1rem; color: var(--text-color); background-color: rgba(250, 249, 246, 0.9); text-align: center; opacity: 0.8; letter-spacing: 3px; font-family: var(--font-title); font-weight: 300; border-top: 1px solid rgba(197, 160, 89, 0.3); }
-
-        @media (max-width: 768px) {
-            .section-card { background-attachment: scroll; padding: 60px 20px; border-radius: 20px; }
-            .card-box { padding: 50px 20px; }
-            .couple-names-card { font-size: 3.5rem; }
-            .houppa-title-script { font-size: 3rem; }
-            nav a { margin: 0 10px; font-size: 0.75rem; letter-spacing: 1px; }
-            .parents-container { flex-direction: column; gap: 30px; border-bottom: none; padding-bottom: 0; }
-            .parents-block { padding-bottom: 20px; border-bottom: 1px solid rgba(197, 160, 89, 0.25); }
-            .parents-block:last-child { border-bottom: none; }
-        }
+        footer { text-align: center; padding: 40px 0; font-size: 0.75rem; color: var(--gold-color); opacity: 0.7; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -327,191 +224,132 @@
     <nav>
         <a href="#mairie">Mairie</a>
         <a href="#houppa">Houppa</a>
-        <a href="#confirmation">Confirmation</a>
+        <a href="#confirmation">RSVP</a>
     </nav>
 
     <div class="main-wrapper">
 
-        <section id="mairie" class="section-card bg-overlay">
-            <div class="card-box">
-                <div class="reveal">
-                    <svg class="rings-icon" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
-                        <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
-                    </svg>
-                </div>
-                
-                <h3 class="card-title reveal delay-100">Cérémonie Civile</h3>
-                <div class="couple-names-card reveal delay-200">Eliah & Dov</div>
-                <p class="card-phrase reveal delay-200">se diront "Oui"</p>
-                <hr class="card-divider">
-                <p class="card-date reveal delay-300">Lundi 27 Juillet 2026</p>
-                <div class="reveal delay-400">
-                    <div class="card-venue">Mairie de Joinville-le-Pont</div>
-                    <div class="card-address">23 rue de Paris</div>
-                    <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">
-                        <i class="fa-brands fa-waze"></i> Waze
-                    </a>
-                </div>
+        <div id="mairie" class="card reveal">
+            <svg class="rings-icon" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1" />
+                <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1" />
+            </svg>
+            
+            <h3 class="gold-shimmer">Cérémonie Civile</h3>
+            <div class="couple-names">Eliah & Dov</div>
+            <p class="serif-italic">se diront "Oui"</p>
+            
+            <div class="divider"></div>
+            
+            <div class="date-block">
+                <div class="date-main">Lundi 27 Juillet 2026</div>
             </div>
-        </section>
-
-        <section id="houppa" class="section-card bg-overlay">
-            <div class="card-box">
-                <img src="hebreu.png" alt="Kol Sasson" class="hebrew-final-img reveal">
-
-                <div class="parents-container reveal delay-100">
-                    <div class="parents-block">
-                        <div class="parents-names">Famille Saada-Dos Santos</div>
-                    </div>
-                    <div class="parents-block">
-                        <div class="parents-names">Famille Guigui-Halioua</div>
-                    </div>
-                </div>
-                
-                <p class="invitation-text reveal delay-200">
-                    Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
-                </p>
-                
-                <div class="couple-names-card reveal delay-300">Eliah & Dov</div>
-                <div class="hebrew-names reveal delay-300">אליה & דוב</div>
-                <h3 class="houppa-title-script reveal delay-300">Houppa & Soirée</h3>
-                <hr class="card-divider">
-                
-                <div class="reveal delay-400">
-                    <p class="card-date">Mercredi 29 Juillet 2026</p>
-                    <p style="font-size: 1.4rem; color: var(--gold-color); font-style: italic; margin-top: 15px; font-weight: 300;">15 Av 5786</p>
-                    <p class="card-date" style="font-size: 1.6rem; margin-top: 25px;">à 17h30</p>
-                    
-                    <div class="card-venue">La Verrière 91</div>
-                    <div class="card-address">3 rue Marvingt, 91700 Fleury-Mérogis</div>
-                    <a href="https://waze.com/ul?q=La%20Verriere%2091%20Fleury-Merogis" target="_blank" class="btn-waze">
-                        <i class="fa-brands fa-waze"></i> Waze
-                    </a>
-                </div>
-                <p class="dedication-text reveal delay-400">
-                    Nous avons une pensée très chère pour nos grands parents Muriel Rachel Dos Santos et Amram Halioua, qui veillent sur nous.
-                </p>
+            
+            <div>
+                <span class="address-name">Mairie de Joinville-le-Pont</span>
+                <p>23 rue de Paris</p>
             </div>
-        </section>
+            
+            <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">
+                <i class="fa-brands fa-waze"></i> Y aller
+            </a>
+        </div>
 
-        <section id="confirmation" class="section-card">
-            <div class="card-box rsvp-container">
-                <h2 class="reveal" style="font-family: var(--font-title); text-transform: uppercase; letter-spacing: 6px; font-size: 2.2rem; margin-bottom: 30px; text-align: center; font-weight: 400;">Confirmation</h2>
-                <p class="reveal delay-100" style="text-align: center; font-size: 1.3rem; font-style: italic;">Merci de nous confirmer votre présence avant le 1er Juin 2026.</p>
-                
-                <form class="reveal delay-200">
-                    <div class="form-group">
-                        <label for="name">Nom & Prénom</label>
-                        <input type="text" id="name" placeholder="Votre nom complet" required>
-                    </div>
+        <div id="houppa" class="card reveal delay-100">
+            <img src="hebreu.png" alt="Kol Sasson" class="hebrew-img">
 
-                    <hr class="card-divider" style="width: 100%; margin: 30px 0; opacity: 0.4;">
-
-                    <div class="form-group">
-                        <label>Serez-vous présent à la Mairie ?</label>
-                        <div class="radio-options">
-                            <label class="radio-label">
-                                <input type="radio" name="mairie" value="oui" onchange="toggleGuest('mairie', true)"> Présent(e)
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="mairie" value="non" onchange="toggleGuest('mairie', false)" checked> Absent(e)
-                            </label>
-                        </div>
-                        <div id="mairie-guest" class="guest-count">
-                            <label>Nombre de personnes (Mairie)</label>
-                            <select>
-                                <option value="1">1 Personne</option>
-                                <option value="2">2 Personnes</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <hr class="card-divider" style="width: 100%; margin: 30px 0; opacity: 0.4;">
-
-                    <div class="form-group">
-                        <label>Serez-vous présent à la Houppa ?</label>
-                        <div class="radio-options">
-                            <label class="radio-label">
-                                <input type="radio" name="houppa" value="oui" onchange="toggleGuest('houppa', true)"> Présent(e)
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="houppa" value="non" onchange="toggleGuest('houppa', false)" checked> Absent(e)
-                            </label>
-                        </div>
-                        <div id="houppa-guest" class="guest-count">
-                            <label>Nombre de personnes (Houppa)</label>
-                            <select>
-                                <option value="1">1 Personne</option>
-                                <option value="2">2 Personnes</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <hr class="card-divider" style="width: 100%; margin: 30px 0; opacity: 0.4;">
-
-                    <div class="form-group">
-                        <label for="message">Message pour les mariés</label>
-                        <textarea id="message" rows="5" placeholder="Un petit mot pour les mariés..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn">Envoyer</button>
-                </form>
+            <div class="parents-grid">
+                <div class="parent-col">Famille<br>Saada-Dos Santos</div>
+                <div class="parent-col">Famille<br>Guigui-Halioua</div>
             </div>
-        </section>
+            
+            <p class="serif-italic" style="margin: 25px 0; font-size: 1.2rem;">
+                Ont la joie de vous faire part du mariage de leurs enfants
+            </p>
+            
+            <div class="couple-names">Eliah & Dov</div>
+            <div style="font-family: 'Cormorant Garamond'; color: var(--gold-color); font-size: 1.6rem; margin-bottom: 20px;">אליה & דוב</div>
+            
+            <h3 class="gold-shimmer">Houppa & Soirée</h3>
+            
+            <div class="divider"></div>
+            
+            <div class="date-block">
+                <div class="date-main">Mercredi 29 Juillet 2026</div>
+                <div class="date-sub">15 Av 5786</div>
+                <div style="margin-top: 8px; font-weight: 500; color: #666;">à 17h30</div>
+            </div>
+            
+            <div>
+                <span class="address-name">La Verrière 91</span>
+                <p>3 rue Marvingt, 91700 Fleury-Mérogis</p>
+            </div>
+            
+            <a href="https://waze.com/ul?q=La%20Verriere%2091%20Fleury-Merogis" target="_blank" class="btn-waze">
+                <i class="fa-brands fa-waze"></i> Y aller
+            </a>
+
+            <p style="font-size: 0.85rem; color: #999; margin-top: 35px; font-style: italic; border-top: 1px solid rgba(197, 160, 89, 0.15); padding-top: 20px;">
+                Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
+            </p>
+        </div>
+
+        <div id="confirmation" class="card reveal delay-200">
+            <h3 class="gold-shimmer">Confirmation</h3>
+            <p class="serif-italic" style="font-size: 1rem;">Réponse souhaitée avant le 1er Juin 2026</p>
+            
+            <form>
+                <input type="text" placeholder="Votre Nom & Prénom" required>
+
+                <div style="margin-top: 15px;">
+                    <p style="text-align: left; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--gold-color);">Mairie</p>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="mairie" value="oui" onclick="toggle('mairie', true)"> Présent</label>
+                        <label class="radio-label"><input type="radio" name="mairie" value="non" onclick="toggle('mairie', false)"> Absent</label>
+                    </div>
+                    <select id="mairie-guest" style="display:none; margin-top: 15px;">
+                        <option value="1">1 Personne</option>
+                        <option value="2">2 Personnes</option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <p style="text-align: left; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--gold-color);">Houppa</p>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="houppa" value="oui" onclick="toggle('houppa', true)"> Présent</label>
+                        <label class="radio-label"><input type="radio" name="houppa" value="non" onclick="toggle('houppa', false)"> Absent</label>
+                    </div>
+                    <select id="houppa-guest" style="display:none; margin-top: 15px;">
+                        <option value="1">1 Personne</option>
+                        <option value="2">2 Personnes</option>
+                    </select>
+                </div>
+
+                <textarea rows="3" placeholder="Un petit mot..."></textarea>
+                <button type="submit" class="btn-submit">Confirmer ma présence</button>
+            </form>
+        </div>
 
     </div>
 
-    <footer>
-        <p>&copy; 2026 Eliah & Dov</p>
-    </footer>
+    <footer>&copy; 2026 Eliah & Dov</footer>
 
     <script>
-        // Scroll fluide
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // Gestion du nombre d'invités
-        function toggleGuest(event, isPresent) {
-            const guestDiv = document.getElementById(event + '-guest');
-            if (isPresent) {
-                guestDiv.style.display = 'block';
-            } else {
-                guestDiv.style.display = 'none';
-            }
+        function toggle(type, show) {
+            document.getElementById(type + '-guest').style.display = show ? 'block' : 'none';
         }
 
-        // ANIMATION AU SCROLL (INTERSECTION OBSERVER)
-        // Ce script détecte quand un élément entre dans l'écran et lance l'animation
-        const observerOptions = {
-            threshold: 0.15, // L'élément doit être à 15% visible pour s'animer
-            rootMargin: "0px 0px -50px 0px"
-        };
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    // Si c'est une section carte, on anime aussi ses enfants .reveal
-                    if (entry.target.classList.contains('section-card')) {
-                        const childReveals = entry.target.querySelectorAll('.reveal');
-                        childReveals.forEach(child => child.classList.add('active'));
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // On observe les sections et les éléments avec la classe .reveal
-        document.querySelectorAll('.section-card, .reveal').forEach(el => {
-            observer.observe(el);
-        });
+            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
