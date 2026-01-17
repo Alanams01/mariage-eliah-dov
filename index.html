@@ -44,16 +44,16 @@
             transform: scale(1.0);
         }
 
-        /* --- 2. LA CARTE CENTRALE (Aspect plus "serré") --- */
+        /* --- 2. LA CARTE CENTRALE (Version compacte) --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            width: 85%; /* Un peu plus large pour accueillir les gros éléments */
-            max-width: 380px;
-            /* PADDING TRÈS RÉDUIT : Moins d'espace blanc sur les bords */
+            /* C'EST ICI QUE J'AI RÉDUIT LA LARGEUR */
+            width: 80%; /* Sur ordi */
+            max-width: 350px;
             padding: 15px 5px; 
             
             max-height: 95vh;
@@ -68,27 +68,27 @@
             text-align: center;
             
             outline: 1px solid var(--or-fonce);
-            outline-offset: -6px; /* Liseré plus proche du bord */
+            outline-offset: -6px; 
             
             overflow-y: auto;
         }
 
-        /* --- ÉLÉMENTS DE LA CARTE (AGRANDIS) --- */
+        /* --- ÉLÉMENTS DE LA CARTE --- */
         
-        /* Logo PLUS GRAND */
+        /* Logo GRAND */
         .logo-img {
-            width: 100px; /* Était 80px */
-            margin-bottom: 5px; /* Moins d'espace */
+            width: 90px; 
+            margin-bottom: 5px; 
             margin-top: 0;
             mix-blend-mode: multiply;
         }
 
-        /* Cadre Photo PLUS GRAND */
+        /* Cadre Photo GRAND */
         .photo-container {
-            width: 200px; /* Était 150px */
-            height: 250px; /* Était 190px */
+            width: 190px; 
+            height: 240px; 
             position: relative;
-            margin-bottom: 8px; /* Moins d'espace */
+            margin-bottom: 5px; 
             border: 2px solid var(--or-fonce);
             padding: 3px; 
             background: #fff;
@@ -102,37 +102,35 @@
         /* Titres */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 2.8rem; /* Légèrement réduit pour compenser le manque de place */
+            font-size: 2.8rem; 
             color: var(--or-fonce);
-            margin: 0 0 10px 0;
+            margin: 5px 0 5px 0; /* Marges réduites */
             line-height: 1;
         }
 
-        /* Compteur PLUS GRAND */
+        /* Compteur */
         .countdown {
             display: flex;
-            gap: 12px; /* Un peu plus d'écart entre les gros chiffres */
-            margin-bottom: 15px;
+            gap: 10px; 
+            margin-bottom: 12px;
             color: var(--or-fonce);
             border-top: 1px solid var(--or-clair);
-            padding-top: 12px;
-            width: 95%; /* Prend presque toute la largeur */
+            padding-top: 10px;
+            width: 95%; 
             justify-content: center;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
-        
-        /* Chiffres agrandis */
-        .count-num { font-size: 1.5rem; font-weight: 700; line-height: 1; } /* Était 1.1rem */
-        .count-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-top: 2px; }
+        .count-num { font-size: 1.4rem; font-weight: 700; line-height: 1; } 
+        .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-top: 2px; }
 
         /* Bouton */
         .btn {
             background-color: var(--or-fonce);
             color: #fff;
             text-decoration: none;
-            padding: 12px 30px; /* Bouton un peu plus imposant */
-            font-size: 0.8rem;
+            padding: 12px 25px; 
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
@@ -141,21 +139,23 @@
 
         .btn:hover { background-color: #4A3F35; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- RESPONSIVE MOBILE (C'est ici qu'on force la réduction du cadre) --- */
         @media (max-width: 600px) {
             .card-wrapper {
-                width: 88%;
-                padding: 10px 2px; /* Padding extrêmement fin sur mobile */
+                /* J'ai réduit ici à 74% pour laisser beaucoup de place aux fleurs */
+                width: 74%; 
+                padding: 15px 2px; /* Presque pas de marge intérieure */
             }
-            /* Éléments très grands sur mobile aussi */
-            .photo-container { width: 170px; height: 210px; margin-bottom: 5px; }
-            h1 { font-size: 2.4rem; margin-bottom: 8px; }
-            .logo-img { width: 80px; margin-bottom: 5px; }
             
-            .count-num { font-size: 1.3rem; } /* Chiffres grands sur mobile */
-            .countdown { gap: 8px; padding-top: 10px; margin-bottom: 12px; }
+            /* Je garde les éléments intérieurs GRANDS */
+            .photo-container { width: 180px; height: 220px; margin-bottom: 5px; }
+            .logo-img { width: 85px; margin-bottom: 5px; }
+            h1 { font-size: 2.3rem; margin-bottom: 5px; }
             
-            .btn { padding: 10px 25px; font-size: 0.75rem; }
+            .count-num { font-size: 1.2rem; }
+            .countdown { gap: 8px; padding-top: 8px; margin-bottom: 10px; }
+            
+            .btn { padding: 10px 20px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -187,7 +187,6 @@
     </div>
 
     <script>
-        // Script du Compte à Rebours
         const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
 
         setInterval(() => {
