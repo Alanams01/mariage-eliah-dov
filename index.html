@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mariage - Eliah & Dov</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,13 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES --- */
         :root {
-            /* Couleur Bronze foncé / Marron doré */
-            --color-title: #7B5E28; 
+            --color-title: #7B5E28; /* Bronze Doré */
             --color-cream: #FAF9F6;
             --color-text: #5A4A42;
-            
             --font-script: 'Pinyon Script', cursive;
             --font-serif: 'Playfair Display', serif;
         }
@@ -27,126 +24,230 @@
             height: 100%;
             background-color: var(--color-cream);
             overflow: hidden;
+            overscroll-behavior: none;
         }
 
-        /* --- CONTENEUR PRINCIPAL --- */
+        /* --- PLUIE D'OR --- */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            z-index: 2; /* Devant le fond */
+            pointer-events: none;
+        }
+
         .hero-section {
             position: relative;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
-        /* --- IMAGE D'ARRIÈRE PLAN --- */
-        .background-frame {
+        /* --- ARRIÈRE-PLAN (IMAGE) --- */
+        .background-layer {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 1;
-            pointer-events: none; 
+            pointer-events: none;
         }
 
-        .background-frame img {
+        .background-layer img {
             width: 100%; height: 100%;
+            /* SUR ORDINATEUR : On voit le cadre entier centré */
             object-fit: contain; 
             object-position: center center;
-            opacity: 0.8; 
+            opacity: 0.85; 
         }
 
-        /* --- TEXTE CENTRAL --- */
-        .content {
+        /* --- CONTENU (TEXTE) --- */
+        .content-layer {
             z-index: 10;
             text-align: center;
             padding: 20px;
-            animation: fadeIn 2s ease-in-out;
+            width: 100%; 
+            max-width: 90%;
         }
 
+        /* --- ANIMATIONS D'ENTRÉE (Reveal du bas vers le haut) --- */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(30px); /* Arrive du bas */
+            transition: all 1s ease-out;
+        }
+
+        /* Classes activées par JS */
+        body.loaded .reveal-1 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+        body.loaded .reveal-2 { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+        body.loaded .reveal-3 { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+        body.loaded .reveal-4 { opacity: 1; transform: translateY(0); transition-delay: 1.1s; }
+
+
+        /* --- TYPOGRAPHIE --- */
         .pre-title {
             font-family: var(--font-serif);
             text-transform: uppercase;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             letter-spacing: 4px;
             color: var(--color-text);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-weight: 600;
         }
 
         .names {
             font-family: var(--font-script);
-            font-size: 7rem; 
+            font-size: 6.5rem; 
             color: var(--color-title);
-            line-height: 1.2;
-            margin: 10px 0;
+            line-height: 1.1;
+            margin: 15px 0;
+            white-space: nowrap; 
         }
 
         .date {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--color-text);
             letter-spacing: 3px;
-            margin-top: 20px;
+            margin-top: 15px;
             margin-bottom: 40px; 
             font-style: italic;
             font-weight: 600;
         }
 
-        /* --- STYLE DU BOUTON (Transformé en LIEN) --- */
+        /* --- BOUTON --- */
         .btn-invitation {
-            display: inline-block; /* Important pour que le lien ressemble à un bouton */
-            padding: 15px 40px;
-            
+            display: inline-block;
+            padding: 15px 35px;
             border: 2px solid var(--color-title); 
             color: var(--color-title);
-            
-            background-color: transparent;
+            background-color: rgba(250, 249, 246, 0.7);
             font-family: var(--font-serif);
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 0.9rem;
             font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s ease;
-            text-decoration: none; /* Enlève le soulignement bleu moche des liens */
+            position: relative;
         }
-
+        
         .btn-invitation:hover {
             background-color: var(--color-title);
             color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(123, 94, 40, 0.2);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- MOBILE --- */
+        /* --- OPTIMISATION MOBILE (C'est ici que ça change tout) --- */
         @media (max-width: 768px) {
-            .names { font-size: 4rem; }
-            .pre-title { font-size: 0.9rem; }
-            .background-frame img { transform: scale(0.9); }
+            
+            /* 1. L'image remplit TOUT l'écran sur mobile */
+            .background-layer img {
+                object-fit: cover; /* Remplit l'écran */
+                object-position: center center;
+            }
+
+            /* 2. Texte adapté */
+            .names {
+                font-size: 4rem; /* Assez grand mais tient sur l'écran */
+                white-space: normal; /* Permet le retour à la ligne si besoin */
+                line-height: 1;
+                margin-bottom: 20px;
+            }
+
+            .pre-title { font-size: 0.8rem; letter-spacing: 2px; }
+            .date { font-size: 1.2rem; margin-bottom: 30px; }
+            
+            /* Bouton plus facile à cliquer */
+            .btn-invitation { 
+                padding: 14px 30px; 
+                font-size: 0.85rem; 
+                background-color: rgba(250, 249, 246, 0.9); /* Fond plus uni pour lisibilité */
+            }
+        }
+
+        /* Style des particules JS */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--color-title); /* Particules couleur or */
+            pointer-events: none;
+            opacity: 0;
         }
     </style>
 </head>
 <body>
 
+    <div id="particles-js"></div>
+
     <div class="hero-section">
         
-        <div class="background-frame">
-            <img src="Cadre-floral-or.png" alt="Décoration florale">
+        <div class="background-layer">
+            <img src="cadre-floral-or.png" alt="Décoration florale">
         </div>
 
-        <div class="content">
-            <p class="pre-title">Mariage de</p>
-            <h1 class="names">Eliah & Dov</h1>
-            <p class="date">29 Juillet 2026</p>
+        <div class="content-layer">
+            <p class="pre-title reveal-text reveal-1">Mariage de</p>
+            <h1 class="names reveal-text reveal-2">Eliah & Dov</h1>
+            <p class="date reveal-text reveal-3">29 Juillet 2026</p>
             
-            <a href="premiere-page.html" class="btn-invitation">Voir l'invitation</a>
+            <div class="reveal-text reveal-4">
+                <a href="premiere-page.html" class="btn-invitation">Voir l'invitation</a>
+            </div>
         </div>
 
     </div>
 
+    <script>
+        // 1. Lancer les animations d'entrée au chargement
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            createParticles(); 
+        });
+
+        // 2. Générateur de pluie d'or RAPIDE
+        function createParticles() {
+            const container = document.getElementById('particles-js');
+            const count = 60; // Nombre de gouttes d'or
+
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Taille
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Position horizontale
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `-10px`;
+                
+                // Opacité variable
+                particle.style.opacity = Math.random() * 0.6 + 0.3;
+                
+                // VITESSE RAPIDE (Entre 2s et 4s de chute)
+                const duration = Math.random() * 2 + 2; 
+                const delay = Math.random() * 2; // Démarrage décalé
+                
+                particle.style.animation = `fall ${duration}s linear ${delay}s infinite`;
+                
+                container.appendChild(particle);
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(110vh); opacity: 0; }
+        }
+    </style>
+
 </body>
 </html>
-
