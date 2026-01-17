@@ -44,16 +44,17 @@
             transform: scale(1.0);
         }
 
-        /* --- 2. LA CARTE CENTRALE --- */
+        /* --- 2. LA CARTE CENTRALE (Aspect plus "serré") --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            width: 82%;
-            max-width: 360px;
-            padding: 20px 10px;
+            width: 85%; /* Un peu plus large pour accueillir les gros éléments */
+            max-width: 380px;
+            /* PADDING TRÈS RÉDUIT : Moins d'espace blanc sur les bords */
+            padding: 15px 5px; 
             
             max-height: 95vh;
             background-color: var(--creme);
@@ -67,33 +68,29 @@
             text-align: center;
             
             outline: 1px solid var(--or-fonce);
-            outline-offset: -8px;
+            outline-offset: -6px; /* Liseré plus proche du bord */
             
             overflow-y: auto;
         }
 
-        /* --- ÉLÉMENTS DE LA CARTE --- */
+        /* --- ÉLÉMENTS DE LA CARTE (AGRANDIS) --- */
         
-        /* Logo (avec tentative de suppression du fond) */
+        /* Logo PLUS GRAND */
         .logo-img {
-            /* LOGO AGRANDI ICI */
-            width: 80px; /* Était 50px */
-            margin-bottom: 8px;
+            width: 100px; /* Était 80px */
+            margin-bottom: 5px; /* Moins d'espace */
             margin-top: 0;
-            /* ASTUCE CSS POUR LE FOND BLANC : */
-            mix-blend-mode: multiply; /* Tente de rendre le blanc transparent */
-            /* Note : Pour un résultat parfait, utilisez un PNG transparent */
+            mix-blend-mode: multiply;
         }
 
-        /* Cadre Photo */
+        /* Cadre Photo PLUS GRAND */
         .photo-container {
-            /* CADRE RÉDUIT ICI */
-            width: 150px; /* Était 180px */
-            height: 190px; /* Était 230px */
+            width: 200px; /* Était 150px */
+            height: 250px; /* Était 190px */
             position: relative;
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Moins d'espace */
             border: 2px solid var(--or-fonce);
-            padding: 4px; 
+            padding: 3px; 
             background: #fff;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
@@ -105,35 +102,37 @@
         /* Titres */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3rem;
+            font-size: 2.8rem; /* Légèrement réduit pour compenser le manque de place */
             color: var(--or-fonce);
-            margin: 0 0 15px 0; /* Ajout d'une marge en bas car la date n'est plus là */
+            margin: 0 0 10px 0;
             line-height: 1;
         }
 
-        /* Compteur */
+        /* Compteur PLUS GRAND */
         .countdown {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px; /* Espace avant le bouton */
+            gap: 12px; /* Un peu plus d'écart entre les gros chiffres */
+            margin-bottom: 15px;
             color: var(--or-fonce);
-            border-top: 1px solid var(--or-clair); /* Ajout d'une ligne fine au-dessus pour séparer des noms */
-            padding-top: 15px;
-            width: 90%;
+            border-top: 1px solid var(--or-clair);
+            padding-top: 12px;
+            width: 95%; /* Prend presque toute la largeur */
             justify-content: center;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.1rem; font-weight: 700; }
-        .count-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+        
+        /* Chiffres agrandis */
+        .count-num { font-size: 1.5rem; font-weight: 700; line-height: 1; } /* Était 1.1rem */
+        .count-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-top: 2px; }
 
         /* Bouton */
         .btn {
             background-color: var(--or-fonce);
             color: #fff;
             text-decoration: none;
-            padding: 10px 25px;
-            font-size: 0.75rem;
+            padding: 12px 30px; /* Bouton un peu plus imposant */
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
@@ -145,15 +144,18 @@
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
             .card-wrapper {
-                width: 80%;
-                padding: 15px 5px;
+                width: 88%;
+                padding: 10px 2px; /* Padding extrêmement fin sur mobile */
             }
-            /* CADRE RÉDUIT SUR MOBILE ICI */
-            .photo-container { width: 120px; height: 150px; margin-bottom: 8px; } /* Était 150px / 190px */
-            h1 { font-size: 2.3rem; }
-            /* LOGO AGRANDI SUR MOBILE ICI */
-            .logo-img { width: 60px; margin-bottom: 5px; } /* Était 40px */
-            .countdown { margin-bottom: 15px; }
+            /* Éléments très grands sur mobile aussi */
+            .photo-container { width: 170px; height: 210px; margin-bottom: 5px; }
+            h1 { font-size: 2.4rem; margin-bottom: 8px; }
+            .logo-img { width: 80px; margin-bottom: 5px; }
+            
+            .count-num { font-size: 1.3rem; } /* Chiffres grands sur mobile */
+            .countdown { gap: 8px; padding-top: 10px; margin-bottom: 12px; }
+            
+            .btn { padding: 10px 25px; font-size: 0.75rem; }
         }
     </style>
 </head>
