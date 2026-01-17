@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariage de Eliah & Dov</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES ET RESET --- */
+        :root {
+            --bg-color: #FAF9F6; /* Couleur Crème */
+            --gold-color: #C5A059; /* Couleur Dorée de l'image */
+            --text-color: #5A4A42; /* Marron foncé pour la lisibilité */
+            --font-script: 'Great Vibes', cursive;
+            --font-serif: 'Cormorant Garamond', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHIE --- */
+        h1, h2, h3 {
+            font-family: var(--font-script);
+            color: var(--gold-color);
+            font-weight: 400;
+        }
+
+        h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
+        h2 { font-size: 3.5rem; margin-bottom: 20px; text-align: center; }
+        h3 { font-size: 2rem; }
+        
+        p { font-size: 1.2rem; margin-bottom: 15px; }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            color: #8c7b60;
+            margin-bottom: 20px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(250, 249, 246, 0.95);
+            padding: 15px 0;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin: 0 15px;
+            font-family: var(--font-serif);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--gold-color); }
+
+        /* --- HERO SECTION (La page couverture) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Cadre floral (Simulation des images aux coins) */
+        .floral-corner {
+            position: absolute;
+            width: 250px; /* Ajustez selon la taille de vos images */
+            max-width: 40vw;
+            z-index: -1;
+            opacity: 0.9;
+        }
+
+        .top-left { top: 0; left: 0; transform: rotate(0deg); }
+        .top-right { top: 0; right: 0; transform: scaleX(-1); }
+        .bottom-left { bottom: 0; left: 0; transform: scaleY(-1); }
+        .bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
+
+        /* Si vous n'avez pas encore les images, ceci crée un cadre doré simple */
+        .border-fallback {
+            position: absolute;
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 2px solid var(--gold-color);
+            pointer-events: none;
+            display: none; /* Activez ceci si vous n'avez pas d'images */
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-date {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: var(--text-color);
+            letter-spacing: 3px;
+        }
+
+        /* --- SECTIONS GÉNÉRALES --- */
+        section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- SECTION HISTOIRE --- */
+        .story-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 30px 0;
+            border: 1px solid var(--gold-color);
+        }
+
+        /* --- SECTION PROGRAMME --- */
+        .timeline-item {
+            margin: 40px 0;
+            padding: 20px;
+            border-left: 2px solid var(--gold-color);
+            text-align: left;
+            margin-left: 20px;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: var(--gold-color);
+            font-size: 1.2rem;
+        }
+
+        /* --- BOUTON RSVP --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--gold-color);
+            color: #fff;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 2px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-serif);
+        }
+
+        .btn:hover {
+            background-color: #a88544;
+        }
+
+        /* --- FORMULAIRE RSVP --- */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        input, select, textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: 1px solid var(--gold-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            .floral-corner { width: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="#histoire">Notre Histoire</a>
+        <a href="#programme">Programme</a>
+        <a href="#rsvp">RSVP</a>
+    </nav>
+
+    <section id="accueil" class="hero">
+        <img src="https://via.placeholder.com/300x300/FAF9F6/C5A059?text=Fleur+Haut+G" alt="Décoration" class="floral-corner top-left">
+        <img src="https://via.placeholder.com/300x300/FAF9F6/C5A059?text=Fleur+Haut+D" alt="Décoration" class="floral-corner top-right">
+        <img src="https://via.placeholder.com/300x300/FAF9F6/C5A059?text=Fleur+Bas+G" alt="Décoration" class="floral-corner bottom-left">
+        <img src="https://via.placeholder.com/300x300/FAF9F6/C5A059?text=Fleur+Bas+D" alt="Décoration" class="floral-corner bottom-right">
+
+        <div class="hero-content">
+            <p class="subtitle">Livret de prières de Chabbat</p>
+            <h1>Chabbat Shalom</h1>
+            <br>
+            <h2>Eliah & Dov</h2>
+            <div class="hero-date">29.07.2026</div>
+        </div>
+    </section>
+
+    <section id="histoire">
+        <h2>Notre Histoire</h2>
+        <p>Du premier regard à notre "Oui" pour la vie.</p>
+        <img src="https://via.placeholder.com/800x400/efebe0/8c7b60?text=Photo+du+Couple" alt="Eliah et Dov" class="story-img">
+        <p>
+            Nous sommes ravis de partager ce moment unique avec vous. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+    </section>
+
+    <section id="programme">
+        <h2>Le Programme</h2>
+        <p class="subtitle">Dimanche 29 Juillet 2026</p>
+
+        <div class="timeline-item">
+            <div class="timeline-time">16:00</div>
+            <h3>Houppa</h3>
+            <p>Synagogue de la Victoire, Paris<br>Tenue de ville souhaitée</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-time">19:00</div>
+            <h3>Réception & Dîner</h3>
+            <p>Pavillon des Étoiles<br>Suivi d'une soirée dansante jusqu'au bout de la nuit.</p>
+        </div>
+    </section>
+
+    <section id="rsvp">
+        <h2>Réponse Souhaitée</h2>
+        <p>Merci de nous confirmer votre présence avant le 1er Juin 2026.</p>
+        
+        <form>
+            <input type="text" placeholder="Votre Nom complet" required>
+            <input type="email" placeholder="Votre Email" required>
+            <select>
+                <option value="">Serez-vous présent ?</option>
+                <option value="oui">Oui, avec joie</option>
+                <option value="non">Non, malheureusement</option>
+            </select>
+            <textarea rows="4" placeholder="Message aux mariés ou restrictions alimentaires..."></textarea>
+            <button type="submit" class="btn">Envoyer</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Eliah & Dov - Fait avec amour</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

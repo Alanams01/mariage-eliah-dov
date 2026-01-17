@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariage - Eliah & Dov</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            /* Couleur Bronze foncé / Marron doré */
+            --color-title: #7B5E28; 
+            --color-cream: #FAF9F6;
+            --color-text: #5A4A42;
+            
+            --font-script: 'Pinyon Script', cursive;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            height: 100%;
+            background-color: var(--color-cream);
+            overflow: hidden;
+        }
+
+        /* --- CONTENEUR PRINCIPAL --- */
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- IMAGE D'ARRIÈRE PLAN --- */
+        .background-frame {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none; 
+        }
+
+        .background-frame img {
+            width: 100%; height: 100%;
+            object-fit: contain; 
+            object-position: center center;
+            opacity: 0.8; 
+        }
+
+        /* --- TEXTE CENTRAL --- */
+        .content {
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .pre-title {
+            font-family: var(--font-serif);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--color-text);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .names {
+            font-family: var(--font-script);
+            font-size: 7rem; 
+            color: var(--color-title);
+            line-height: 1.2;
+            margin: 10px 0;
+        }
+
+        .date {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-text);
+            letter-spacing: 3px;
+            margin-top: 20px;
+            margin-bottom: 40px; 
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        /* --- STYLE DU BOUTON (Transformé en LIEN) --- */
+        .btn-invitation {
+            display: inline-block; /* Important pour que le lien ressemble à un bouton */
+            padding: 15px 40px;
+            
+            border: 2px solid var(--color-title); 
+            color: var(--color-title);
+            
+            background-color: transparent;
+            font-family: var(--font-serif);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none; /* Enlève le soulignement bleu moche des liens */
+        }
+
+        .btn-invitation:hover {
+            background-color: var(--color-title);
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .names { font-size: 4rem; }
+            .pre-title { font-size: 0.9rem; }
+            .background-frame img { transform: scale(0.9); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        
+        <div class="background-frame">
+            <img src="cadre-floral-or.png" alt="Décoration florale">
+        </div>
+
+        <div class="content">
+            <p class="pre-title">Mariage de</p>
+            <h1 class="names">Eliah & Dov</h1>
+            <p class="date">29 Juillet 2026</p>
+            
+            <a href="premiere-page.html" class="btn-invitation">Voir l'invitation</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
