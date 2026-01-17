@@ -26,7 +26,7 @@
             overflow: hidden; 
         }
 
-        /* --- 1. FOND FLORAL (Visible et net) --- */
+        /* --- 1. FOND FLORAL --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -44,17 +44,16 @@
             transform: scale(1.0);
         }
 
-        /* --- 2. LA CARTE CENTRALE (RÉDUITE) --- */
+        /* --- 2. LA CARTE CENTRALE --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            /* TAILLES RÉDUITES ICI */
-            width: 85%; /* Moins large */
-            max-width: 400px; /* Taille max plus petite */
-            padding: 25px 15px; /* Moins d'espace intérieur */
+            width: 82%;
+            max-width: 360px;
+            padding: 20px 10px;
             
             max-height: 95vh;
             background-color: var(--creme);
@@ -68,27 +67,30 @@
             text-align: center;
             
             outline: 1px solid var(--or-fonce);
-            outline-offset: -8px; /* Liseré plus proche du bord */
+            outline-offset: -8px;
             
             overflow-y: auto;
         }
 
-        /* --- ÉLÉMENTS DE LA CARTE (Tous réduits) --- */
+        /* --- ÉLÉMENTS DE LA CARTE --- */
         
-        /* Logo réduit */
+        /* Logo (avec tentative de suppression du fond) */
         .logo-img {
-            width: 50px; /* Était 60px */
-            margin-bottom: 10px;
+            width: 50px;
+            margin-bottom: 8px;
             margin-top: 0;
+            /* ASTUCE CSS POUR LE FOND BLANC : */
+            mix-blend-mode: multiply; /* Tente de rendre le blanc transparent */
+            /* Note : Pour un résultat parfait, utilisez un PNG transparent */
         }
 
-        /* Cadre Photo NETTEMENT réduit */
+        /* Cadre Photo */
         .photo-container {
-            width: 140px; /* Était 180px */
-            height: 180px; /* Était 220px */
+            width: 180px;
+            height: 230px;
             position: relative;
-            margin-bottom: 15px; /* Moins d'espace sous la photo */
-            border: 2px solid var(--or-fonce); /* Bordure un peu plus fine */
+            margin-bottom: 10px;
+            border: 2px solid var(--or-fonce);
             padding: 4px; 
             background: #fff;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -98,55 +100,37 @@
             width: 100%; height: 100%; object-fit: cover; display: block;
         }
 
-        /* Titres réduits */
+        /* Titres */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3rem; /* Était 3.5rem */
+            font-size: 3rem;
             color: var(--or-fonce);
-            margin: 0;
+            margin: 0 0 15px 0; /* Ajout d'une marge en bas car la date n'est plus là */
             line-height: 1;
         }
 
-        .pre-title {
-            text-transform: uppercase;
-            font-size: 0.7rem; /* Un peu plus petit */
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            color: #888;
-        }
-
-        .date {
-            font-size: 1rem; /* Était 1.1rem */
-            font-weight: 600;
-            color: var(--texte);
-            margin-top: 10px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-top: 1px solid var(--or-clair);
-            border-bottom: 1px solid var(--or-clair);
-            padding: 6px 0;
-            width: 85%;
-        }
-
-        /* Compteur réduit */
+        /* Compteur */
         .countdown {
             display: flex;
-            gap: 10px; /* Moins d'écart */
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 20px; /* Espace avant le bouton */
             color: var(--or-fonce);
+            border-top: 1px solid var(--or-clair); /* Ajout d'une ligne fine au-dessus pour séparer des noms */
+            padding-top: 15px;
+            width: 90%;
+            justify-content: center;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.1rem; font-weight: 700; } /* Chiffres plus petits */
+        .count-num { font-size: 1.1rem; font-weight: 700; }
         .count-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
 
-        /* Bouton réduit */
+        /* Bouton */
         .btn {
             background-color: var(--or-fonce);
             color: #fff;
             text-decoration: none;
-            padding: 10px 25px; /* Bouton plus petit */
+            padding: 10px 25px;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -156,18 +140,15 @@
 
         .btn:hover { background-color: #4A3F35; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE (Encore plus petit sur téléphone) --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
             .card-wrapper {
-                width: 85%; /* Laisse bien voir les fleurs sur les côtés */
-                padding: 20px 10px;
-                outline-offset: -6px;
+                width: 80%;
+                padding: 15px 5px;
             }
-            h1 { font-size: 2.5rem; } /* Prénoms plus petits sur mobile */
-            /* Photo très compacte sur mobile */
-            .photo-container { width: 110px; height: 140px; margin-bottom: 10px; }
+            .photo-container { width: 150px; height: 190px; margin-bottom: 8px; }
+            h1 { font-size: 2.3rem; }
             .logo-img { width: 40px; margin-bottom: 5px; }
-            .date { font-size: 0.9rem; margin-bottom: 15px; }
             .countdown { margin-bottom: 15px; }
         }
     </style>
@@ -185,13 +166,9 @@
         <div class="photo-container">
             <img src="photo.jpeg" alt="Eliah et Dov">
         </div>
-
-        <p class="pre-title">Mariage de</p>
         
         <h1>Eliah & Dov</h1>
         
-        <div class="date">Mercredi 29 Juillet 2026</div>
-
         <div class="countdown" id="countdown">
             <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
             <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
