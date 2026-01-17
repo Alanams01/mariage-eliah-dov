@@ -76,7 +76,8 @@
         
         /* Logo (avec tentative de suppression du fond) */
         .logo-img {
-            width: 50px;
+            /* LOGO AGRANDI ICI */
+            width: 80px; /* Était 50px */
             margin-bottom: 8px;
             margin-top: 0;
             /* ASTUCE CSS POUR LE FOND BLANC : */
@@ -86,8 +87,9 @@
 
         /* Cadre Photo */
         .photo-container {
-            width: 180px;
-            height: 230px;
+            /* CADRE RÉDUIT ICI */
+            width: 150px; /* Était 180px */
+            height: 190px; /* Était 230px */
             position: relative;
             margin-bottom: 10px;
             border: 2px solid var(--or-fonce);
@@ -146,9 +148,11 @@
                 width: 80%;
                 padding: 15px 5px;
             }
-            .photo-container { width: 150px; height: 190px; margin-bottom: 8px; }
+            /* CADRE RÉDUIT SUR MOBILE ICI */
+            .photo-container { width: 120px; height: 150px; margin-bottom: 8px; } /* Était 150px / 190px */
             h1 { font-size: 2.3rem; }
-            .logo-img { width: 40px; margin-bottom: 5px; }
+            /* LOGO AGRANDI SUR MOBILE ICI */
+            .logo-img { width: 60px; margin-bottom: 5px; } /* Était 40px */
             .countdown { margin-bottom: 15px; }
         }
     </style>
