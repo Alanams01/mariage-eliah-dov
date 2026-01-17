@@ -11,7 +11,7 @@
 
     <style>
         :root {
-            --or-fonce: #8E793E; /* Or antique */
+            --or-fonce: #8E793E;
             --or-clair: #AD9C65;
             --creme: #FCFBF9;
             --texte: #4A3F35;
@@ -22,12 +22,11 @@
         body, html {
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            /* Fond crème chaud pour faire ressortir le doré */
             background-color: #FDFCF8;
             overflow: hidden; 
         }
 
-        /* --- 1. LE FOND FLORAL (CORRIGÉ POUR ÊTRE BIEN VISIBLE) --- */
+        /* --- 1. FOND FLORAL (Visible et net) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -39,31 +38,28 @@
         .bg-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Remplit tout l'écran du téléphone */
-            
-            /* C'EST ICI QUE J'AI CHANGÉ LES RÉGLAGES : */
-            opacity: 0.9;      /* Quasi opaque pour être bien visible */
-            filter: blur(0px); /* J'ai enlevé le flou pour que ce soit net */
-            transform: scale(1.0); /* Taille normale */
+            object-fit: cover;
+            opacity: 0.9;      
+            filter: blur(0px); 
+            transform: scale(1.0);
         }
 
-        /* --- 2. LA CARTE CENTRALE (INVITATION) --- */
+        /* --- 2. LA CARTE CENTRALE (RÉDUITE) --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            width: 90%;
-            max-width: 450px;
-            height: auto;
-            max-height: 95vh;
             
+            /* TAILLES RÉDUITES ICI */
+            width: 85%; /* Moins large */
+            max-width: 400px; /* Taille max plus petite */
+            padding: 25px 15px; /* Moins d'espace intérieur */
+            
+            max-height: 95vh;
             background-color: var(--creme);
-            /* Bordure fine pour détacher la carte du fond */
             border: 1px solid rgba(142, 121, 62, 0.4);
-            /* Grande ombre pour l'effet "posé sur les fleurs" */
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3); 
-            padding: 30px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25); 
             
             display: flex;
             flex-direction: column;
@@ -71,45 +67,41 @@
             justify-content: center;
             text-align: center;
             
-            /* Double liseré intérieur */
             outline: 1px solid var(--or-fonce);
-            outline-offset: -10px;
+            outline-offset: -8px; /* Liseré plus proche du bord */
             
-            overflow-y: auto; /* Sécurité pour les très petits écrans */
+            overflow-y: auto;
         }
 
-        /* --- ÉLÉMENTS DE LA CARTE --- */
+        /* --- ÉLÉMENTS DE LA CARTE (Tous réduits) --- */
         
-        /* Logo */
+        /* Logo réduit */
         .logo-img {
-            width: 60px;
-            margin-bottom: 15px;
-            margin-top: 5px;
+            width: 50px; /* Était 60px */
+            margin-bottom: 10px;
+            margin-top: 0;
         }
 
-        /* Cadre Photo */
+        /* Cadre Photo NETTEMENT réduit */
         .photo-container {
-            width: 180px;
-            height: 220px;
+            width: 140px; /* Était 180px */
+            height: 180px; /* Était 220px */
             position: relative;
-            margin-bottom: 20px;
-            border: 3px solid var(--or-fonce);
-            padding: 5px; 
+            margin-bottom: 15px; /* Moins d'espace sous la photo */
+            border: 2px solid var(--or-fonce); /* Bordure un peu plus fine */
+            padding: 4px; 
             background: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
         .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            width: 100%; height: 100%; object-fit: cover; display: block;
         }
 
-        /* Titres */
+        /* Titres réduits */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3.5rem;
+            font-size: 3rem; /* Était 3.5rem */
             color: var(--or-fonce);
             margin: 0;
             line-height: 1;
@@ -117,79 +109,66 @@
 
         .pre-title {
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* Un peu plus petit */
             letter-spacing: 3px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: #888;
         }
 
         .date {
-            font-size: 1.1rem;
+            font-size: 1rem; /* Était 1.1rem */
             font-weight: 600;
             color: var(--texte);
             margin-top: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 1px;
             border-top: 1px solid var(--or-clair);
             border-bottom: 1px solid var(--or-clair);
-            padding: 8px 0;
-            width: 80%;
+            padding: 6px 0;
+            width: 85%;
         }
 
-        /* Compteur */
+        /* Compteur réduit */
         .countdown {
             display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 10px; /* Moins d'écart */
+            margin-bottom: 20px;
             color: var(--or-fonce);
         }
 
-        .count-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .count-box { display: flex; flex-direction: column; align-items: center; }
+        .count-num { font-size: 1.1rem; font-weight: 700; } /* Chiffres plus petits */
+        .count-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
 
-        .count-num {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .count-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.7;
-        }
-
-        /* Bouton */
+        /* Bouton réduit */
         .btn {
             background-color: var(--or-fonce);
             color: #fff;
             text-decoration: none;
-            padding: 12px 30px;
-            font-size: 0.8rem;
+            padding: 10px 25px; /* Bouton plus petit */
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        .btn:hover {
-            background-color: #4A3F35;
-            cursor: pointer;
-        }
+        .btn:hover { background-color: #4A3F35; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- RESPONSIVE MOBILE (Encore plus petit sur téléphone) --- */
         @media (max-width: 600px) {
             .card-wrapper {
-                width: 90%; /* Carte un peu plus étroite pour voir plus de fleurs sur les côtés */
-                padding: 25px 15px;
-                outline-offset: -8px;
+                width: 85%; /* Laisse bien voir les fleurs sur les côtés */
+                padding: 20px 10px;
+                outline-offset: -6px;
             }
-            h1 { font-size: 3rem; }
-            .photo-container { width: 140px; height: 180px; }
+            h1 { font-size: 2.5rem; } /* Prénoms plus petits sur mobile */
+            /* Photo très compacte sur mobile */
+            .photo-container { width: 110px; height: 140px; margin-bottom: 10px; }
+            .logo-img { width: 40px; margin-bottom: 5px; }
+            .date { font-size: 0.9rem; margin-bottom: 15px; }
+            .countdown { margin-bottom: 15px; }
         }
     </style>
 </head>
@@ -226,7 +205,7 @@
 
     <script>
         // Script du Compte à Rebours
-        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime(); // 29 Juillet = Mois 6 (index 0)
+        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
 
         setInterval(() => {
             const now = new Date().getTime();
