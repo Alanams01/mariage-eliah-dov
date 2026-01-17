@@ -44,7 +44,7 @@
             transform: scale(1.0);
         }
 
-        /* --- CARTE CENTRALE (Hauteur ULTRA réduite) --- */
+        /* --- CARTE CENTRALE --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
@@ -54,8 +54,8 @@
             width: 80%; 
             max-width: 380px;
             
-            /* MODIFICATION ICI : Padding vertical au minimum */
-            padding: 8px 5px; 
+            /* Padding ajusté pour compenser l'espace ajouté sous la photo */
+            padding: 10px 5px; 
             
             background-color: var(--creme);
             border: 1px solid rgba(142, 121, 62, 0.4);
@@ -71,12 +71,12 @@
             outline-offset: -5px; 
         }
 
-        /* --- ÉLÉMENTS DE LA CARTE (Espacements réduits à 0 ou presque) --- */
+        /* --- ÉLÉMENTS DE LA CARTE --- */
         
         /* Logo XXL */
         .logo-img {
             width: 150px;
-            margin-bottom: 0px; /* Marge supprimée */
+            margin-bottom: 0px; 
             margin-top: 0;
             mix-blend-mode: multiply;
         }
@@ -86,7 +86,10 @@
             width: 220px;
             height: 280px;
             position: relative;
-            margin-bottom: 0px; /* Marge supprimée */
+            
+            /* C'EST ICI LA CORRECTION : J'ai ajouté de l'espace en bas */
+            margin-bottom: 15px; 
+            
             border: 2px solid var(--or-fonce);
             padding: 3px; 
             background: #fff;
@@ -102,7 +105,7 @@
             font-family: 'Pinyon Script', cursive;
             font-size: 2.8rem; 
             color: var(--or-fonce);
-            margin: 0 0 2px 0; /* Marge minimale */
+            margin: 0 0 5px 0; 
             line-height: 1;
         }
 
@@ -110,10 +113,10 @@
         .countdown {
             display: flex;
             gap: 10px; 
-            margin-bottom: 5px; /* Marge réduite */
+            margin-bottom: 5px; 
             color: var(--or-fonce);
             border-top: 1px solid var(--or-clair);
-            padding-top: 5px; /* Padding réduit */
+            padding-top: 8px; 
             width: 95%; 
             justify-content: center;
         }
@@ -127,7 +130,7 @@
             background-color: var(--or-fonce);
             color: #fff;
             text-decoration: none;
-            padding: 10px 25px; /* Bouton légèrement moins haut */
+            padding: 10px 25px; 
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -141,21 +144,24 @@
         @media (max-width: 600px) {
             .card-wrapper {
                 width: 76%;
-                /* Padding vertical quasi nul sur mobile */
-                padding: 5px 2px; 
+                padding: 8px 2px; 
                 outline-offset: -4px;
             }
             
-            /* PHOTO XXL MOBILE */
-            .photo-container { width: 210px; height: 260px; margin-bottom: 0px; }
+            /* PHOTO XXL MOBILE avec marge en bas corrigée */
+            .photo-container { 
+                width: 210px; 
+                height: 260px; 
+                margin-bottom: 15px; /* Espace ajouté ici aussi */
+            }
             
             /* LOGO XXL MOBILE */
             .logo-img { width: 135px; margin-bottom: 0px; }
             
-            h1 { font-size: 2.3rem; margin: 0 0 2px 0; }
+            h1 { font-size: 2.3rem; margin: 0 0 5px 0; }
             
             .count-num { font-size: 1.2rem; }
-            .countdown { gap: 8px; padding-top: 4px; margin-bottom: 5px; }
+            .countdown { gap: 8px; padding-top: 6px; margin-bottom: 8px; }
             
             .btn { padding: 10px 20px; font-size: 0.7rem; margin-bottom: 2px; }
         }
