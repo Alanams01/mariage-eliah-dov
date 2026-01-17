@@ -7,17 +7,20 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES ET RESET --- */
+        /* --- VARIABLES --- */
         :root {
             --bg-color: #FAF9F6;
+            --card-bg-color: #ffffff;
             --gold-color: #C5A059;
-            --text-color: #3E3A35; 
+            --text-color: #C5A059; 
+            
             --font-script: 'Pinyon Script', cursive;
             --font-serif: 'Cormorant Garamond', serif;
+            --font-title: 'Cinzel Decorative', serif;
             --waze-color: #58949C;
         }
 
@@ -29,153 +32,293 @@
             font-family: var(--font-serif);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 70px; 
+            padding-top: 80px;
+            font-weight: 300;
+            opacity: 0; /* Pour l'animation d'ouverture */
+            animation: pageFadeIn 1.5s ease-out forwards;
         }
 
-        h2, h3 { font-weight: 400; line-height: 1.2; color: var(--text-color); }
-        p { font-size: 1.15rem; margin-bottom: 15px; }
+        /* --- ANIMATIONS KEYFRAMES --- */
+        @keyframes pageFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- CLASSES D'ANIMATION (JS) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Délais pour l'effet cascade */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Titres généraux */
+        h2, h3, h4 { font-weight: 400; line-height: 1.3; color: var(--text-color); margin-bottom: 25px; }
+        p { font-size: 1.15rem; margin-bottom: 20px; color: var(--text-color); font-weight: 300; }
 
         /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; width: 100%;
             background-color: rgba(250, 249, 246, 0.98);
-            padding: 20px 0; text-align: center; z-index: 1000;
-            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+            padding: 25px 0; text-align: center; z-index: 1000;
+            box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            /* Animation d'arrivée */
+            animation: slideDown 1s ease-out 0.5s backwards;
         }
 
         nav a {
             text-decoration: none; color: var(--text-color);
-            margin: 0 25px; font-family: var(--font-serif);
-            text-transform: uppercase; letter-spacing: 2px;
-            font-size: 0.85rem; font-weight: 600; transition: color 0.3s;
+            margin: 0 30px; font-family: var(--font-title);
+            text-transform: uppercase; letter-spacing: 3px;
+            font-size: 0.8rem; font-weight: 400; transition: all 0.4s ease;
+            position: relative;
         }
-        nav a:hover { color: var(--gold-color); }
+        
+        /* Petit trait qui apparaît sous le lien au survol */
+        nav a::after {
+            content: ''; position: absolute; width: 0; height: 1px;
+            bottom: -5px; left: 50%; background-color: var(--gold-color);
+            transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: #a88544; letter-spacing: 4px; }
 
-        /* --- SECTIONS --- */
-        section { padding: 80px 20px; text-align: center; background-color: var(--bg-color); }
+        /* --- CONTENEUR --- */
+        .main-wrapper {
+            max-width: 1000px; margin: 0 auto; padding: 40px 20px;
+        }
 
-        /* --- SECTION MAIRIE (STYLE CARTE) --- */
-        .floral-section {
-            background-image: url('fleur.png');
+        /* --- SECTIONS (CARTES GÉANTES) --- */
+        .section-card {
             background-size: cover; background-position: center;
-            padding: 120px 20px;
+            /* EFFET PARALLAXE : L'image reste fixe */
+            background-attachment: fixed; 
+            padding: 120px 40px;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             display: flex; justify-content: center; align-items: center;
+            position: relative; overflow: hidden;
+            
+            /* Animation initiale de la section */
+            opacity: 0; transform: scale(0.98);
+            transition: opacity 1.2s ease, transform 1.2s ease;
         }
+        
+        .section-card.active { opacity: 1; transform: scale(1); }
 
+        .bg-overlay::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); z-index: 0;
+        }
+        
+        #mairie { background-image: url('fleur.png'); }
+        #houppa { background-image: url('houppa.png'); }
+        #confirmation { background-color: var(--bg-color); border: 1px solid rgba(197, 160, 89, 0.2); box-shadow: none; background-attachment: scroll; }
+
+        /* --- CARTES BLANCHES INTERNES --- */
         .card-box {
-            background-color: #ffffff;
-            padding: 60px 40px;
-            max-width: 550px; width: 100%;
-            border: 1px solid rgba(0,0,0,0.03);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            text-align: center; position: relative;
+            background-color: var(--card-bg-color);
+            padding: 80px 50px;
+            max-width: 700px; width: 100%;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center; position: relative; z-index: 1;
+            border-radius: 15px;
+        }
+        
+        #confirmation .card-box { background-color: transparent; border: none; box-shadow: none; padding: 40px 20px; }
+
+        /* --- ELEMENTS --- */
+        .hebrew-final-img {
+            width: 500px; max-width: 100%; margin-bottom: 60px;
+            display: block; margin-left: auto; margin-right: auto;
+            filter: saturate(0.7) opacity(0.85);
         }
 
-        /* LOGO DANS LA CARTE */
-        .card-logo {
-            width: 70px; /* Taille du logo */
-            margin-bottom: 25px;
-            mix-blend-mode: multiply; /* Enlève le blanc si le fond est blanc */
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* BAGUES FINES */
         .rings-icon {
-            width: 50px;
-            height: auto;
-            margin-bottom: 25px;
-            color: var(--text-color);
-            opacity: 0.8;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            width: 60px; height: auto; margin-bottom: 40px;
+            color: var(--text-color); opacity: 1; display: block; margin-left: auto; margin-right: auto;
+            transition: transform 0.8s ease;
         }
+        /* Petite rotation au survol de la carte */
+        .card-box:hover .rings-icon { transform: rotate(180deg); }
 
         .card-title {
-            font-family: var(--font-serif); font-weight: 600; font-size: 1.6rem;
-            text-transform: uppercase; letter-spacing: 5px;
-            color: var(--text-color); margin-bottom: 15px;
-            position: relative; display: inline-block; padding-bottom: 20px;
+            font-family: var(--font-title); font-weight: 400; font-size: 1.8rem;
+            text-transform: uppercase; letter-spacing: 6px; color: var(--text-color);
+            margin-bottom: 25px; position: relative; display: inline-block; padding-bottom: 30px;
         }
         .card-title::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); width: 80px; height: 0.5px;
-            background-color: var(--text-color); opacity: 0.4;
+            transform: translateX(-50%); width: 0; height: 1px;
+            background-color: var(--text-color); opacity: 0.5;
+            transition: width 1s ease 0.5s; /* Trait qui s'agrandit */
         }
+        .section-card.active .card-title::after { width: 100px; }
 
         .couple-names-card {
-            font-family: var(--font-script); font-size: 4.5rem;
-            color: var(--text-color); margin: 30px 0 20px;
-            line-height: 1; font-weight: 400;
+            font-family: var(--font-script); font-size: 5.5rem;
+            color: var(--text-color); margin: 35px 0 25px;
+            line-height: 1; font-weight: 400; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .hebrew-names {
+            font-family: var(--font-serif); font-size: 2.2rem;
+            color: var(--text-color); margin-bottom: 50px; font-weight: 400;
         }
 
         .card-phrase {
-            font-family: var(--font-serif); font-size: 1.4rem;
+            font-family: var(--font-serif); font-size: 1.6rem;
             font-style: italic; color: var(--text-color);
-            margin-bottom: 40px; opacity: 0.9;
+            margin-bottom: 50px; opacity: 1; font-weight: 300;
         }
 
-        .card-date-container {
-            border-top: 0.5px solid rgba(62, 58, 53, 0.2);
-            border-bottom: 0.5px solid rgba(62, 58, 53, 0.2);
-            padding: 25px 0; margin-bottom: 40px;
+        .card-divider {
+            border: 0; border-top: 1px solid rgba(197, 160, 89, 0.25);
+            margin: 50px auto; width: 0; transition: width 1.5s ease;
         }
+        .section-card.active .card-divider { width: 50%; }
 
         .card-date {
-            font-family: var(--font-serif); font-weight: 700;
-            font-size: 1.5rem; text-transform: uppercase;
-            letter-spacing: 3px; color: var(--text-color); margin: 0;
+            font-family: var(--font-title); font-weight: 400;
+            font-size: 1.7rem; text-transform: uppercase;
+            letter-spacing: 5px; color: var(--text-color); margin: 0;
         }
 
         .card-venue {
-            font-family: var(--font-serif); font-weight: 700; font-size: 1.3rem;
-            text-transform: uppercase; letter-spacing: 2px;
-            margin-bottom: 10px; color: var(--text-color);
+            font-family: var(--font-title); font-weight: 400; font-size: 1.5rem;
+            text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 15px; color: var(--text-color); margin-top: 50px;
         }
 
         .card-address {
-            font-family: var(--font-serif); font-size: 1.2rem;
-            font-style: italic; color: var(--text-color); opacity: 0.8;
-            margin-bottom: 45px;
+            font-family: var(--font-serif); font-size: 1.4rem;
+            font-style: italic; color: var(--text-color); opacity: 0.9;
+            margin-bottom: 60px; font-weight: 300;
         }
 
         .btn-waze {
             display: inline-flex; align-items: center; justify-content: center;
             background-color: var(--waze-color); color: #fff;
-            padding: 14px 40px; border-radius: 50px;
-            text-decoration: none; font-family: var(--font-serif);
-            font-weight: 700; text-transform: uppercase;
-            letter-spacing: 2px; font-size: 0.85rem;
+            padding: 16px 45px; border-radius: 50px;
+            text-decoration: none; font-family: var(--font-title);
+            font-weight: 400; text-transform: uppercase;
+            letter-spacing: 3px; font-size: 0.9rem;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(88, 148, 156, 0.3);
+            box-shadow: 0 10px 25px rgba(88, 148, 156, 0.3);
         }
-        .btn-waze:hover { background-color: #477a80; transform: translateY(-2px); }
-        .btn-waze i { margin-right: 10px; font-size: 1.1rem; }
-
-        /* --- SECTION HOUPPA --- */
-        .event-box-simple {
-            background-color: #ffffff; padding: 60px 40px;
-            max-width: 600px; width: 100%; margin: 0 auto;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        .btn-waze:hover {
+            background-color: #477a80; transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(88, 148, 156, 0.5);
+        }
+        .btn-waze i { margin-right: 12px; font-size: 1.2rem; }
+        
+        .parents-container {
+            display: flex; justify-content: space-between;
+            margin-bottom: 40px; padding: 0 10px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+        }
+        .parents-block { text-align: center; flex: 1; }
+        .parents-names {
+            font-family: var(--font-title); font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: 3px;
+            color: var(--text-color); font-weight: 400;
+        }
+        .invitation-text {
+            font-family: var(--font-serif); font-size: 1.5rem; font-style: italic;
+            margin: 50px 0; color: var(--text-color); line-height: 1.5; opacity: 1; font-weight: 300;
+        }
+        
+        .houppa-title-script {
+             font-family: var(--font-script); font-size: 4.5rem;
+             color: var(--text-color); margin-bottom: 50px; line-height: 1;
+             text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
-        /* --- CONFIRMATION & FOOTER --- */
-        .rsvp-container { max-width: 600px; margin: 0 auto; }
-        form { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
-        input, select, textarea { padding: 18px; border: 1px solid #e0e0e0; background-color: #fff; font-family: var(--font-serif); font-size: 1rem; }
-        .btn { display: inline-block; background-color: var(--gold-color); color: #fff; padding: 16px 45px; border: none; cursor: pointer; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; font-weight: 600; border-radius: 2px; }
-        footer { padding: 50px; font-size: 0.9rem; color: #888; border-top: 1px solid #eee; }
-        .event-time { font-family: var(--font-serif); font-weight: 600; color: var(--gold-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; font-size: 0.9rem; }
+        .dedication-text {
+            font-family: var(--font-serif); font-size: 1rem; font-style: italic;
+            color: var(--text-color); margin-top: 60px; border-top: 1px solid rgba(197, 160, 89, 0.25); padding-top: 30px;
+            line-height: 1.6; opacity: 0.8; font-weight: 300;
+        }
+
+        /* --- CONFIRMATION --- */
+        .rsvp-container { max-width: 700px; margin: 0 auto; }
+        form { display: flex; flex-direction: column; gap: 35px; margin-top: 30px; text-align: left; }
+        .form-group { display: flex; flex-direction: column; gap: 12px; }
+        
+        label {
+            font-family: var(--font-title); font-weight: 400;
+            text-transform: uppercase; letter-spacing: 3px; font-size: 0.95rem; color: var(--text-color);
+        }
+        
+        input[type="text"], textarea, select {
+            padding: 20px; border: 1px solid rgba(197, 160, 89, 0.3);
+            background-color: #fff; font-family: var(--font-serif);
+            font-size: 1.1rem; width: 100%; transition: all 0.3s;
+            color: var(--text-color); font-weight: 300; border-radius: 4px;
+        }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold-color); box-shadow: 0 0 15px rgba(197, 160, 89, 0.1); transform: translateY(-2px); }
+
+        .radio-options { display: flex; gap: 40px; margin-top: 10px; }
+        .radio-label {
+            display: flex; align-items: center; gap: 12px;
+            font-family: var(--font-serif); font-size: 1.1rem; cursor: pointer;
+            color: var(--text-color); font-weight: 300;
+        }
+        input[type="radio"] { accent-color: var(--gold-color); transform: scale(1.3); cursor: pointer; }
+
+        .guest-count { margin-top: 25px; display: none; animation: fadeInUp 0.5s ease-out; }
+
+        .btn {
+            display: inline-block; background-color: var(--gold-color); color: #fff;
+            padding: 18px 50px; border: none; cursor: pointer;
+            font-family: var(--font-title); text-transform: uppercase;
+            letter-spacing: 4px; font-size: 1rem; font-weight: 400;
+            border-radius: 50px; align-self: center; margin-top: 30px; transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+        }
+        .btn:hover { background-color: #a88544; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(197, 160, 89, 0.4); }
+
+        footer { padding: 50px; font-size: 1rem; color: var(--text-color); background-color: rgba(250, 249, 246, 0.9); text-align: center; opacity: 0.8; letter-spacing: 3px; font-family: var(--font-title); font-weight: 300; border-top: 1px solid rgba(197, 160, 89, 0.3); }
 
         @media (max-width: 768px) {
-            .floral-section { padding: 80px 15px; }
-            .card-box { padding: 50px 25px; }
+            .section-card { background-attachment: scroll; padding: 60px 20px; border-radius: 20px; }
+            .card-box { padding: 50px 20px; }
             .couple-names-card { font-size: 3.5rem; }
-            .card-title { font-size: 1.4rem; letter-spacing: 3px; }
-            nav a { margin: 0 8px; font-size: 0.75rem; }
+            .houppa-title-script { font-size: 3rem; }
+            nav a { margin: 0 10px; font-size: 0.75rem; letter-spacing: 1px; }
+            .parents-container { flex-direction: column; gap: 30px; border-bottom: none; padding-bottom: 0; }
+            .parents-block { padding-bottom: 20px; border-bottom: 1px solid rgba(197, 160, 89, 0.25); }
+            .parents-block:last-child { border-bottom: none; }
         }
     </style>
 </head>
@@ -187,71 +330,144 @@
         <a href="#confirmation">Confirmation</a>
     </nav>
 
-    <section id="mairie" class="floral-section">
-        <div class="card-box">
-            
-            <img src="logo.jpeg" alt="Eliah & Dov" class="card-logo">
+    <div class="main-wrapper">
 
-            <svg class="rings-icon" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1" />
-                <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1" />
-            </svg>
-
-            <h3 class="card-title">Cérémonie Civile</h3>
-            
-            <div class="couple-names-card">Eliah & Dov</div>
-            
-            <p class="card-phrase">se diront "Oui"</p>
-            
-            <div class="card-date-container">
-                <p class="card-date">Lundi 27 Juillet 2026</p>
+        <section id="mairie" class="section-card bg-overlay">
+            <div class="card-box">
+                <div class="reveal">
+                    <svg class="rings-icon" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
+                        <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                </div>
+                
+                <h3 class="card-title reveal delay-100">Cérémonie Civile</h3>
+                <div class="couple-names-card reveal delay-200">Eliah & Dov</div>
+                <p class="card-phrase reveal delay-200">se diront "Oui"</p>
+                <hr class="card-divider">
+                <p class="card-date reveal delay-300">Lundi 27 Juillet 2026</p>
+                <div class="reveal delay-400">
+                    <div class="card-venue">Mairie de Joinville-le-Pont</div>
+                    <div class="card-address">23 rue de Paris</div>
+                    <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">
+                        <i class="fa-brands fa-waze"></i> Waze
+                    </a>
+                </div>
             </div>
-            
-            <div class="card-venue">Mairie de Joinville-le-Pont</div>
-            <div class="card-address">23 rue de Paris</div>
-            
-            <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">
-                <i class="fa-brands fa-waze"></i> Waze
-            </a>
-        </div>
-    </section>
+        </section>
 
-    <section id="houppa">
-        <div class="event-box-simple">
-            <span class="event-time">Mercredi 29 juillet 2026 - 17h30</span>
-            <h3 style="font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 3px; font-size: 2rem; margin-bottom: 25px;">Houppa / Soirée</h3>
-            <p>
-                <span style="font-style: italic; color: #8c7b60; font-size: 1.1rem;">15 Av 5786</span>
-            </p>
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-                <strong>La Verrière 91</strong><br>
-                3 rue Marvingt, Fleury-Merogis 91700
-            </p>
-        </div>
-    </section>
+        <section id="houppa" class="section-card bg-overlay">
+            <div class="card-box">
+                <img src="hebreu.png" alt="Kol Sasson" class="hebrew-final-img reveal">
 
-    <section id="confirmation">
-        <div class="rsvp-container">
-            <h2 style="font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 4px; font-size: 2.5rem; margin-bottom: 30px;">Confirmation</h2>
-            <p>Merci de nous confirmer votre présence avant le 1er Juin 2026.</p>
-            
-            <form>
-                <input type="text" placeholder="Votre Nom complet" required>
-                <select>
-                    <option value="">Serez-vous présent ?</option>
-                    <option value="oui">Oui, avec joie</option>
-                    <option value="non">Non, malheureusement</option>
-                </select>
-                <button type="submit" class="btn">Envoyer</button>
-            </form>
-        </div>
-    </section>
+                <div class="parents-container reveal delay-100">
+                    <div class="parents-block">
+                        <div class="parents-names">Famille Saada-Dos Santos</div>
+                    </div>
+                    <div class="parents-block">
+                        <div class="parents-names">Famille Guigui-Halioua</div>
+                    </div>
+                </div>
+                
+                <p class="invitation-text reveal delay-200">
+                    Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
+                </p>
+                
+                <div class="couple-names-card reveal delay-300">Eliah & Dov</div>
+                <div class="hebrew-names reveal delay-300">אליה & דוב</div>
+                <h3 class="houppa-title-script reveal delay-300">Houppa & Soirée</h3>
+                <hr class="card-divider">
+                
+                <div class="reveal delay-400">
+                    <p class="card-date">Mercredi 29 Juillet 2026</p>
+                    <p style="font-size: 1.4rem; color: var(--gold-color); font-style: italic; margin-top: 15px; font-weight: 300;">15 Av 5786</p>
+                    <p class="card-date" style="font-size: 1.6rem; margin-top: 25px;">à 17h30</p>
+                    
+                    <div class="card-venue">La Verrière 91</div>
+                    <div class="card-address">3 rue Marvingt, 91700 Fleury-Mérogis</div>
+                    <a href="https://waze.com/ul?q=La%20Verriere%2091%20Fleury-Merogis" target="_blank" class="btn-waze">
+                        <i class="fa-brands fa-waze"></i> Waze
+                    </a>
+                </div>
+                <p class="dedication-text reveal delay-400">
+                    Nous avons une pensée très chère pour nos grands parents Muriel Rachel Dos Santos et Amram Halioua, qui veillent sur nous.
+                </p>
+            </div>
+        </section>
+
+        <section id="confirmation" class="section-card">
+            <div class="card-box rsvp-container">
+                <h2 class="reveal" style="font-family: var(--font-title); text-transform: uppercase; letter-spacing: 6px; font-size: 2.2rem; margin-bottom: 30px; text-align: center; font-weight: 400;">Confirmation</h2>
+                <p class="reveal delay-100" style="text-align: center; font-size: 1.3rem; font-style: italic;">Merci de nous confirmer votre présence avant le 1er Juin 2026.</p>
+                
+                <form class="reveal delay-200">
+                    <div class="form-group">
+                        <label for="name">Nom & Prénom</label>
+                        <input type="text" id="name" placeholder="Votre nom complet" required>
+                    </div>
+
+                    <hr class="card-divider" style="width: 100%; margin: 30px 0; opacity: 0.4;">
+
+                    <div class="form-group">
+                        <label>Serez-vous présent à la Mairie ?</label>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="mairie" value="oui" onchange="toggleGuest('mairie', true)"> Présent(e)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="mairie" value="non" onchange="toggleGuest('mairie', false)" checked> Absent(e)
+                            </label>
+                        </div>
+                        <div id="mairie-guest" class="guest-count">
+                            <label>Nombre de personnes (Mairie)</label>
+                            <select>
+                                <option value="1">1 Personne</option>
+                                <option value="2">2 Personnes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr class="card-divider" style="width: 100%; margin: 30px 0; opacity: 0.4;">
+
+                    <div class="form-group">
+                        <label>Serez-vous présent à la Houppa ?</label>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="houppa" value="oui" onchange="toggleGuest('houppa', true)"> Présent(e)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="houppa" value="non" onchange="toggleGuest('houppa', false)" checked> Absent(e)
+                            </label>
+                        </div>
+                        <div id="houppa-guest" class="guest-count">
+                            <label>Nombre de personnes (Houppa)</label>
+                            <select>
+                                <option value="1">1 Personne</option>
+                                <option value="2">2 Personnes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr class="card-divider" style="width: 100%; margin: 30px 0; opacity: 0.4;">
+
+                    <div class="form-group">
+                        <label for="message">Message pour les mariés</label>
+                        <textarea id="message" rows="5" placeholder="Un petit mot pour les mariés..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Envoyer</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
 
     <footer>
         <p>&copy; 2026 Eliah & Dov</p>
     </footer>
 
     <script>
+        // Scroll fluide
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -259,6 +475,42 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Gestion du nombre d'invités
+        function toggleGuest(event, isPresent) {
+            const guestDiv = document.getElementById(event + '-guest');
+            if (isPresent) {
+                guestDiv.style.display = 'block';
+            } else {
+                guestDiv.style.display = 'none';
+            }
+        }
+
+        // ANIMATION AU SCROLL (INTERSECTION OBSERVER)
+        // Ce script détecte quand un élément entre dans l'écran et lance l'animation
+        const observerOptions = {
+            threshold: 0.15, // L'élément doit être à 15% visible pour s'animer
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Si c'est une section carte, on anime aussi ses enfants .reveal
+                    if (entry.target.classList.contains('section-card')) {
+                        const childReveals = entry.target.querySelectorAll('.reveal');
+                        childReveals.forEach(child => child.classList.add('active'));
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // On observe les sections et les éléments avec la classe .reveal
+        document.querySelectorAll('.section-card, .reveal').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
