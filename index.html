@@ -11,7 +11,7 @@
 
     <style>
         :root {
-            --or-fonce: #8E793E; /* Or antique plus lisible */
+            --or-fonce: #8E793E; /* Or antique */
             --or-clair: #AD9C65;
             --creme: #FCFBF9;
             --texte: #4A3F35;
@@ -22,11 +22,12 @@
         body, html {
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: #f0f0f0;
-            overflow: hidden; /* Pas de scroll */
+            /* Fond crème chaud pour faire ressortir le doré */
+            background-color: #FDFCF8;
+            overflow: hidden; 
         }
 
-        /* --- 1. LE FOND FLORAL (TAPISSERIE) --- */
+        /* --- 1. LE FOND FLORAL (CORRIGÉ POUR ÊTRE BIEN VISIBLE) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -38,10 +39,12 @@
         .bg-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Remplit tout l'écran */
-            opacity: 0.6; /* Un peu effacé pour mettre en valeur la carte */
-            filter: blur(2px); /* Léger flou pour la profondeur de champ */
-            transform: scale(1.05);
+            object-fit: cover; /* Remplit tout l'écran du téléphone */
+            
+            /* C'EST ICI QUE J'AI CHANGÉ LES RÉGLAGES : */
+            opacity: 0.9;      /* Quasi opaque pour être bien visible */
+            filter: blur(0px); /* J'ai enlevé le flou pour que ce soit net */
+            transform: scale(1.0); /* Taille normale */
         }
 
         /* --- 2. LA CARTE CENTRALE (INVITATION) --- */
@@ -51,14 +54,15 @@
             transform: translate(-50%, -50%);
             z-index: 10;
             width: 90%;
-            max-width: 450px; /* Taille d'un beau carton d'invitation */
+            max-width: 450px;
             height: auto;
-            max-height: 95vh; /* Ne dépasse pas l'écran */
+            max-height: 95vh;
             
-            /* Style Papier Luxe */
             background-color: var(--creme);
-            border: 1px solid rgba(142, 121, 62, 0.3);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); /* Belle ombre portée */
+            /* Bordure fine pour détacher la carte du fond */
+            border: 1px solid rgba(142, 121, 62, 0.4);
+            /* Grande ombre pour l'effet "posé sur les fleurs" */
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3); 
             padding: 30px 20px;
             
             display: flex;
@@ -67,14 +71,14 @@
             justify-content: center;
             text-align: center;
             
-            /* Double Bordure Intérieure (Effet chic) */
+            /* Double liseré intérieur */
             outline: 1px solid var(--or-fonce);
             outline-offset: -10px;
             
-            overflow-y: auto; /* Permet de scroller DANS la carte si l'écran est tout petit */
+            overflow-y: auto; /* Sécurité pour les très petits écrans */
         }
 
-        /* --- CONTENU DE LA CARTE --- */
+        /* --- ÉLÉMENTS DE LA CARTE --- */
         
         /* Logo */
         .logo-img {
@@ -85,12 +89,12 @@
 
         /* Cadre Photo */
         .photo-container {
-            width: 180px; /* Plus petit, plus mignon */
+            width: 180px;
             height: 220px;
             position: relative;
             margin-bottom: 20px;
             border: 3px solid var(--or-fonce);
-            padding: 5px; /* Espace blanc entre photo et cadre */
+            padding: 5px; 
             background: #fff;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
@@ -102,7 +106,7 @@
             display: block;
         }
 
-        /* Textes */
+        /* Titres */
         h1 {
             font-family: 'Pinyon Script', cursive;
             font-size: 3.5rem;
@@ -133,7 +137,7 @@
             width: 80%;
         }
 
-        /* Compteur Minimaliste */
+        /* Compteur */
         .countdown {
             display: flex;
             gap: 15px;
@@ -180,9 +184,9 @@
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
             .card-wrapper {
-                width: 92%;
+                width: 90%; /* Carte un peu plus étroite pour voir plus de fleurs sur les côtés */
                 padding: 25px 15px;
-                outline-offset: -8px; /* Bordure plus proche du bord */
+                outline-offset: -8px;
             }
             h1 { font-size: 3rem; }
             .photo-container { width: 140px; height: 180px; }
@@ -221,8 +225,8 @@
     </div>
 
     <script>
-        // Compte à rebours
-        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
+        // Script du Compte à Rebours
+        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime(); // 29 Juillet = Mois 6 (index 0)
 
         setInterval(() => {
             const now = new Date().getTime();
