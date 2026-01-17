@@ -44,19 +44,18 @@
             transform: scale(1.0);
         }
 
-        /* --- 2. LA CARTE CENTRALE (Version compacte) --- */
+        /* --- 2. LA CARTE CENTRALE (Compacte) --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            /* C'EST ICI QUE J'AI RÉDUIT LA LARGEUR */
-            width: 80%; /* Sur ordi */
-            max-width: 350px;
-            padding: 15px 5px; 
+            width: 80%; 
+            max-width: 380px; /* Un peu plus large pour accueillir les gros éléments */
+            padding: 10px 5px; /* Padding minimal */
             
-            max-height: 95vh;
+            max-height: 98vh; /* Utilise presque toute la hauteur si besoin */
             background-color: var(--creme);
             border: 1px solid rgba(142, 121, 62, 0.4);
             box-shadow: 0 20px 40px rgba(0,0,0,0.25); 
@@ -70,23 +69,23 @@
             outline: 1px solid var(--or-fonce);
             outline-offset: -6px; 
             
-            overflow-y: auto;
+            overflow-y: auto; /* Important : permet le scroll si l'écran est trop petit en hauteur */
         }
 
         /* --- ÉLÉMENTS DE LA CARTE --- */
         
-        /* Logo GRAND */
+        /* Logo XXL */
         .logo-img {
-            width: 90px; 
+            width: 150px; /* Était 120px - BEAUCOUP PLUS GRAND */
             margin-bottom: 5px; 
             margin-top: 0;
             mix-blend-mode: multiply;
         }
 
-        /* Cadre Photo GRAND */
+        /* Cadre Photo XXL */
         .photo-container {
-            width: 190px; 
-            height: 240px; 
+            width: 220px; /* Était 190px */
+            height: 280px; /* Était 240px */
             position: relative;
             margin-bottom: 5px; 
             border: 2px solid var(--or-fonce);
@@ -104,7 +103,7 @@
             font-family: 'Pinyon Script', cursive;
             font-size: 2.8rem; 
             color: var(--or-fonce);
-            margin: 5px 0 5px 0; /* Marges réduites */
+            margin: 5px 0 5px 0; 
             line-height: 1;
         }
 
@@ -112,7 +111,7 @@
         .countdown {
             display: flex;
             gap: 10px; 
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--or-fonce);
             border-top: 1px solid var(--or-clair);
             padding-top: 10px;
@@ -139,17 +138,21 @@
 
         .btn:hover { background-color: #4A3F35; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE (C'est ici qu'on force la réduction du cadre) --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 600px) {
             .card-wrapper {
-                /* J'ai réduit ici à 74% pour laisser beaucoup de place aux fleurs */
-                width: 74%; 
-                padding: 15px 2px; /* Presque pas de marge intérieure */
+                width: 76%; /* Carte étroite */
+                padding: 10px 2px; /* Padding quasi nul */
+                justify-content: flex-start; /* Alignement haut pour le scroll */
+                padding-top: 20px;
             }
             
-            /* Je garde les éléments intérieurs GRANDS */
-            .photo-container { width: 180px; height: 220px; margin-bottom: 5px; }
-            .logo-img { width: 85px; margin-bottom: 5px; }
+            /* PHOTO XXL MOBILE */
+            .photo-container { width: 210px; height: 260px; margin-bottom: 5px; }
+            
+            /* LOGO XXL MOBILE */
+            .logo-img { width: 135px; margin-bottom: 5px; }
+            
             h1 { font-size: 2.3rem; margin-bottom: 5px; }
             
             .count-num { font-size: 1.2rem; }
