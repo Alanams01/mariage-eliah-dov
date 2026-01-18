@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* --- VARIABLES COULEURS --- */
         :root {
             --or-fonce: #8E793E;
             --or-clair: #AD9C65;
@@ -23,22 +24,28 @@
             height: 100%;
             width: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: #FDFCF8; /* Couleur de fond qui complète l'image */
-            overflow: hidden; 
+            background-color: #FDFCF8;
+            overflow: hidden; /* Empêche le défilement */
         }
 
-        /* --- FOND FLORAL CORRIGÉ --- */
+        /* --- FOND FLORAL PLEIN ÉCRAN ZOOMÉ --- */
         .background-container {
-            position: fixed; /* Fixe pour ne pas bouger au scroll */
+            position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
-            
-            /* IMAGE EN BACKGROUND CSS (Plus propre pour le cadrage) */
-            background-image: url('Cadre-floral-or.png');
-            background-position: center center; /* Centré parfaitement */
-            background-repeat: no-repeat;
-            background-size: contain; /* AFFICHE TOUTE L'IMAGE sans couper ni déformer */
+            overflow: hidden; /* Important pour couper ce qui dépasse après le zoom */
+        }
+
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            /* 'cover' assure que ça couvre tout sans déformer */
+            object-fit: cover; 
+            /* MODIFICATION ICI : On zoom à 120% pour que les fleurs soient partout */
+            transform: scale(0.60); 
+            transform-origin: center center;
+            opacity: 0.95;      
         }
 
         /* --- PLUIE D'OR --- */
@@ -74,14 +81,14 @@
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            width: 70%; /* Carte fine pour voir le décor */
+            width: 70%; 
             max-width: 320px; 
             
-            padding: 15px; 
+            padding: 15px 10px 25px 10px;
             
-            background-color: rgba(253, 252, 248, 0.95); /* Légère transparence */
+            background-color: rgba(252, 251, 249, 0.96); 
             border: 1px solid rgba(142, 121, 62, 0.3);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2); 
             
             display: flex;
             flex-direction: column;
@@ -96,63 +103,71 @@
         /* --- ÉLÉMENTS DE LA CARTE --- */
         .logo-img {
             width: 90px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             mix-blend-mode: multiply;
         }
 
         .photo-container {
-            width: 160px;
-            height: 220px;
+            width: 170px;
+            height: 230px;
             position: relative;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            
             border: 2px solid var(--or-fonce);
-            padding: 3px; 
+            padding: 4px; 
             background: #fff;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            border-top-left-radius: 80px;
-            border-top-right-radius: 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            
+            border-top-left-radius: 85px;
+            border-top-right-radius: 85px;
         }
 
         .photo-container img {
             width: 100%; height: 100%; 
             object-fit: cover; display: block;
-            border-top-left-radius: 75px; 
-            border-top-right-radius: 75px;
+            border-top-left-radius: 80px; 
+            border-top-right-radius: 80px;
         }
 
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--or-fonce);
-            margin: 5px 0 10px 0;
+            margin: 5px 0 12px 0;
             line-height: 1;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+
+        .separator {
+            width: 40px;
+            height: 1px;
+            background-color: var(--or-clair);
+            margin-bottom: 15px;
         }
 
         .countdown {
             display: flex;
-            gap: 12px; 
-            margin-bottom: 15px; 
+            gap: 15px; 
+            margin-bottom: 20px; 
             color: var(--or-fonce);
-            border-top: 1px solid var(--or-clair);
-            padding-top: 8px; 
-            width: 85%; 
             justify-content: center;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1rem; font-weight: 700; line-height: 1; } 
-        .count-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-top: 2px; }
+        .count-num { font-size: 1.1rem; font-weight: 600; font-variant-numeric: tabular-nums; } 
+        .count-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; color: var(--or-clair); }
 
         .btn {
             background-color: var(--or-fonce);
             color: #fff;
             text-decoration: none;
-            padding: 10px 20px; 
-            font-size: 0.65rem;
+            padding: 12px 25px; 
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
             border: 1px solid var(--or-fonce);
+            font-weight: 600;
         }
 
         .btn:hover { 
@@ -161,16 +176,19 @@
             cursor: pointer; 
         }
 
-        @media (max-width: 400px) {
-            .card-wrapper { width: 75%; }
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 380px) {
+            .card-wrapper { width: 75%; padding: 10px; }
             .photo-container { width: 150px; height: 200px; }
-            h1 { font-size: 1.8rem; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-container"></div>
+    <div class="background-container">
+        <img src="Cadre-floral-or.png" alt="Fond floral" class="bg-image">
+    </div>
 
     <div id="gold-rain-container"></div>
 
@@ -184,6 +202,8 @@
         
         <h1>Eliah & Dov</h1>
         
+        <div class="separator"></div>
+        
         <div class="countdown" id="countdown">
             <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
             <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
@@ -196,6 +216,7 @@
     </div>
 
     <script>
+        // --- SCRIPT COMPTE A REBOURS ---
         const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
 
         setInterval(() => {
@@ -215,6 +236,7 @@
             }
         }, 1000);
 
+        // --- SCRIPT PLUIE D'OR ---
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
             const particleCount = 40; 
