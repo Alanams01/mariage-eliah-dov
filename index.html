@@ -7,275 +7,241 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
+        /* --- CONFIGURATION DES COULEURS --- */
         :root {
-            --or-fonce: #8E793E;
-            --or-clair: #AD9C65;
-            --creme: #FCFBF9;
-            --texte: #4A3F35;
+            --or-luxe: #C5A059;       /* Le doré parfait */
+            --or-pale: #E5D4B3;       /* Doré très clair pour les détails */
+            --blanc-creme: #FCFBF9;   /* Fond de la carte */
+            --texte-noir: #2C2C2C;    /* Gris très foncé pour le texte */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body, html {
-            height: 100%;
-            font-family: 'Cormorant Garamond', serif;
-            background-color: #FDFCF8;
-            overflow: hidden; 
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* --- FOND FLORAL --- */
-        .background-container {
+        /* --- FOND D'ÉCRAN (IMAGE FLORALE) --- */
+        .background-layer {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
-            overflow: hidden;
+            background-image: url('Cadre-floral-or.png'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px) brightness(0.95); 
         }
 
-        .bg-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;      
-            transform: scale(1.0);
-        }
-
-        /* --- PLUIE D'OR (ANIMATION) --- */
+        /* --- PLUIE D'OR (ANIMATION AJOUTÉE) --- */
         #gold-rain-container {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            pointer-events: none; /* Permet de cliquer à travers */
+            pointer-events: none; /* Important pour cliquer au travers */
             z-index: 5; /* Devant le fond, derrière la carte */
             overflow: hidden;
         }
 
         .gold-speck {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background-color: var(--or-clair);
+            width: 3px; height: 3px;
+            background-color: var(--or-luxe);
+            box-shadow: 0 0 4px var(--or-pale); /* Petit effet brillant */
             border-radius: 50%;
             opacity: 0;
             animation: fall linear infinite;
         }
 
         @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0px); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+            0% { transform: translateY(-10vh) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(110vh) translateX(20px) rotate(360deg); opacity: 0; }
         }
 
-        /* --- CARTE CENTRALE --- */
-        .card-wrapper {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            
-            width: 80%; 
-            max-width: 380px;
-            
-            /* Padding ajusté pour remonter le contenu */
-            padding: 5px 5px 15px 5px; 
-            
-            background-color: var(--creme);
-            border: 1px solid rgba(142, 121, 62, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25); 
-            
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Changé de center à flex-start pour contrôler le haut */
-            text-align: center;
-            
-            outline: 1px solid var(--or-fonce);
-            outline-offset: -5px; 
-        }
-
-        /* --- ÉLÉMENTS DE LA CARTE --- */
-        
-        /* Logo XXL - Remonté */
-        .logo-img {
-            width: 140px; /* Légèrement réduit pour remonter le tout */
-            margin-top: -10px; /* Marge négative pour le tirer vers le haut */
-            margin-bottom: -5px; /* Réduit l'espace avec la photo */
-            mix-blend-mode: multiply;
-        }
-
-        /* Cadre Photo XXL */
-        .photo-container {
-            width: 220px;
-            height: 280px;
+        /* --- LA CARTE PRINCIPALE --- */
+        .luxury-card {
             position: relative;
-            
-            /* Espace réduit sous la photo */
-            margin-bottom: 10px; 
-            
-            border: 2px solid var(--or-fonce);
-            padding: 3px; 
+            z-index: 10;
+            width: 90%; max-width: 400px;
+            height: auto; max-height: 90vh;
+            background-color: var(--blanc-creme);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0; transform: translateY(20px);
+            animation: textFadeIn 1.2s ease-out forwards;
+        }
+
+        .luxury-card::before {
+            content: ''; position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid var(--or-luxe);
+            pointer-events: none;
+        }
+
+        /* --- LE LOGO IMAGE (MODIFIÉ) --- */
+        .logo-container {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        .logo-img {
+            width: 130px; /* Taille ajustable */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            /* Rend le fond blanc de l'image transparent si besoin */
+            mix-blend-mode: multiply; 
+        }
+
+        /* --- L'ARCHE PHOTO --- */
+        .photo-arch-container {
+            position: relative;
+            width: 200px; height: 280px;
+            margin-bottom: 30px;
+            border: 1px solid var(--or-luxe);
+            border-radius: 100px 100px 0 0;
+            padding: 6px; 
             background: #fff;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        .photo-container img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
+        .photo-arch-inner {
+            width: 100%; height: 100%;
+            position: relative;
+            border-radius: 94px 94px 0 0; 
+            overflow: hidden;
         }
 
-        /* Titres - Remontés */
-        h1 {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 2.8rem; 
-            color: var(--or-fonce);
-            margin: 0 0 10px 0; /* Un peu d'espace avant le compteur */
-            line-height: 0.9;
+        .photo-arch-inner img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
         }
 
-        /* Compteur */
-        .countdown {
-            display: flex;
-            gap: 10px; 
-            margin-bottom: 15px; 
-            color: var(--or-fonce);
-            border-top: 1px solid var(--or-clair);
-            padding-top: 8px; 
-            width: 95%; 
-            justify-content: center;
+        /* --- TEXTES --- */
+        .names-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem; color: var(--or-luxe);
+            line-height: 1; margin-bottom: 20px;
+            text-shadow: 0 0 1px rgba(197, 160, 89, 0.2);
         }
 
-        .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.4rem; font-weight: 700; line-height: 1; } 
-        .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-top: 2px; }
-
-        /* Bouton */
-        .btn {
-            background-color: var(--or-fonce);
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 25px; 
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
+        .divider-line {
+            width: 50px; height: 1px; background-color: var(--or-luxe);
+            margin: 0 auto 25px auto;
         }
 
-        .btn:hover { background-color: #4A3F35; cursor: pointer; }
+        /* --- COMPTEUR --- */
+        .countdown-wrapper {
+            display: flex; justify-content: center; gap: 20px;
+            margin-bottom: 30px; font-family: 'Cormorant Garamond', serif;
+            color: var(--or-luxe);
+        }
+        .count-unit { display: flex; flex-direction: column; align-items: center; }
+        .count-val { font-size: 1.4rem; font-weight: 600; }
+        .count-lbl { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; color: #888; }
 
-        /* --- RESPONSIVE MOBILE --- */
-        @media (max-width: 600px) {
-            .card-wrapper {
-                width: 78%;
-                padding: 5px 2px 10px 2px;
-                top: 50%; /* On garde le centrage vertical global */
-            }
-            
-            .photo-container { 
-                width: 200px; 
-                height: 250px; 
-                margin-bottom: 10px; 
-            }
-            
-            .logo-img { 
-                width: 125px; 
-                margin-top: -5px; 
-                margin-bottom: -5px; 
-            }
-            
-            h1 { font-size: 2.4rem; margin: 0 0 8px 0; }
-            
-            .count-num { font-size: 1.2rem; }
-            .countdown { gap: 8px; padding-top: 6px; margin-bottom: 10px; }
-            
-            .btn { padding: 10px 20px; font-size: 0.7rem; }
+        /* --- BOUTON --- */
+        .btn-gold {
+            background-color: var(--or-luxe); color: #fff; text-decoration: none;
+            padding: 14px 35px; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 3px; font-weight: 500; transition: all 0.3s ease;
+            border: 1px solid var(--or-luxe); position: relative; z-index: 2;
+        }
+        .btn-gold:hover { background-color: transparent; color: var(--or-luxe); cursor: pointer; }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-container">
-        <img src="Cadre-floral-or.png" alt="Fond floral" class="bg-image">
-    </div>
-
+    <div class="background-layer"></div>
+    
     <div id="gold-rain-container"></div>
 
-    <div class="card-wrapper">
+    <div class="luxury-card">
         
-        <img src="logo.jpeg" alt="Logo" class="logo-img">
-
-        <div class="photo-container">
-            <img src="photo.jpeg" alt="Eliah et Dov">
-        </div>
-        
-        <h1>Eliah & Dov</h1>
-        
-        <div class="countdown" id="countdown">
-            <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
-            <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
-            <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
-            <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Logo E&D" class="logo-img">
         </div>
 
-        <a href="premiere-page.html" class="btn">Voir l'invitation</a>
+        <div class="photo-arch-container">
+            <div class="photo-arch-inner">
+                <img src="photo.jpeg" alt="Eliah & Dov">
+            </div>
+        </div>
+
+        <div class="names-title">Eliah & Dov</div>
+        <div class="divider-line"></div>
+
+        <div class="countdown-wrapper">
+            <div class="count-unit"><span class="count-val" id="d">00</span><span class="count-lbl">Jours</span></div>
+            <div class="count-unit"><span class="count-val" id="h">00</span><span class="count-lbl">Hrs</span></div>
+            <div class="count-unit"><span class="count-val" id="m">00</span><span class="count-lbl">Min</span></div>
+            <div class="count-unit"><span class="count-val" id="s">00</span><span class="count-lbl">Sec</span></div>
+        </div>
+
+        <a href="premiere-page.html" class="btn-gold">Voir l'invitation</a>
 
     </div>
 
     <script>
-        // --- SCRIPT COMPTE A REBOURS ---
-        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
+        // DATE DU MARIAGE
+        const targetDate = new Date("July 29, 2026 17:30:00").getTime();
 
         setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
-
             if (diff > 0) {
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById("d").innerText = d;
-                document.getElementById("h").innerText = h;
-                document.getElementById("m").innerText = m;
-                document.getElementById("s").innerText = s;
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
             }
         }, 1000);
 
-        // --- SCRIPT PLUIE D'OR ---
+        // SCRIPT PLUIE D'OR RÉINTÉGRÉ
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
-            const particleCount = 40; // Nombre de particules
+            const particleCount = 50; // Nombre de particules
 
             for (let i = 0; i < particleCount; i++) {
                 const speck = document.createElement('div');
                 speck.classList.add('gold-speck');
-                
-                // Position horizontale aléatoire
+                // Position aléatoire
                 speck.style.left = Math.random() * 100 + '%';
-                
-                // Durée de chute aléatoire (entre 3s et 8s)
-                const duration = Math.random() * 5 + 3;
+                // Vitesse aléatoire
+                const duration = Math.random() * 5 + 4; // Entre 4 et 9 secondes
                 speck.style.animationDuration = duration + 's';
-                
-                // Délai aléatoire pour que tout ne tombe pas en même temps
+                // Délai aléatoire
                 speck.style.animationDelay = Math.random() * 5 + 's';
-                
-                // Taille légèrement variable
-                const size = Math.random() * 3 + 1;
+                // Taille aléatoire
+                const size = Math.random() * 4 + 2; // Plus gros pour plus de brillant
                 speck.style.width = size + 'px';
                 speck.style.height = size + 'px';
-                
-                // Opacité variable
-                speck.style.opacity = Math.random();
+                // Opacité aléatoire pour effet scintillant
+                speck.style.opacity = Math.random() * 0.5 + 0.5;
 
                 container.appendChild(speck);
             }
         }
-
-        // Lancer la pluie au chargement
         createGoldRain();
     </script>
 
