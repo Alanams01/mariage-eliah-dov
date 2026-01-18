@@ -7,17 +7,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES COULEURS --- */
+        /* --- COULEURS --- */
         :root {
-            --or-fonce: #8E793E;
-            --or-clair: #AD9C65;
-            --creme: #FCFBF9;
-            /* Couleur de fond unie qui doit correspondre au fond de votre image 'Cadre-floral-or.png' */
-            --fond-uni: #FDFCF8; 
-            --texte: #4A3F35;
+            --or-dore: #B89B5E;       /* Doré élégant */
+            --or-fonce: #8E793E;      /* Pour les textes foncés */
+            --blanc-creme: #FDFCF8;   /* Fond de la carte */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,27 +23,24 @@
             height: 100%;
             width: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: var(--fond-uni);
-            overflow: hidden; /* Empêche le défilement */
+            background-color: var(--blanc-creme);
+            overflow: hidden; /* Pas de scroll */
         }
 
-        /* --- FOND FLORAL CORRIGÉ (MÉTHODE CSS ROBUSTE) --- */
+        /* --- FOND FLORAL --- */
         .background-container {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
-            background-color: var(--fond-uni); /* Assure la continuité si l'image ne remplit pas tout */
             
-            /* C'EST ICI QUE LA MAGIE OPÈRE */
-            background-image: url('Cadre-floral-or.png'); /* L'image est définie ici */
-            background-position: center center; /* Centrée parfaitement horizontalement et verticalement */
-            background-repeat: no-repeat; /* Ne pas répéter l'image */
+            /* Image de fond centrée qui ne se répète pas */
+            background-image: url('Cadre-floral-or.png'); /* Ton image de fond */
+            background-position: center center;
+            background-repeat: no-repeat;
             
-            /* CRUCIAL : 'contain' force l'image entière à être visible sans être coupée ni déformée */
+            /* 'contain' pour voir tout le cadre floral sans couper */
             background-size: contain; 
-            
-            opacity: 0.95;
         }
 
         /* --- PLUIE D'OR --- */
@@ -56,140 +50,154 @@
             width: 100%; height: 100%;
             pointer-events: none;
             z-index: 5;
-            overflow: hidden;
         }
-
         .gold-speck {
             position: absolute;
-            width: 3px; height: 3px;
-            background-color: var(--or-clair);
+            width: 2px; height: 2px;
+            background-color: var(--or-dore);
             border-radius: 50%;
             opacity: 0;
             animation: fall linear infinite;
         }
-
         @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0px); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+            0% { transform: translateY(-10vh); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(110vh); opacity: 0; }
         }
 
-        /* --- CARTE CENTRALE --- */
+        /* --- CARTE CENTRALE (Le cadre blanc) --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            /* Dimensions de la carte */
-            width: 70%; 
-            max-width: 320px; 
+            /* Dimensions ajustées pour ressembler à la photo */
+            width: 78%; 
+            max-width: 350px;
+            height: auto;
+            min-height: 600px; /* Hauteur minimale pour l'élégance */
             
-            padding: 15px 10px 25px 10px;
+            background-color: var(--blanc-creme);
             
-            background-color: rgba(252, 251, 249, 0.96); 
-            border: 1px solid rgba(142, 121, 62, 0.3);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2); 
+            /* Ombre portée douce pour détacher la carte du fond */
+            box-shadow: 0 15px 40px rgba(184, 155, 94, 0.15);
+            
+            /* Double bordure dorée (une fine, une plus épaisse) */
+            border: 1px solid var(--or-dore);
+            outline: 1px solid var(--or-dore);
+            outline-offset: -6px; /* Crée l'effet de double cadre */
             
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 30px 20px;
             text-align: center;
-            
-            outline: 1px solid var(--or-fonce);
-            outline-offset: -6px; 
         }
 
-        /* --- ÉLÉMENTS DE LA CARTE --- */
+        /* --- LOGO --- */
         .logo-img {
-            width: 90px;
-            margin-bottom: 10px;
-            mix-blend-mode: multiply;
+            width: 70px; /* Taille discrète comme sur le modèle */
+            margin-bottom: 25px;
+            /* Si le logo a un fond blanc, le mode multiply l'efface */
+            mix-blend-mode: multiply; 
         }
 
+        /* --- PHOTO EN ARCHE --- */
         .photo-container {
-            width: 170px;
-            height: 230px;
+            width: 160px;
+            height: 220px;
             position: relative;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
             
-            border: 2px solid var(--or-fonce);
-            padding: 4px; 
-            background: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            /* Forme d'arche */
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
             
-            border-top-left-radius: 85px;
-            border-top-right-radius: 85px;
+            /* Bordure dorée fine autour de la photo */
+            border: 1px solid var(--or-dore);
+            padding: 4px; /* Espace entre la photo et la bordure */
+            background-color: var(--blanc-creme);
         }
 
         .photo-container img {
-            width: 100%; height: 100%; 
-            object-fit: cover; display: block;
-            border-top-left-radius: 80px; 
-            border-top-right-radius: 80px;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            /* L'image suit la forme de l'arche */
+            border-top-left-radius: 76px;
+            border-top-right-radius: 76px;
         }
 
+        /* --- PRÉNOMS --- */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 2.2rem;
-            color: var(--or-fonce);
-            margin: 5px 0 12px 0;
+            font-size: 2.8rem;
+            color: var(--or-dore); /* Couleur dorée */
+            margin: 0 0 15px 0;
             line-height: 1;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            font-weight: 400;
         }
 
+        /* --- TRAIT DE SÉPARATION --- */
         .separator {
-            width: 40px;
+            width: 30px;
             height: 1px;
-            background-color: var(--or-clair);
-            margin-bottom: 15px;
+            background-color: var(--or-dore);
+            margin-bottom: 20px;
+            opacity: 0.6;
         }
 
+        /* --- COMPTEUR --- */
         .countdown {
             display: flex;
-            gap: 15px; 
-            margin-bottom: 20px; 
-            color: var(--or-fonce);
-            justify-content: center;
+            gap: 25px; /* Espacement large entre les chiffres */
+            margin-bottom: 30px;
+            color: var(--or-dore);
+        }
+        .count-box { 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+        .count-num { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+        } 
+        .count-label { 
+            font-size: 0.5rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-top: 5px; 
+            color: #998a68; /* Couleur un peu plus terne pour les labels */
         }
 
-        .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.1rem; font-weight: 600; font-variant-numeric: tabular-nums; } 
-        .count-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; color: var(--or-clair); }
-
+        /* --- BOUTON --- */
         .btn {
-            background-color: var(--or-fonce);
+            background-color: #BFA05F; /* Fond doré plein */
             color: #fff;
             text-decoration: none;
-            padding: 12px 25px; 
-            font-size: 0.7rem;
+            padding: 14px 0; /* Hauteur du bouton */
+            width: 100%; /* Prend toute la largeur disponible */
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            border: 1px solid var(--or-fonce);
+            letter-spacing: 3px;
             font-weight: 600;
+            transition: opacity 0.3s;
+            border: none;
         }
-
-        .btn:hover { 
-            background-color: transparent; 
-            color: var(--or-fonce); 
-            cursor: pointer; 
-        }
+        .btn:hover { opacity: 0.9; cursor: pointer; }
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 380px) {
-            .card-wrapper { width: 75%; padding: 10px; }
-            .photo-container { width: 150px; height: 200px; }
-            h1 { font-size: 2rem; }
+            .card-wrapper { width: 85%; padding: 20px 15px; min-height: 550px; }
+            h1 { font-size: 2.4rem; }
+            .photo-container { width: 140px; height: 190px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-container">
-        </div>
+    <div class="background-container"></div>
 
     <div id="gold-rain-container"></div>
 
@@ -217,8 +225,8 @@
     </div>
 
     <script>
-        // --- SCRIPT COMPTE A REBOURS ---
-        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
+        // --- COMPTE A REBOURS ---
+        const targetDate = new Date(2026, 6, 29, 17, 30, 0).getTime(); // 29 Juillet 2026
 
         setInterval(() => {
             const now = new Date().getTime();
@@ -237,22 +245,18 @@
             }
         }, 1000);
 
-        // --- SCRIPT PLUIE D'OR ---
+        // --- PLUIE D'OR ---
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
-            const particleCount = 40; 
+            const particleCount = 30; 
 
             for (let i = 0; i < particleCount; i++) {
                 const speck = document.createElement('div');
                 speck.classList.add('gold-speck');
                 speck.style.left = Math.random() * 100 + '%';
-                const duration = Math.random() * 5 + 3;
+                const duration = Math.random() * 5 + 4;
                 speck.style.animationDuration = duration + 's';
                 speck.style.animationDelay = Math.random() * 5 + 's';
-                const size = Math.random() * 3 + 1;
-                speck.style.width = size + 'px';
-                speck.style.height = size + 'px';
-                speck.style.opacity = Math.random();
                 container.appendChild(speck);
             }
         }
