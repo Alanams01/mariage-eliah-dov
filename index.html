@@ -31,11 +31,14 @@
             
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 40px 0;
+            align-items: flex-start; 
+            
+            /* MODIFICATION ICI : On réduit l'espace en haut pour remonter le cadre (50px -> 10px) */
+            padding-top: 10px; 
+            padding-bottom: 30px;
         }
 
-        /* --- FOND D'ÉCRAN FIXE (MODIFIÉ POUR ÊTRE PLUS PRÉSENT) --- */
+        /* --- FOND D'ÉCRAN (FIXE) --- */
         .background-layer {
             position: fixed;
             top: 0; left: 0;
@@ -44,8 +47,8 @@
             background-image: url('Cadre-floral-or.png'); 
             background-size: cover;
             background-position: center;
-            /* MODIFICATION ICI : Suppression du flou et légère augmentation du contraste/luminosité */
-            filter: brightness(1.05) contrast(1.05); 
+            background-repeat: no-repeat;
+            filter: contrast(1.1) saturate(1.2); 
         }
 
         /* --- PLUIE D'OR FIXE --- */
@@ -79,17 +82,21 @@
         .luxury-card {
             position: relative;
             z-index: 10;
-            width: 90%; 
-            max-width: 400px;
+            
+            width: 85%; 
+            max-width: 380px;
+            
             height: auto;
             min-height: 600px;
+            
             background-color: var(--blanc-creme);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3); 
+            
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             text-align: center;
             padding: 40px 20px;
-            margin: auto;
+            
             opacity: 0; transform: translateY(20px);
             animation: textFadeIn 1.2s ease-out forwards;
         }
@@ -108,11 +115,13 @@
             z-index: 2;
         }
         .logo-img {
-            width: 130px;
+            width: 120px; 
             height: auto;
             display: block;
             margin: 0 auto;
+            filter: brightness(1.25) contrast(1.1); 
             mix-blend-mode: multiply; 
+            opacity: 0.95; 
         }
 
         /* --- L'ARCHE PHOTO --- */
@@ -142,7 +151,7 @@
         /* --- TEXTES --- */
         .names-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem; color: var(--or-luxe);
+            font-size: 3.2rem; color: var(--or-luxe);
             line-height: 1; margin-bottom: 20px;
             text-shadow: 0 0 1px rgba(197, 160, 89, 0.2);
         }
@@ -154,12 +163,12 @@
 
         /* --- COMPTEUR --- */
         .countdown-wrapper {
-            display: flex; justify-content: center; gap: 20px;
+            display: flex; justify-content: center; gap: 18px;
             margin-bottom: 30px; font-family: 'Cormorant Garamond', serif;
             color: var(--or-luxe);
         }
         .count-unit { display: flex; flex-direction: column; align-items: center; }
-        .count-val { font-size: 1.4rem; font-weight: 600; }
+        .count-val { font-size: 1.3rem; font-weight: 600; }
         .count-lbl { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; color: #888; }
 
         /* --- BOUTON --- */
@@ -223,7 +232,7 @@
             }
         }, 1000);
 
-        // SCRIPT PLUIE D'OR
+        // SCRIPT PLUIE D'OR RAPIDE
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
             const particleCount = 50; 
@@ -232,7 +241,10 @@
                 const speck = document.createElement('div');
                 speck.classList.add('gold-speck');
                 speck.style.left = Math.random() * 100 + '%';
-                const duration = Math.random() * 5 + 4; 
+                
+                // Vitesse rapide : entre 2 et 5 secondes
+                const duration = Math.random() * 3 + 2; 
+                
                 speck.style.animationDuration = duration + 's';
                 speck.style.animationDelay = Math.random() * 5 + 's';
                 const size = Math.random() * 4 + 2; 
