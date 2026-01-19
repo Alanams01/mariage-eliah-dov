@@ -25,11 +25,11 @@
             background-color: #FDFCF8;
             overflow: hidden; 
             
-            /* AJOUT POUR L'EFFET 3D */
+            /* EFFET 3D POUR L'ANIMATION LIVRE */
             perspective: 1500px;
         }
 
-        /* --- FOND FLORAL DÉCALÉ --- */
+        /* --- FOND FLORAL DÉCALÉ (POSITION AJUSTÉE) --- */
         .background-container {
             position: fixed;
             top: 0; left: 0;
@@ -37,9 +37,9 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* MODIFICATION ICI : Décalage plus prononcé vers la gauche */
-            /* On augmente le pourcentage pour déplacer le fond vers la gauche */
-            background-position: 60% center; 
+            /* MODIFICATION ICI : Décalage encore plus prononcé vers la gauche */
+            /* Passé de 60% à 75% pour bien centrer le vide */
+            background-position: 75% center; 
             
             background-repeat: no-repeat;
             background-size: cover; 
@@ -76,8 +76,7 @@
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
-            /* Note: le translate est géré ici pour l'état initial */
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, -50%);
             z-index: 10;
             
             width: 100%; 
@@ -95,15 +94,14 @@
             justify-content: center;
             text-align: center;
 
-            /* AJOUTS POUR L'ANIMATION LIVRE */
+            /* ANIMATION LIVRE */
             transform-style: preserve-3d;
-            transform-origin: left center; /* Pivote sur la gauche comme une reliure */
+            transform-origin: left center;
             transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
         }
 
         /* CLASSE D'ACTIVATION DE L'ANIMATION */
         .book-open-active {
-            /* Pivote de 100 degrés vers la gauche et disparait */
             transform: translate(-50%, -50%) rotateY(-100deg) !important;
             opacity: 0;
         }
@@ -184,7 +182,7 @@
             border: 1px solid var(--or-fonce);
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(142, 121, 62, 0.3);
-            cursor: pointer; /* Curseur main */
+            cursor: pointer;
         }
 
         .btn:hover { 
@@ -230,7 +228,6 @@
     </div>
 
     <script>
-        // --- SCRIPT COMPTE A REBOURS ---
         const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
 
         setInterval(() => {
@@ -250,7 +247,6 @@
             }
         }, 1000);
 
-        // --- SCRIPT PLUIE D'OR ---
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
             const particleCount = 40; 
