@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (ZOOMÉ + DÉCALÉ DROITE) --- */
+        /* --- FOND FLORAL (RECENTRÉ) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,10 +52,10 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* MODIFICATION : Décalé vers la DROITE (85%) */
-            background-position: 85% center; 
+            /* MODIFICATION ICI : RECENTRAGE PARFAIT */
+            background-position: center center; 
             
-            /* ZOOM SUR L'IMAGE (150%) */
+            /* ON GARDE LE ZOOM (150%) */
             background-size: 150%; 
             
             background-repeat: no-repeat;
@@ -137,21 +137,19 @@
             font-size: 2.4rem; 
             color: var(--or-luxe);
             
-            /* MODIFICATION : Marge du bas réduite */
+            /* Marge du bas réduite */
             margin: 0 0 5px 0;
             
             line-height: 1;
             text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
         }
 
-        /* SEPARATEUR SUPPRIMÉ */
-
         /* --- COMPTEUR --- */
         .countdown {
             display: flex;
             gap: 20px; 
             
-            /* MODIFICATION : Marge du bas réduite */
+            /* Marge du bas réduite */
             margin-bottom: 20px; 
             
             color: var(--or-luxe);
