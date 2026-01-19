@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -101,23 +101,25 @@
         }
 
         /* --- DECORATION FLEURS SPECIFIQUES (HOUPPA) --- */
+        /* MODIFICATION 1 : Taille augmentée ici */
         .flower-specific {
             position: absolute; 
-            width: 100px; height: auto; 
-            z-index: 1; opacity: 0.9; pointer-events: none;
+            width: 170px; /* Passé de 120px à 170px */
+            height: auto; 
+            z-index: 1; opacity: 0.95; pointer-events: none;
         }
         
-        /* 1. HAUT DROITE : Juste après le bloc Famille */
+        /* Positions légèrement ajustées pour compenser la plus grande taille */
         .flower-specific-top {
-            top: 550px;   /* <--- CHANGE CE NOMBRE pour monter ou descendre */
-            right: -30px; /* <--- CHANGE CE NOMBRE pour aller à gauche ou droite */
-            transform: rotate(10deg); /* <--- CHANGE L'ANGLE si tu veux la tourner */
+            top: 550px; 
+            right: 5px; 
+            transform: rotate(10deg);
         }
 
         .flower-specific-bottom {
-            /* Positionnée vers le bas à gauche, proche du bouton Waze */
-            bottom: 10%; /* Ajusté pour tomber vers le bas */
-            left: -15px;
+            bottom: 80px; 
+            left: -5px; 
+            transform: rotate(-10deg);
         }
 
         /* TYPOGRAPHIE INTERNE */
@@ -136,6 +138,12 @@
             font-family: var(--font-serif); font-style: normal; font-weight: 400;
             font-size: 1rem; letter-spacing: 1px; color: var(--gold-flowers);
         }
+
+        /* MODIFICATION 2 : Nouvelle classe pour réduire le texte spécifique */
+        .houppa-intro-text {
+             font-size: 0.85rem; /* Plus petit que le 1rem standard */
+        }
+
         .divider { 
             width: 50px; height: 1px; background-color: var(--gold-flowers); margin: 30px auto; 
         }
@@ -291,12 +299,12 @@
                     <div class="parent-col">Famille<br>Saada-Dos Santos</div>
                     <div class="parent-col">Famille<br>Guigui-Halioua</div>
                 </div>
-                <p class="serif-italic" style="margin: 25px 0;">
+                <p class="serif-italic houppa-intro-text" style="margin: 25px 0;">
                     Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
                 </p>
                 <div class="couple-names">Eliah & Dov</div>
                 
-                <p class="serif-italic" style="margin: 10px 0;">
+                <p class="serif-italic houppa-intro-text" style="margin: 10px 0;">
                     Et seront honorés de votre présence à la cérémonie religieuse qui aura lieu :
                 </p>
 
@@ -423,8 +431,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
