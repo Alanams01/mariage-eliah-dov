@@ -75,8 +75,18 @@
             background-color: var(--card-bg);
             border: 1px solid var(--gold-flowers); 
             box-shadow: 0 10px 30px rgba(191, 164, 102, 0.1);
-            text-align: center; overflow: hidden;
+            text-align: center; 
+            /* IMPORTANT : On garde hidden pour les autres cartes */
+            overflow: hidden; 
         }
+
+        /* MODIFICATION SPECIFIQUE POUR HOUPPA : PERMETTRE LE DEBORDEMENT */
+        #houppa.card {
+            overflow: visible;
+            /* On augmente un peu le z-index pour qu'il passe au dessus des autres éléments si besoin */
+            z-index: 10; 
+        }
+
         .card::after {
             content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
             border: 1px solid var(--gold-light); pointer-events: none; z-index: 3;
@@ -101,18 +111,24 @@
         }
 
         /* --- DECORATION ANGLES (HOUPPA SEULEMENT) --- */
+        /* MODIFICATIONS ICI POUR LE DEBORDEMENT */
         .corner-flower {
-            position: absolute; width: 120px; height: auto; 
-            z-index: 4; opacity: 0.9; pointer-events: none;
+            position: absolute; 
+            width: 150px; /* Un peu plus grand pour bien déborder */
+            height: auto; 
+            z-index: 20; /* Z-index élevé pour passer au-dessus du cadre */
+            opacity: 1; 
+            pointer-events: none;
         }
         
         .flower-top-right {
-            top: -10px; right: -10px;
-            z-index: 6; 
+            top: -60px; /* Poussé vers le haut */
+            right: -60px; /* Poussé vers la droite */
         }
 
         .flower-bottom-left {
-            bottom: -10px; left: -10px;
+            bottom: -60px; /* Poussé vers le bas */
+            left: -60px; /* Poussé vers la gauche */
         }
 
         /* TYPOGRAPHIE INTERNE */
@@ -145,23 +161,8 @@
         .rings-icon { width: 40px; height: auto; margin-bottom: 20px; color: var(--gold-flowers); }
 
         /* MAIRIE & HOUPPA */
-        .date-main { 
-            font-family: var(--font-serif); 
-            font-weight: 600; 
-            font-size: 1.3rem; 
-            letter-spacing: 1px; 
-            margin-bottom: 8px; 
-            color: var(--text-color);
-            white-space: nowrap; /* Empêche le retour à la ligne si possible */
-        }
-        
-        /* AJUSTEMENT MOBILE POUR LA DATE */
-        @media (max-width: 400px) {
-            .date-main {
-                font-size: 1.1rem; /* Réduit la taille sur petit écran */
-                white-space: normal; /* Autorise le retour à la ligne si vraiment trop petit */
-            }
-        }
+        .date-main { font-family: var(--font-serif); font-weight: 600; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-color); white-space: nowrap; }
+        @media (max-width: 400px) { .date-main { font-size: 1.1rem; white-space: normal; } }
 
         .date-sub { font-family: var(--font-script); font-size: 2rem; color: var(--gold-flowers); margin-top: 5px; letter-spacing: 1px; }
         .address-name { display: block; font-family: var(--font-serif); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; font-size: 1rem; color: var(--text-color); }
