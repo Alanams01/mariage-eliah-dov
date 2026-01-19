@@ -76,21 +76,16 @@
             border: 1px solid var(--gold-flowers); 
             box-shadow: 0 10px 30px rgba(191, 164, 102, 0.1);
             text-align: center; 
-            /* IMPORTANT : On garde hidden pour les autres cartes */
+            /* RETOUR A HIDDEN : Les éléments restent dans le cadre */
             overflow: hidden; 
-        }
-
-        /* MODIFICATION SPECIFIQUE POUR HOUPPA : PERMETTRE LE DEBORDEMENT */
-        #houppa.card {
-            overflow: visible;
-            /* On augmente un peu le z-index pour qu'il passe au dessus des autres éléments si besoin */
-            z-index: 10; 
         }
 
         .card::after {
             content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
             border: 1px solid var(--gold-light); pointer-events: none; z-index: 3;
         }
+        
+        /* Le contenu est à 5, donc il passera au-dessus des fleurs qui sont à 4 */
         .card-content { position: relative; z-index: 5; }
 
         /* --- DECORATION FEUILLES LATÉRALES --- */
@@ -111,24 +106,26 @@
         }
 
         /* --- DECORATION ANGLES (HOUPPA SEULEMENT) --- */
-        /* MODIFICATIONS ICI POUR LE DEBORDEMENT */
+        /* MODIFICATIONS ICI POUR INCLINAISON ET POSITION INTERIEURE */
         .corner-flower {
             position: absolute; 
-            width: 150px; /* Un peu plus grand pour bien déborder */
+            width: 130px; /* Taille ajustée */
             height: auto; 
-            z-index: 20; /* Z-index élevé pour passer au-dessus du cadre */
-            opacity: 1; 
+            z-index: 4; /* En dessous du contenu texte */
+            opacity: 0.9; 
             pointer-events: none;
         }
         
         .flower-top-right {
-            top: -60px; /* Poussé vers le haut */
-            right: -60px; /* Poussé vers la droite */
+            top: -20px;   /* Légèrement rentré dans le coin haut */
+            right: -20px; /* Légèrement rentré dans le coin droit */
+            transform: rotate(25deg); /* Inclinaison */
         }
 
         .flower-bottom-left {
-            bottom: -60px; /* Poussé vers le bas */
-            left: -60px; /* Poussé vers la gauche */
+            bottom: -20px; /* Légèrement rentré dans le coin bas */
+            left: -20px;   /* Légèrement rentré dans le coin gauche */
+            transform: rotate(25deg); /* Inclinaison symétrique */
         }
 
         /* TYPOGRAPHIE INTERNE */
