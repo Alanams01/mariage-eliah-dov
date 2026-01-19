@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (AGRANDI & AJUSTÉ) --- */
+        /* --- FOND FLORAL (TAILLE NORMALE) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,11 +52,11 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* On décale légèrement pour que les fleurs encadrent bien */
-            background-position: 85% center; 
+            /* RETOUR À LA NORMALE : Centré parfaitement */
+            background-position: center center; 
             
-            /* ZOOM IMPORTANT : Pour que les fleurs soient grosses et visibles */
-            background-size: 160%; 
+            /* RETOUR À LA NORMALE : Couvre l'écran sans zoom excessif */
+            background-size: cover; 
             
             background-repeat: no-repeat;
             opacity: 1; 
@@ -87,7 +87,7 @@
             
             z-index: 10;
             width: 100%; 
-            max-width: 350px; /* Plus étroit pour ne pas toucher les fleurs */
+            max-width: 350px;
             padding: 15px;
             
             background-color: transparent;
@@ -110,10 +110,10 @@
 
         /* --- PHOTO (RÉDUITE) --- */
         .photo-container {
-            width: 120px; /* Réduit */
-            height: 170px; /* Réduit */
+            width: 120px;
+            height: 170px;
             position: relative;
-            margin-bottom: 15px; /* Espace réduit */
+            margin-bottom: 15px;
             
             border: 1px solid var(--or-luxe);
             padding: 3px; 
@@ -134,32 +134,30 @@
         /* --- TITRE (RÉDUIT) --- */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 2.2rem; /* Réduit */
+            font-size: 2.2rem;
             color: var(--or-luxe);
             margin: 0 0 5px 0;
             line-height: 1;
             text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
         }
 
-        /* SEPARATEUR DISCRET (Optionnel, supprimé pour gagner de la place) */
-
         /* --- COMPTEUR (RÉDUIT) --- */
         .countdown {
             display: flex;
-            gap: 15px; /* Espacement réduit */
-            margin-bottom: 20px; /* Espace réduit */
+            gap: 15px;
+            margin-bottom: 20px;
             color: var(--or-luxe);
             justify-content: center;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
         .count-num { 
-            font-size: 0.9rem; /* Plus petit */
+            font-size: 0.9rem;
             font-weight: 600; 
             font-family: 'Cormorant Garamond', serif; 
         } 
         .count-label { 
-            font-size: 0.5rem; /* Plus petit */
+            font-size: 0.5rem;
             text-transform: uppercase; 
             letter-spacing: 1.5px; 
             margin-top: 3px; 
@@ -172,7 +170,7 @@
             background-color: var(--or-luxe);
             color: #fff;
             text-decoration: none;
-            padding: 12px 30px; /* Plus compact */
+            padding: 12px 30px;
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -190,7 +188,7 @@
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 380px) {
-            .background-container { background-size: 170%; } /* Encore plus gros sur petit mobile */
+            /* Pas de changement de background ici, il reste en 'cover' normal */
             .photo-container { width: 110px; height: 160px; }
             h1 { font-size: 2rem; }
             .btn { padding: 10px 25px; }
