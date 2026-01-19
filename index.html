@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (DÉCALÉ DROITE) --- */
+        /* --- FOND FLORAL (ZOOMÉ) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,11 +52,12 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* MODIFICATION ICI : 85% = Décalage vers la DROITE */
-            background-position: 85% center; 
+            background-position: center center; 
+            
+            /* MODIFICATION ICI : ZOOM SUR L'IMAGE (150%) */
+            background-size: 150%; 
             
             background-repeat: no-repeat;
-            background-size: cover;
             opacity: 1; 
         }
 
@@ -79,8 +80,6 @@
         /* --- CONTENEUR CENTRAL --- */
         .card-wrapper {
             position: absolute;
-            
-            /* CENTRÉ VERTICALEMENT ET HORIZONTALEMENT */
             top: 50%; 
             left: 50%;
             transform: translate(-50%, -50%);
