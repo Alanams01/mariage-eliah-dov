@@ -101,28 +101,20 @@
             background-position: right center;
         }
 
-        /* --- DECORATION HORIZONTALE (HOUPPA) --- */
-        .flower-horizontal {
-            position: absolute; 
-            left: 0; 
-            width: 100%; 
-            height: auto; 
-            object-fit: contain; 
-            pointer-events: none;
-            
-            /* MODIFICATION ICI : PASSER EN ARRIÈRE PLAN */
-            z-index: 1; /* Inférieur à .card-content qui est à 5 */
-            opacity: 0.8; /* Légère transparence pour ne pas gêner la lecture */
+        /* --- DECORATION ANGLES (HOUPPA SEULEMENT) --- */
+        .corner-flower {
+            position: absolute; width: 120px; height: auto; 
+            /* MODIFICATION CRUCIALE : z-index très bas pour passer derrière tout */
+            z-index: 1; 
+            opacity: 0.9; pointer-events: none;
         }
         
-        .flower-top {
-            top: 0;
-            max-height: 120px; 
+        .flower-top-right {
+            top: -10px; right: -10px;
         }
 
-        .flower-bottom {
-            bottom: 0;
-            max-height: 120px;
+        .flower-bottom-left {
+            bottom: -10px; left: -10px;
         }
 
         /* TYPOGRAPHIE INTERNE */
@@ -282,8 +274,8 @@
         </div>
 
         <div id="houppa" class="card reveal">
-            <img src="feuille-haut.png" alt="" class="flower-horizontal flower-top">
-            <img src="feuille-bas.png" alt="" class="flower-horizontal flower-bottom">
+            <img src="haut-droite.png" alt="" class="corner-flower flower-top-right">
+            <img src="bas-gauche.png" alt="" class="corner-flower flower-bottom-left">
 
             <div class="card-content">
                 <img src="houppa.png" alt="Houppa" class="houppa-img-top">
