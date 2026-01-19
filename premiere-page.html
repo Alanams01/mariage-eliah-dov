@@ -75,20 +75,16 @@
             background-color: var(--card-bg);
             border: 1px solid var(--gold-flowers); 
             box-shadow: 0 10px 30px rgba(191, 164, 102, 0.1);
-            text-align: center; 
-            /* RETOUR A HIDDEN : Les éléments restent dans le cadre */
-            overflow: hidden; 
+            text-align: center; overflow: hidden;
         }
-
         .card::after {
             content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
             border: 1px solid var(--gold-light); pointer-events: none; z-index: 3;
         }
-        
-        /* Le contenu est à 5, donc il passera au-dessus des fleurs qui sont à 4 */
+        /* Contenu au premier plan (z-index 5) */
         .card-content { position: relative; z-index: 5; }
 
-        /* --- DECORATION FEUILLES LATÉRALES --- */
+        /* --- DECORATION FEUILLES LATÉRALES (HISTOIRE & MAIRIE) --- */
         .deco-leaf {
             position: absolute; top: 0; bottom: 0; width: 100px; 
             background-size: contain; background-repeat: repeat-y; 
@@ -105,27 +101,28 @@
             background-position: right center;
         }
 
-        /* --- DECORATION ANGLES (HOUPPA SEULEMENT) --- */
-        /* MODIFICATIONS ICI POUR INCLINAISON ET POSITION INTERIEURE */
-        .corner-flower {
+        /* --- DECORATION HORIZONTALE (HOUPPA) --- */
+        .flower-horizontal {
             position: absolute; 
-            width: 130px; /* Taille ajustée */
+            left: 0; 
+            width: 100%; 
             height: auto; 
-            z-index: 4; /* En dessous du contenu texte */
-            opacity: 0.9; 
+            object-fit: contain; 
             pointer-events: none;
+            
+            /* MODIFICATION ICI : PASSER EN ARRIÈRE PLAN */
+            z-index: 1; /* Inférieur à .card-content qui est à 5 */
+            opacity: 0.8; /* Légère transparence pour ne pas gêner la lecture */
         }
         
-        .flower-top-right {
-            top: -20px;   /* Légèrement rentré dans le coin haut */
-            right: -20px; /* Légèrement rentré dans le coin droit */
-            transform: rotate(25deg); /* Inclinaison */
+        .flower-top {
+            top: 0;
+            max-height: 120px; 
         }
 
-        .flower-bottom-left {
-            bottom: -20px; /* Légèrement rentré dans le coin bas */
-            left: -20px;   /* Légèrement rentré dans le coin gauche */
-            transform: rotate(25deg); /* Inclinaison symétrique */
+        .flower-bottom {
+            bottom: 0;
+            max-height: 120px;
         }
 
         /* TYPOGRAPHIE INTERNE */
@@ -158,9 +155,7 @@
         .rings-icon { width: 40px; height: auto; margin-bottom: 20px; color: var(--gold-flowers); }
 
         /* MAIRIE & HOUPPA */
-        .date-main { font-family: var(--font-serif); font-weight: 600; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-color); white-space: nowrap; }
-        @media (max-width: 400px) { .date-main { font-size: 1.1rem; white-space: normal; } }
-
+        .date-main { font-family: var(--font-serif); font-weight: 600; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-color); }
         .date-sub { font-family: var(--font-script); font-size: 2rem; color: var(--gold-flowers); margin-top: 5px; letter-spacing: 1px; }
         .address-name { display: block; font-family: var(--font-serif); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; font-size: 1rem; color: var(--text-color); }
         .address-line { font-size: 0.9rem; font-weight: 400; color: var(--text-color); }
@@ -287,8 +282,8 @@
         </div>
 
         <div id="houppa" class="card reveal">
-            <img src="haut-droite.png" alt="" class="corner-flower flower-top-right">
-            <img src="bas-gauche.png" alt="" class="corner-flower flower-bottom-left">
+            <img src="feuille-haut.png" alt="" class="flower-horizontal flower-top">
+            <img src="feuille-bas.png" alt="" class="flower-horizontal flower-bottom">
 
             <div class="card-content">
                 <img src="houppa.png" alt="Houppa" class="houppa-img-top">
