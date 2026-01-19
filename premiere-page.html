@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -103,23 +103,20 @@
         /* --- DECORATION FLEURS SPECIFIQUES (HOUPPA) --- */
         .flower-specific {
             position: absolute; 
-            width: 120px; /* Taille ajustée pour être visible */
-            height: auto; 
-            z-index: 1; opacity: 0.95; pointer-events: none;
+            width: 100px; height: auto; 
+            z-index: 1; opacity: 0.9; pointer-events: none;
         }
         
-        /* 1. HAUT DROITE : Juste après le bloc Famille */
         .flower-specific-top {
-            top: 230px; /* Descendue pour être au niveau de "Ont la joie..." */
-            right: -30px; /* Poussée sur le bord droit */
-            transform: rotate(10deg);
+            /* Positionnée vers le haut à droite, proche du texte "Ont la joie..." */
+            top: 25%; /* Ajusté pour tomber vers le texte du haut */
+            right: -15px;
         }
 
-        /* 2. BAS GAUCHE : Après le bouton Waze */
         .flower-specific-bottom {
-            bottom: 90px; /* Positionnée au niveau du bouton/fin de carte */
-            left: -30px; /* Poussée sur le bord gauche */
-            transform: rotate(-10deg);
+            /* Positionnée vers le bas à gauche, proche du bouton Waze */
+            bottom: 10%; /* Ajusté pour tomber vers le bas */
+            left: -15px;
         }
 
         /* TYPOGRAPHIE INTERNE */
