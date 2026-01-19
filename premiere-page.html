@@ -75,19 +75,8 @@
             background-color: var(--card-bg);
             border: 1px solid var(--gold-flowers); 
             box-shadow: 0 10px 30px rgba(191, 164, 102, 0.1);
-            text-align: center; 
-            /* On garde hidden pour les autres cartes */
-            overflow: hidden;
+            text-align: center; overflow: hidden;
         }
-
-        /* --- NOUVEAU : Règle spécifique pour la carte Houppa --- */
-        #houppa.card {
-            /* Permet aux éléments de sortir du cadre */
-            overflow: visible;
-            /* S'assure que la carte elle-même est au-dessus du fond général */
-            z-index: 10; 
-        }
-
         .card::after {
             content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
             border: 1px solid var(--gold-light); pointer-events: none; z-index: 3;
@@ -113,27 +102,19 @@
         }
 
         /* --- DECORATION ANGLES (HOUPPA SEULEMENT) --- */
-        /* --- MODIFICATIONS ICI POUR LE DÉBORDEMENT --- */
         .corner-flower {
-            position: absolute; 
-            width: 150px; /* Taille légèrement augmentée */
-            height: auto; 
-            /* z-index 4 : Au-dessus du fond et de la bordure, mais SOUS le texte (qui est à 5) */
-            z-index: 4; 
-            opacity: 0.9; 
-            pointer-events: none;
+            position: absolute; width: 120px; height: auto; 
+            /* MODIFICATION CRUCIALE : z-index très bas pour passer derrière tout */
+            z-index: 1; 
+            opacity: 0.9; pointer-events: none;
         }
         
         .flower-top-right {
-            /* Valeurs négatives plus grandes pour pousser dehors */
-            top: -50px; 
-            right: -50px;
+            top: -10px; right: -10px;
         }
 
         .flower-bottom-left {
-             /* Valeurs négatives plus grandes pour pousser dehors */
-            bottom: -50px; 
-            left: -50px;
+            bottom: -10px; left: -10px;
         }
 
         /* TYPOGRAPHIE INTERNE */
