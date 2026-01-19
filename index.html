@@ -36,7 +36,11 @@
             width: 100%; height: 100%;
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
-            background-position: 35% center; 
+            
+            /* MODIFICATION ICI : Décalage plus prononcé vers la gauche */
+            /* On augmente le pourcentage pour déplacer le fond vers la gauche */
+            background-position: 60% center; 
+            
             background-repeat: no-repeat;
             background-size: cover; 
             opacity: 0.90;      
@@ -267,17 +271,12 @@
         }
         createGoldRain();
 
-        // --- SCRIPT ANIMATION LIVRE (NOUVEAU) ---
+        // --- SCRIPT ANIMATION LIVRE ---
         document.getElementById('open-btn').addEventListener('click', function(e) {
-            e.preventDefault(); // Empêche le changement de page immédiat
-            
-            const link = this.getAttribute('href'); // Récupère le lien
+            e.preventDefault(); 
+            const link = this.getAttribute('href'); 
             const card = document.getElementById('invitation-card');
-            
-            // Ajoute la classe qui déclenche la rotation CSS
             card.classList.add('book-open-active');
-            
-            // Attend 800ms (durée de l'animation) avant de changer de page
             setTimeout(function() {
                 window.location.href = link;
             }, 800);
