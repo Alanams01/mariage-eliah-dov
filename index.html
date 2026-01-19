@@ -14,6 +14,7 @@
             --or-fonce: #8E793E;
             --or-clair: #AD9C65;
             --texte: #4A3F35;
+            --creme: #FDFCF8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,25 +23,44 @@
             height: 100%;
             width: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: #FDFCF8;
+            /* On met un fond sombre derrière pour accentuer l'effet 3D quand la page tourne */
+            background-color: #2c2c2c; 
             overflow: hidden; 
             
-            /* EFFET 3D POUR L'ANIMATION LIVRE */
-            perspective: 1500px;
+            /* EFFET 3D GLOBAL */
+            perspective: 2000px;
         }
 
-        /* --- FOND FLORAL DÉCALÉ (POSITION AJUSTÉE) --- */
+        /* --- CONTENEUR GLOBAL DE LA PAGE (CE QUI VA TOURNER) --- */
+        #global-page-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: var(--creme); /* La couleur papier de la page */
+            
+            /* Configuration 3D */
+            transform-style: preserve-3d;
+            transform-origin: left center; /* Pivote sur la gauche (reliure) */
+            transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            
+            /* Ombre pour effet de page */
+            box-shadow: inset 10px 0 30px rgba(0,0,0,0.1);
+        }
+
+        /* CLASSE D'ANIMATION ACTIVÉE PAR JS */
+        .page-turn-active {
+            /* Tourne la page entière à -120 degrés */
+            transform: rotateY(-120deg);
+        }
+
+        /* --- FOND FLORAL --- */
         .background-container {
-            position: fixed;
+            position: absolute; /* Devient absolute par rapport au conteneur qui tourne */
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
-            
-            /* MODIFICATION ICI : Décalage encore plus prononcé vers la gauche */
-            /* Passé de 60% à 75% pour bien centrer le vide */
             background-position: 75% center; 
-            
             background-repeat: no-repeat;
             background-size: cover; 
             opacity: 0.90;      
@@ -72,7 +92,7 @@
             100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
         }
 
-        /* --- CONTENEUR CENTRAL --- */
+        /* --- CONTENEUR CARTE (SANS ANIMATION PROPRE, ELLE SUIT LA PAGE) --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
@@ -93,17 +113,6 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-
-            /* ANIMATION LIVRE */
-            transform-style: preserve-3d;
-            transform-origin: left center;
-            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
-        }
-
-        /* CLASSE D'ACTIVATION DE L'ANIMATION */
-        .book-open-active {
-            transform: translate(-50%, -50%) rotateY(-100deg) !important;
-            opacity: 0;
         }
 
         /* --- ÉLÉMENTS --- */
@@ -190,7 +199,6 @@
             color: var(--or-fonce); 
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 380px) {
             .logo-img { width: 90px; }
             .photo-container { width: 150px; height: 200px; }
@@ -201,30 +209,33 @@
 </head>
 <body>
 
-    <div class="background-container"></div>
-    <div id="gold-rain-container"></div>
-
-    <div class="card-wrapper" id="invitation-card">
+    <div id="global-page-content">
         
-        <img src="logo.png" alt="Logo" class="logo-img">
+        <div class="background-container"></div>
+        <div id="gold-rain-container"></div>
 
-        <div class="photo-container">
-            <img src="photo.jpeg" alt="Eliah et Dov">
+        <div class="card-wrapper">
+            
+            <img src="logo.png" alt="Logo" class="logo-img">
+
+            <div class="photo-container">
+                <img src="photo.jpeg" alt="Eliah et Dov">
+            </div>
+            
+            <h1>Eliah & Dov</h1>
+            
+            <div class="separator"></div>
+            
+            <div class="countdown" id="countdown">
+                <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
+                <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
+                <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
+                <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
+            </div>
+
+            <a href="premiere-page.html" class="btn" id="open-btn">Voir l'invitation</a>
+
         </div>
-        
-        <h1>Eliah & Dov</h1>
-        
-        <div class="separator"></div>
-        
-        <div class="countdown" id="countdown">
-            <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
-            <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
-            <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
-            <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
-        </div>
-
-        <a href="premiere-page.html" class="btn" id="open-btn">Voir l'invitation</a>
-
     </div>
 
     <script>
@@ -267,15 +278,21 @@
         }
         createGoldRain();
 
-        // --- SCRIPT ANIMATION LIVRE ---
+        // --- SCRIPT ANIMATION PAGE ENTIERE ---
         document.getElementById('open-btn').addEventListener('click', function(e) {
             e.preventDefault(); 
             const link = this.getAttribute('href'); 
-            const card = document.getElementById('invitation-card');
-            card.classList.add('book-open-active');
+            
+            // On cible le conteneur global
+            const pageContent = document.getElementById('global-page-content');
+            
+            // On active la rotation sur toute la page
+            pageContent.classList.add('page-turn-active');
+            
+            // On attend que la page ait "tourné" pour changer d'URL
             setTimeout(function() {
                 window.location.href = link;
-            }, 800);
+            }, 1000);
         });
     </script>
 
