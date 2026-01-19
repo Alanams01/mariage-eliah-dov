@@ -4,211 +4,410 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mariage de Eliah & Dov</title>
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* --- PALETTE DE COULEURS BASÉE SUR VOS CAPTURES --- */
         :root {
-            --or-luxe: #A08954; 
-            --or-clair: #D4C59A;
-            --blanc-creme: #FFFEFA;
-            --texte-gris: #4A4A4A;
+            --bg-color: #FFFEFA; /* Fond crème très clair */
+            --gold-luxe: #A08954; /* Le doré bronze exact de vos images */
+            --gold-light: #D4C59A;
+            --text-dark: #4A4A4A;
+            
+            --font-script: 'Great Vibes', cursive;
+            --font-serif: 'Cinzel', serif;
+            --font-sans: 'Montserrat', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body, html {
+        html, body {
             height: 100%;
             width: 100%;
-            font-family: 'Cormorant Garamond', serif;
-            background-color: #222; 
-            overflow: hidden; 
-            perspective: 2000px;
+            overflow-x: hidden; /* Évite le scroll horizontal */
+            background-color: var(--bg-color);
+            font-family: var(--font-sans);
         }
 
-        /* --- PAGE GLOBALE --- */
-        #global-page-content {
+        /* =========================================
+           --- PAGE D'ACCUEIL (LANDING) ---
+           ========================================= */
+        
+        #landing-page {
             position: relative;
+            height: 100vh;
             width: 100%;
-            height: 100%;
-            background-color: var(--blanc-creme);
-            transform-style: preserve-3d;
-            transform-origin: left center;
-            transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-            box-shadow: inset 20px 0 50px rgba(0,0,0,0.05);
-        }
-
-        .page-turn-active {
-            transform: rotateY(-130deg);
-        }
-
-        /* --- FOND FLORAL --- */
-        .background-container {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            background-image: url('Cadre-floral-or.png');
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            opacity: 1; 
-        }
-
-        /* --- CONTENEUR FLOTTANT --- */
-        .card-wrapper {
-            position: absolute;
-            /* MODIFICATION ICI : Je redescends à 50% pour centrer parfaitement */
-            top: 50%; 
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            
-            width: 100%; 
-            max-width: 400px;
-            
-            background-color: transparent;
-            border: none;
-            box-shadow: none;
-            
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
+            justify-content: center; /* Centrage vertical parfait */
+            z-index: 100;
+            background-color: var(--bg-color);
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
         }
 
-        /* --- ARCHE PHOTO --- */
-        .photo-frame {
-            width: 190px;
-            height: 270px;
+        /* Image de fond florale (Cadre doré) */
+        .floral-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('image.png'); /* L'image du cadre doré */
+            background-position: center center;
+            background-size: cover;
+            opacity: 1;
+            z-index: 1;
+            pointer-events: none; /* Permet de cliquer à travers */
+        }
+
+        /* Conteneur central de l'accueil */
+        .landing-content {
             position: relative;
-            margin-bottom: 25px; /* Espace sous la photo */
+            z-index: 10;
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+            /* On descend légèrement pour être bien centré entre les fleurs */
+            margin-top: 20px; 
+        }
+
+        /* Photo en Arche (Style Image 1) */
+        .hero-photo-frame {
+            width: 180px;
+            height: 260px;
+            margin: 0 auto 25px auto;
+            position: relative;
             
-            /* Forme d'arche */
-            border-top-left-radius: 95px;
-            border-top-right-radius: 95px;
+            /* L'arche arrondie */
+            border-top-left-radius: 90px;
+            border-top-right-radius: 90px;
             
-            /* Ombre douce */
-            box-shadow: 0 15px 40px rgba(160, 137, 84, 0.25);
+            /* Bordure dorée fine */
+            border: 2px solid var(--gold-luxe);
+            padding: 5px; /* Espace entre photo et bordure */
+            background: #fff;
         }
 
-        .photo-frame img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            border-top-left-radius: 95px;
-            border-top-right-radius: 95px;
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-top-left-radius: 85px;
+            border-top-right-radius: 85px;
+            display: block;
+            filter: grayscale(100%); /* Photo en noir et blanc comme sur la capture */
         }
 
-        /* --- TEXTES --- */
-        h1 {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 3.2rem;
-            color: var(--or-luxe);
-            margin: 0 0 15px 0;
-            line-height: 1;
-            font-weight: 400;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.9);
+        /* Titre Noms */
+        .landing-names {
+            font-family: var(--font-script);
+            font-size: 3.5rem;
+            color: var(--gold-luxe);
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
-        .separator-line {
+        .separator-gold {
             width: 40px;
-            height: 1px;
-            background-color: var(--or-luxe);
-            margin-bottom: 25px;
-            opacity: 0.6;
+            height: 2px;
+            background-color: var(--gold-luxe);
+            margin: 15px auto;
         }
 
-        /* --- COMPTE À REBOURS --- */
+        /* Compte à rebours */
         .countdown {
             display: flex;
-            gap: 20px;
-            margin-bottom: 35px;
-            color: var(--or-luxe);
             justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            color: var(--gold-luxe);
         }
+        .count-item { display: flex; flex-direction: column; align-items: center; }
+        .count-num { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; }
+        .count-label { font-size: 0.6rem; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px; }
 
-        .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.2rem; font-weight: 600; font-family: 'Cormorant Garamond', serif; }
-        .count-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 5px; opacity: 0.8; }
-
-        /* --- BOUTON --- */
-        .btn {
-            background-color: var(--or-luxe);
-            color: #fff;
-            text-decoration: none;
-            padding: 16px 45px;
-            font-size: 0.75rem;
+        /* Bouton "Voir l'invitation" (Style Image 1) */
+        .enter-btn {
+            background-color: #947e48; /* Couleur dorée foncée du bouton */
+            color: white;
+            border: none;
+            padding: 15px 0;
+            width: 100%;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            transition: all 0.3s;
-            border: none;
             cursor: pointer;
-            font-weight: 500;
-            box-shadow: 0 5px 15px rgba(160, 137, 84, 0.3);
+            box-shadow: 0 4px 10px rgba(148, 126, 72, 0.3);
+            transition: all 0.3s ease;
+        }
+        .enter-btn:hover { background-color: var(--gold-luxe); transform: translateY(-2px); }
+
+
+        /* =========================================
+           --- CONTENU INTÉRIEUR (LES CARTES) ---
+           ========================================= */
+        
+        #main-content {
+            display: none; /* Caché au début */
+            opacity: 0;
+            padding: 40px 20px 100px 20px;
+            background-color: var(--bg-color);
+            transition: opacity 1s ease;
         }
 
-        .btn:hover {
-            background-color: #8c7646;
-            transform: translateY(-2px);
+        /* Style commun des cartes (Basé sur "Notre Histoire" - Image 5) */
+        .card {
+            background: #FFF;
+            padding: 40px 25px;
+            margin: 0 auto 60px auto;
+            max-width: 500px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(160, 137, 84, 0.1);
+            
+            /* La bordure dorée fine extérieure */
+            border: 1px solid var(--gold-luxe);
         }
 
-        /* --- PARTICULES --- */
-        #gold-rain-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 2; overflow: hidden;
-        }
-        .gold-speck {
-            position: absolute; width: 3px; height: 3px;
-            background-color: var(--or-luxe); border-radius: 50%; opacity: 0;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh); opacity: 0; }
-            20% { opacity: 0.6; }
-            100% { transform: translateY(110vh); opacity: 0; }
+        /* La double bordure fine intérieure */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid var(--gold-light);
+            pointer-events: none;
         }
 
-        @media (max-width: 380px) {
-            .photo-frame { width: 160px; height: 230px; }
-            h1 { font-size: 2.8rem; }
-            .btn { padding: 14px 35px; }
+        /* Images dans les cartes */
+        .card-header-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px auto;
         }
+        
+        /* Cas spécifique image Hébreu (Full Width) */
+        .hebrew-full {
+            width: 100%;
+            margin-bottom: 20px;
+            filter: brightness(0) saturate(100%) invert(60%) sepia(16%) saturate(836%) hue-rotate(7deg) brightness(91%) contrast(89%); /* Rend l'image dorée */
+        }
+
+        /* Typo Cartes */
+        .card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--gold-luxe);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 10px 0 20px 0;
+        }
+
+        .card p {
+            font-family: var(--font-script);
+            font-size: 1.6rem; /* Police écriture assez grande */
+            color: var(--text-dark);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .info-text {
+            font-family: var(--font-serif);
+            font-size: 0.9rem !important;
+            color: var(--text-dark) !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .divider-small {
+            width: 30px; height: 1px;
+            background-color: var(--gold-luxe);
+            margin: 20px auto;
+        }
+
+        /* Bouton Waze dans les cartes */
+        .btn-waze {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: 1px solid var(--gold-luxe);
+            color: var(--gold-luxe);
+            text-decoration: none;
+            font-family: var(--font-serif);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .btn-waze:hover { background-color: var(--gold-luxe); color: #fff; }
+
+        /* Formulaire */
+        input, select, textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-family: var(--font-sans);
+            background: transparent;
+        }
+        .submit-btn {
+            background-color: var(--gold-luxe);
+            color: white; width: 100%; padding: 15px;
+            border: none; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        /* Navbar (visible après le clic) */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255, 254, 250, 0.95);
+            padding: 15px 0; z-index: 1000;
+            display: none; justify-content: center; gap: 20px;
+            border-bottom: 1px solid var(--gold-light);
+        }
+        nav a {
+            text-decoration: none; color: var(--text-dark);
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="global-page-content">
-        
-        <div class="background-container"></div>
-        <div id="gold-rain-container"></div>
+    <div id="landing-page">
+        <div class="floral-bg"></div>
 
-        <div class="card-wrapper">
-            
-            <div class="photo-frame">
-                <img src="photo.jpeg" alt="Eliah et Dov">
+        <div class="landing-content">
+            <div class="hero-photo-frame">
+                <img src="image.png" alt="Couple" class="hero-photo">
             </div>
+
+            <h1 class="landing-names">Eliah & Dov</h1>
             
-            <h1>Eliah & Dov</h1>
-            
-            <div class="separator-line"></div>
-            
+            <div class="separator-gold"></div>
+
             <div class="countdown" id="countdown">
-                <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
-                <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
-                <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
-                <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
+                <div class="count-item"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
+                <div class="count-item"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
+                <div class="count-item"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
+                <div class="count-item"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
             </div>
 
-            <a href="premiere-page.html" class="btn" id="open-btn">Voir l'invitation</a>
-
+            <button class="enter-btn" onclick="enterSite()">Voir l'invitation</button>
         </div>
     </div>
 
+    <nav id="navbar">
+        <a href="#histoire">Histoire</a>
+        <a href="#mairie">Mairie</a>
+        <a href="#houppa">Houppa</a>
+        <a href="#rsvp">RSVP</a>
+    </nav>
+
+    <div id="main-content">
+        
+        <div id="histoire" class="card">
+            <div style="font-size: 1.5rem; color: var(--gold-luxe); margin-bottom: 15px;">&#10084;</div>
+            
+            <h3>Notre Histoire</h3>
+            <div class="divider-small"></div>
+            
+            <p>"De meilleurs amis au collège à partenaires pour la vie, D.ieu a guidé notre chemin depuis nos 15 ans jusqu'au jour où nous nous unissons sous la Houppa."</p>
+        </div>
+
+        <div id="mairie" class="card">
+            <img src="image_093869.png" alt="Fleurs" style="width: 100%; height: 120px; object-fit: cover; object-position: top; margin-bottom: 20px; opacity: 0.8;">
+            
+            <h3>Cérémonie Civile</h3>
+            <div class="divider-small"></div>
+            
+            <p class="info-text" style="font-size: 1.2rem !important; text-transform: none; font-family: 'Great Vibes', cursive;">Eliah & Dov</p>
+            <p class="info-text">Se diront "Oui"</p>
+            
+            <div style="margin: 30px 0;">
+                <span class="info-text" style="font-size: 1.1rem !important; font-weight: 600; display: block;">Lundi 27 Juillet 2026</span>
+                <span class="info-text" style="display: block; margin-top: 10px;">Mairie de Joinville-le-Pont</span>
+                <span class="info-text" style="display: block; color: #888 !important; font-size: 0.8rem !important;">23 rue de Paris</span>
+            </div>
+
+            <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">
+                <i class="fa-brands fa-waze"></i> S'y rendre
+            </a>
+        </div>
+
+        <div id="houppa" class="card">
+            <img src="image_09319e.png" alt="Kol Sasson" class="hebrew-full">
+            
+            <img src="image.png" alt="Houppa" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 20px; filter: sepia(30%);">
+
+            <h3>Houppa & Soirée</h3>
+            <div class="divider-small"></div>
+
+            <div style="margin: 30px 0;">
+                <span class="info-text" style="font-size: 1.1rem !important; font-weight: 600; display: block;">Mercredi 29 Juillet 2026</span>
+                <span class="info-text" style="display: block; margin-top: 5px;">15 Av 5786</span>
+                <span class="info-text" style="display: block; margin-top: 15px; font-weight: bold;">À 17H30</span>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <span class="info-text" style="display: block;">La Verrière 91</span>
+                <span class="info-text" style="display: block; color: #888 !important; font-size: 0.8rem !important;">3 rue Marvingt, 91700 Fleury-Mérogis</span>
+            </div>
+
+            <a href="https://waze.com/ul?q=La%20Verriere%2091%20Fleury-Merogis" target="_blank" class="btn-waze">
+                <i class="fa-brands fa-waze"></i> S'y rendre
+            </a>
+        </div>
+
+        <div id="rsvp" class="card">
+            <h3>R.S.V.P</h3>
+            <p class="info-text" style="text-transform: none; margin-bottom: 30px;">Réponse souhaitée avant le 1er Juin 2026</p>
+            
+            <form>
+                <input type="text" placeholder="Nom & Prénoms" required>
+                <select>
+                    <option>Je serai présent(e) à la Mairie</option>
+                    <option>Je ne pourrai pas venir à la Mairie</option>
+                </select>
+                <select>
+                    <option>Je serai présent(e) à la Houppa</option>
+                    <option>Je ne pourrai pas venir à la Houppa</option>
+                </select>
+                <textarea rows="3" placeholder="Un petit message pour les mariés..."></textarea>
+                <button class="submit-btn">Confirmer</button>
+            </form>
+        </div>
+
+    </div>
+
     <script>
+        // --- ANIMATION D'ENTRÉE ---
+        function enterSite() {
+            const landing = document.getElementById('landing-page');
+            const main = document.getElementById('main-content');
+            const nav = document.getElementById('navbar');
+
+            // On fait glisser l'accueil vers le haut (comme une page qui se tourne/lève)
+            landing.style.transform = 'translateY(-100vh)';
+            
+            setTimeout(() => {
+                landing.style.display = 'none';
+                main.style.display = 'block';
+                nav.style.display = 'flex';
+                
+                // Petit délai pour l'opacité
+                setTimeout(() => {
+                    main.style.opacity = '1';
+                }, 50);
+            }, 800);
+        }
+
+        // --- COMPTE À REBOURS ---
         const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
 
         setInterval(() => {
@@ -227,33 +426,6 @@
                 document.getElementById("s").innerText = s;
             }
         }, 1000);
-
-        function createGoldRain() {
-            const container = document.getElementById('gold-rain-container');
-            const particleCount = 30; 
-
-            for (let i = 0; i < particleCount; i++) {
-                const speck = document.createElement('div');
-                speck.classList.add('gold-speck');
-                speck.style.left = Math.random() * 100 + '%';
-                const duration = Math.random() * 5 + 4;
-                speck.style.animationDuration = duration + 's';
-                speck.style.animationDelay = Math.random() * 5 + 's';
-                speck.style.opacity = Math.random() * 0.7; 
-                container.appendChild(speck);
-            }
-        }
-        createGoldRain();
-
-        document.getElementById('open-btn').addEventListener('click', function(e) {
-            e.preventDefault(); 
-            const link = this.getAttribute('href'); 
-            const pageContent = document.getElementById('global-page-content');
-            pageContent.classList.add('page-turn-active');
-            setTimeout(function() {
-                window.location.href = link;
-            }, 1200);
-        });
     </script>
 
 </body>
