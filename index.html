@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (RECENTRÉ) --- */
+        /* --- FOND FLORAL (CORRIGÉ PLEIN ÉCRAN) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,11 +52,11 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* MODIFICATION ICI : RECENTRAGE PARFAIT */
+            /* MODIFICATION ICI : RECENTRAGE + COUVERTURE TOTALE */
             background-position: center center; 
             
-            /* ON GARDE LE ZOOM (150%) */
-            background-size: 150%; 
+            /* FORCE L'IMAGE A REMPLIR TOUT L'ECRAN */
+            background-size: cover; 
             
             background-repeat: no-repeat;
             opacity: 1; 
@@ -136,10 +136,7 @@
             font-family: 'Pinyon Script', cursive;
             font-size: 2.4rem; 
             color: var(--or-luxe);
-            
-            /* Marge du bas réduite */
             margin: 0 0 5px 0;
-            
             line-height: 1;
             text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
         }
@@ -148,10 +145,7 @@
         .countdown {
             display: flex;
             gap: 20px; 
-            
-            /* Marge du bas réduite */
             margin-bottom: 20px; 
-            
             color: var(--or-luxe);
             justify-content: center;
         }
