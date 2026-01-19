@@ -10,11 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* --- CHARTE GRAPHIQUE --- */
         :root {
-            --or-fonce: #8E793E;
-            --or-clair: #AD9C65;
-            --texte: #4A3F35;
-            --creme: #FDFCF8;
+            --or-luxe: #A08954; /* Le doré antique de votre capture */
+            --or-clair: #D4C59A;
+            --blanc-creme: #FFFEFA;
+            --texte-gris: #4A4A4A;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,187 +24,197 @@
             height: 100%;
             width: 100%;
             font-family: 'Cormorant Garamond', serif;
-            /* On met un fond sombre derrière pour accentuer l'effet 3D quand la page tourne */
-            background-color: #2c2c2c; 
+            background-color: #222; /* Fond sombre derrière pour l'effet 3D */
             overflow: hidden; 
             
-            /* EFFET 3D GLOBAL */
+            /* PERSPECTIVE POUR L'EFFET LIVRE */
             perspective: 2000px;
         }
 
-        /* --- CONTENEUR GLOBAL DE LA PAGE (CE QUI VA TOURNER) --- */
+        /* --- CONTENEUR GLOBAL QUI VA TOURNER --- */
         #global-page-content {
             position: relative;
             width: 100%;
             height: 100%;
-            background-color: var(--creme); /* La couleur papier de la page */
+            background-color: var(--blanc-creme);
             
-            /* Configuration 3D */
+            /* ANIMATION LIVRE CONFIGURATION */
             transform-style: preserve-3d;
-            transform-origin: left center; /* Pivote sur la gauche (reliure) */
+            transform-origin: left center; /* La reliure est à gauche */
             transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-            
-            /* Ombre pour effet de page */
-            box-shadow: inset 10px 0 30px rgba(0,0,0,0.1);
+            box-shadow: inset 20px 0 50px rgba(0,0,0,0.05); /* Ombre pliure */
         }
 
-        /* CLASSE D'ANIMATION ACTIVÉE PAR JS */
+        /* CLASSE ACTIVÉE EN JS POUR TOURNER LA PAGE */
         .page-turn-active {
-            /* Tourne la page entière à -120 degrés */
-            transform: rotateY(-120deg);
+            transform: rotateY(-130deg);
         }
 
         /* --- FOND FLORAL --- */
         .background-container {
-            position: absolute; /* Devient absolute par rapport au conteneur qui tourne */
+            position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
+            /* Votre image de fond */
             background-image: url('Cadre-floral-or.png');
-            background-position: 75% center; 
+            background-position: center center;
             background-repeat: no-repeat;
-            background-size: cover; 
-            opacity: 0.90;      
+            background-size: cover; /* Remplit l'écran */
+            opacity: 1; 
         }
 
-        /* --- PLUIE D'OR --- */
-        #gold-rain-container {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-
-        .gold-speck {
-            position: absolute;
-            width: 3px; height: 3px;
-            background-color: var(--or-clair);
-            border-radius: 50%;
-            opacity: 0;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0px); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
-        }
-
-        /* --- CONTENEUR CARTE (SANS ANIMATION PROPRE, ELLE SUIT LA PAGE) --- */
+        /* --- CARTE CENTRALE (STYLE EXACT CAPTURE) --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             
-            width: 100%; 
-            max-width: 400px; 
-            padding: 20px;
+            width: 85%; 
+            max-width: 360px; /* Taille iPhone standard */
+            height: auto;
+            min-height: 550px;
             
-            background-color: transparent;
-            box-shadow: none;
-            border: none;
-            outline: none;
+            background-color: #FFF;
+            /* Bordure double fine style faire-part */
+            border: 1px solid var(--or-luxe);
+            outline: 1px solid var(--or-luxe);
+            outline-offset: -6px; /* La deuxième ligne à l'intérieur */
+            
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15); /* Belle ombre portée */
             
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 30px 20px;
         }
 
-        /* --- ÉLÉMENTS --- */
-        
-        .logo-img {
-            width: 100px;
-            margin-bottom: 20px;
-            mix-blend-mode: multiply; 
-            filter: drop-shadow(0 2px 2px rgba(255,255,255,0.5));
+        /* --- LOGO --- */
+        .logo-top {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 1.8rem;
+            color: var(--texte-gris);
+            margin-bottom: 25px;
+            margin-top: 10px;
         }
 
-        .photo-container {
-            width: 170px;
-            height: 230px;
+        /* --- ARCHE PHOTO --- */
+        .photo-frame {
+            width: 180px;
+            height: 240px;
             position: relative;
             margin-bottom: 20px;
             
-            border: 2px solid var(--or-fonce);
-            padding: 4px; 
-            background: #fff; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            /* Forme d'arche parfaite */
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
             
-            border-top-left-radius: 85px;
-            border-top-right-radius: 85px;
+            /* Bordure dorée autour de la photo */
+            border: 1px solid var(--or-luxe);
+            padding: 5px; /* Espace entre photo et bordure */
         }
 
-        .photo-container img {
-            width: 100%; height: 100%; 
-            object-fit: cover; display: block;
-            border-top-left-radius: 80px; 
-            border-top-right-radius: 80px;
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* L'image suit la forme de l'arche */
+            border-top-left-radius: 95px;
+            border-top-right-radius: 95px;
         }
 
+        /* --- TEXTES --- */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3rem; 
-            color: var(--or-fonce);
-            margin: 0 0 15px 0;
+            font-size: 2.8rem;
+            color: var(--or-luxe);
+            margin: 5px 0 15px 0;
             line-height: 1;
-            text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 5px rgba(255,255,255,0.5);
+            font-weight: 400;
         }
 
-        .separator {
-            width: 50px;
+        .separator-line {
+            width: 30px;
             height: 1px;
-            background-color: var(--or-fonce);
+            background-color: var(--or-luxe);
             margin-bottom: 20px;
-            box-shadow: 0 0 5px rgba(255,255,255,0.5);
         }
 
+        /* --- COMPTE À REBOURS --- */
         .countdown {
             display: flex;
-            gap: 20px; 
-            margin-bottom: 30px; 
-            color: var(--or-fonce);
+            gap: 15px;
+            margin-bottom: 30px;
+            color: var(--or-luxe);
             justify-content: center;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 10px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(2px);
         }
 
-        .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; } 
-        .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; font-weight: 600; }
+        .count-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
+        .count-num {
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .count-label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+
+        /* --- BOUTON --- */
         .btn {
-            background-color: var(--or-fonce);
+            background-color: var(--or-luxe);
             color: #fff;
             text-decoration: none;
-            padding: 14px 35px; 
+            padding: 15px 0;
+            width: 100%;
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             transition: all 0.3s;
-            border: 1px solid var(--or-fonce);
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(142, 121, 62, 0.3);
+            border: none;
             cursor: pointer;
+            font-weight: 500;
         }
 
-        .btn:hover { 
-            background-color: #fff; 
-            color: var(--or-fonce); 
+        .btn:hover {
+            background-color: #8c7646;
         }
 
+        /* --- PARTICULES (PLUIE D'OR SUBTILE) --- */
+        #gold-rain-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 2; overflow: hidden;
+        }
+        .gold-speck {
+            position: absolute; width: 3px; height: 3px;
+            background-color: var(--or-luxe); border-radius: 50%; opacity: 0;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(110vh); opacity: 0; }
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 380px) {
-            .logo-img { width: 90px; }
-            .photo-container { width: 150px; height: 200px; }
-            h1 { font-size: 2.5rem; }
-            .btn { padding: 12px 25px; }
+            .card-wrapper { width: 90%; min-height: 500px; padding: 20px 15px; }
+            .photo-frame { width: 160px; height: 210px; }
+            h1 { font-size: 2.4rem; }
         }
     </style>
 </head>
@@ -216,15 +227,15 @@
 
         <div class="card-wrapper">
             
-            <img src="logo.png" alt="Logo" class="logo-img">
+            <div class="logo-top">DE</div> 
 
-            <div class="photo-container">
+            <div class="photo-frame">
                 <img src="photo.jpeg" alt="Eliah et Dov">
             </div>
             
             <h1>Eliah & Dov</h1>
             
-            <div class="separator"></div>
+            <div class="separator-line"></div>
             
             <div class="countdown" id="countdown">
                 <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
@@ -239,7 +250,8 @@
     </div>
 
     <script>
-        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
+        // --- SCRIPT COMPTE A REBOURS ---
+        const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime(); // 29 Juillet 2026
 
         setInterval(() => {
             const now = new Date().getTime();
@@ -258,21 +270,19 @@
             }
         }, 1000);
 
+        // --- SCRIPT PLUIE D'OR ---
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
-            const particleCount = 40; 
+            const particleCount = 30; // Moins de particules pour faire plus propre
 
             for (let i = 0; i < particleCount; i++) {
                 const speck = document.createElement('div');
                 speck.classList.add('gold-speck');
                 speck.style.left = Math.random() * 100 + '%';
-                const duration = Math.random() * 5 + 3;
+                const duration = Math.random() * 5 + 4;
                 speck.style.animationDuration = duration + 's';
                 speck.style.animationDelay = Math.random() * 5 + 's';
-                const size = Math.random() * 3 + 1;
-                speck.style.width = size + 'px';
-                speck.style.height = size + 'px';
-                speck.style.opacity = Math.random();
+                speck.style.opacity = Math.random() * 0.7; // Transparence variable
                 container.appendChild(speck);
             }
         }
@@ -286,13 +296,13 @@
             // On cible le conteneur global
             const pageContent = document.getElementById('global-page-content');
             
-            // On active la rotation sur toute la page
+            // On active la rotation
             pageContent.classList.add('page-turn-active');
             
-            // On attend que la page ait "tourné" pour changer d'URL
+            // On attend 1.2s (la durée un peu plus courte que la transition CSS pour fluidité)
             setTimeout(function() {
                 window.location.href = link;
-            }, 1000);
+            }, 1200);
         });
     </script>
 
