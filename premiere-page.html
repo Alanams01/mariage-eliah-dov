@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -103,23 +103,23 @@
         /* --- DECORATION FLEURS SPECIFIQUES (HOUPPA) --- */
         .flower-specific {
             position: absolute; 
-            width: 110px; /* Légèrement plus grand */
+            width: 120px; /* Taille ajustée pour être visible */
             height: auto; 
             z-index: 1; opacity: 0.95; pointer-events: none;
         }
         
-        /* MODIFICATION ICI : Positionnement précis pour "Ont la joie..." */
+        /* 1. HAUT DROITE : Juste après le bloc Famille */
         .flower-specific-top {
-            top: 330px; /* Descendue pour s'aligner avec le paragraphe */
-            right: -25px; /* Poussée à droite */
-            transform: rotate(10deg); /* Légère inclinaison */
+            top: 230px; /* Descendue pour être au niveau de "Ont la joie..." */
+            right: -30px; /* Poussée sur le bord droit */
+            transform: rotate(10deg);
         }
 
-        /* MODIFICATION ICI : Positionnement précis pour le bouton Waze */
+        /* 2. BAS GAUCHE : Après le bouton Waze */
         .flower-specific-bottom {
-            bottom: 110px; /* Remontée pour s'aligner avec le bouton */
-            left: -25px; /* Poussée à gauche */
-             transform: rotate(-10deg);
+            bottom: 90px; /* Positionnée au niveau du bouton/fin de carte */
+            left: -30px; /* Poussée sur le bord gauche */
+            transform: rotate(-10deg);
         }
 
         /* TYPOGRAPHIE INTERNE */
