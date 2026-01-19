@@ -83,7 +83,7 @@
         }
         .card-content { position: relative; z-index: 5; }
 
-        /* --- DECORATION FEUILLES LATÉRALES (HISTOIRE & MAIRIE) --- */
+        /* --- DECORATION FEUILLES LATÉRALES --- */
         .deco-leaf {
             position: absolute; top: 0; bottom: 0; width: 100px; 
             background-size: contain; background-repeat: repeat-y; 
@@ -108,7 +108,7 @@
         
         .flower-top-right {
             top: -10px; right: -10px;
-            z-index: 6; /* Passe au-dessus du contenu */
+            z-index: 6; 
         }
 
         .flower-bottom-left {
@@ -145,7 +145,24 @@
         .rings-icon { width: 40px; height: auto; margin-bottom: 20px; color: var(--gold-flowers); }
 
         /* MAIRIE & HOUPPA */
-        .date-main { font-family: var(--font-serif); font-weight: 600; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-color); }
+        .date-main { 
+            font-family: var(--font-serif); 
+            font-weight: 600; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+            margin-bottom: 8px; 
+            color: var(--text-color);
+            white-space: nowrap; /* Empêche le retour à la ligne si possible */
+        }
+        
+        /* AJUSTEMENT MOBILE POUR LA DATE */
+        @media (max-width: 400px) {
+            .date-main {
+                font-size: 1.1rem; /* Réduit la taille sur petit écran */
+                white-space: normal; /* Autorise le retour à la ligne si vraiment trop petit */
+            }
+        }
+
         .date-sub { font-family: var(--font-script); font-size: 2rem; color: var(--gold-flowers); margin-top: 5px; letter-spacing: 1px; }
         .address-name { display: block; font-family: var(--font-serif); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; font-size: 1rem; color: var(--text-color); }
         .address-line { font-size: 0.9rem; font-weight: 400; color: var(--text-color); }
@@ -306,7 +323,6 @@
                 <a href="https://waze.com/ul?q=La%20Verriere%2091%20Fleury-Merogis" target="_blank" class="btn-waze">
                     <i class="fa-brands fa-waze"></i> S'y rendre
                 </a>
-                
                 <p style="font-size: 0.9rem; margin-top: 40px; font-weight: 700; border-top: 1px solid var(--gold-light); padding-top: 25px; color: var(--text-color); opacity: 1;">
                     Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
                 </p>
