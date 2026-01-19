@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (CORRIGÉ PLEIN ÉCRAN) --- */
+        /* --- FOND FLORAL (AGRANDI & AJUSTÉ) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,11 +52,11 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* MODIFICATION ICI : CENTRÉ + COUVERTURE TOTALE */
-            background-position: center center; 
+            /* On décale légèrement pour que les fleurs encadrent bien */
+            background-position: 85% center; 
             
-            /* FORCE L'IMAGE A REMPLIR TOUT L'ECRAN SANS VIDE */
-            background-size: cover; 
+            /* ZOOM IMPORTANT : Pour que les fleurs soient grosses et visibles */
+            background-size: 160%; 
             
             background-repeat: no-repeat;
             opacity: 1; 
@@ -78,17 +78,17 @@
             100% { transform: translateY(110vh); opacity: 0; }
         }
 
-        /* --- CONTENEUR CENTRAL --- */
+        /* --- CONTENEUR CENTRAL (RÉDUIT) --- */
         .card-wrapper {
             position: absolute;
-            top: 40%; /* Un peu plus haut pour équilibrer avec le fond */
+            top: 50%; 
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 10;
             
+            z-index: 10;
             width: 100%; 
-            max-width: 380px; 
-            padding: 20px;
+            max-width: 350px; /* Plus étroit pour ne pas toucher les fleurs */
+            padding: 15px;
             
             background-color: transparent;
             border: none;
@@ -108,81 +108,74 @@
             to { opacity: 1; transform: translate(-50%, -50%); }
         }
 
-        /* --- PHOTO --- */
+        /* --- PHOTO (RÉDUITE) --- */
         .photo-container {
-            width: 140px;
-            height: 200px;
+            width: 120px; /* Réduit */
+            height: 170px; /* Réduit */
             position: relative;
-            margin-bottom: 25px;
+            margin-bottom: 15px; /* Espace réduit */
             
             border: 1px solid var(--or-luxe);
-            padding: 4px; 
+            padding: 3px; 
             background: #fff; 
-            box-shadow: 0 15px 35px rgba(160, 137, 84, 0.2);
+            box-shadow: 0 10px 25px rgba(160, 137, 84, 0.2);
             
-            border-top-left-radius: 80px;
-            border-top-right-radius: 80px;
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
         }
 
         .photo-container img {
             width: 100%; height: 100%; 
             object-fit: cover; display: block;
-            border-top-left-radius: 76px; 
-            border-top-right-radius: 76px;
+            border-top-left-radius: 57px; 
+            border-top-right-radius: 57px;
         }
 
-        /* --- TITRE --- */
+        /* --- TITRE (RÉDUIT) --- */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 2.4rem; 
+            font-size: 2.2rem; /* Réduit */
             color: var(--or-luxe);
-            margin: 0 0 15px 0;
+            margin: 0 0 5px 0;
             line-height: 1;
             text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
         }
 
-        /* --- SÉPARATEUR --- */
-        .separator {
-            width: 40px;
-            height: 1px;
-            background-color: var(--or-luxe);
-            margin-bottom: 25px;
-            opacity: 0.6;
-        }
+        /* SEPARATEUR DISCRET (Optionnel, supprimé pour gagner de la place) */
 
-        /* --- COMPTEUR --- */
+        /* --- COMPTEUR (RÉDUIT) --- */
         .countdown {
             display: flex;
-            gap: 20px; 
-            margin-bottom: 35px; 
+            gap: 15px; /* Espacement réduit */
+            margin-bottom: 20px; /* Espace réduit */
             color: var(--or-luxe);
             justify-content: center;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
         .count-num { 
-            font-size: 1.1rem; 
+            font-size: 0.9rem; /* Plus petit */
             font-weight: 600; 
             font-family: 'Cormorant Garamond', serif; 
         } 
         .count-label { 
-            font-size: 0.55rem; 
+            font-size: 0.5rem; /* Plus petit */
             text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-top: 5px; 
+            letter-spacing: 1.5px; 
+            margin-top: 3px; 
             font-weight: 500;
             opacity: 0.8; 
         }
 
-        /* --- BOUTON --- */
+        /* --- BOUTON (COMPACT & CHIC) --- */
         .btn {
             background-color: var(--or-luxe);
             color: #fff;
             text-decoration: none;
-            padding: 15px 40px; 
-            font-size: 0.65rem;
+            padding: 12px 30px; /* Plus compact */
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             transition: all 0.4s ease;
             border: 1px solid var(--or-luxe);
             font-weight: 600;
@@ -195,11 +188,12 @@
             transform: translateY(-2px);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 380px) {
-            .photo-container { width: 130px; height: 185px; }
-            h1 { font-size: 2.2rem; }
-            .btn { padding: 12px 30px; }
+            .background-container { background-size: 170%; } /* Encore plus gros sur petit mobile */
+            .photo-container { width: 110px; height: 160px; }
+            h1 { font-size: 2rem; }
+            .btn { padding: 10px 25px; }
         }
     </style>
 </head>
@@ -217,8 +211,6 @@
             </div>
             
             <h1>Eliah & Dov</h1>
-            
-            <div class="separator"></div>
             
             <div class="countdown" id="countdown">
                 <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
