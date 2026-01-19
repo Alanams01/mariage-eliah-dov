@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (RECADRÉ) --- */
+        /* --- FOND FLORAL (DÉCALÉ DROITE) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,13 +52,11 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* CORRECTION : CENTRAGE PARFAIT */
-            background-position: center center; 
+            /* MODIFICATION ICI : 85% = Décalage vers la DROITE */
+            background-position: 85% center; 
             
-            /* S'assure que le cadre remplit l'écran sans laisser de vide */
-            background-size: cover; 
             background-repeat: no-repeat;
-            
+            background-size: cover;
             opacity: 1; 
         }
 
