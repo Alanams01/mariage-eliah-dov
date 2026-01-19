@@ -24,6 +24,9 @@
             font-family: 'Cormorant Garamond', serif;
             background-color: #FDFCF8;
             overflow: hidden; 
+            
+            /* AJOUT POUR L'EFFET 3D */
+            perspective: 1500px;
         }
 
         /* --- FOND FLORAL DÉCALÉ --- */
@@ -33,11 +36,7 @@
             width: 100%; height: 100%;
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
-            
-            /* MODIFICATION ICI : Décalage horizontal vers la gauche */
-            /* 35% horizontalement (au lieu de 'center' ou 50%), centré verticalement */
             background-position: 35% center; 
-            
             background-repeat: no-repeat;
             background-size: cover; 
             opacity: 0.90;      
@@ -69,11 +68,12 @@
             100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
         }
 
-        /* --- CONTENEUR CENTRAL (INVISIBLE) --- */
+        /* --- CONTENEUR CENTRAL --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            /* Note: le translate est géré ici pour l'état initial */
+            transform: translate(-50%, -50%); 
             z-index: 10;
             
             width: 100%; 
@@ -90,6 +90,18 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+
+            /* AJOUTS POUR L'ANIMATION LIVRE */
+            transform-style: preserve-3d;
+            transform-origin: left center; /* Pivote sur la gauche comme une reliure */
+            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
+        }
+
+        /* CLASSE D'ACTIVATION DE L'ANIMATION */
+        .book-open-active {
+            /* Pivote de 100 degrés vers la gauche et disparait */
+            transform: translate(-50%, -50%) rotateY(-100deg) !important;
+            opacity: 0;
         }
 
         /* --- ÉLÉMENTS --- */
@@ -101,7 +113,6 @@
             filter: drop-shadow(0 2px 2px rgba(255,255,255,0.5));
         }
 
-        /* Cadre Photo */
         .photo-container {
             width: 170px;
             height: 230px;
@@ -169,12 +180,12 @@
             border: 1px solid var(--or-fonce);
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(142, 121, 62, 0.3);
+            cursor: pointer; /* Curseur main */
         }
 
         .btn:hover { 
             background-color: #fff; 
             color: var(--or-fonce); 
-            cursor: pointer; 
         }
 
         /* --- RESPONSIVE --- */
@@ -191,7 +202,7 @@
     <div class="background-container"></div>
     <div id="gold-rain-container"></div>
 
-    <div class="card-wrapper">
+    <div class="card-wrapper" id="invitation-card">
         
         <img src="logo.png" alt="Logo" class="logo-img">
 
@@ -210,11 +221,12 @@
             <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
         </div>
 
-        <a href="premiere-page.html" class="btn">Voir l'invitation</a>
+        <a href="premiere-page.html" class="btn" id="open-btn">Voir l'invitation</a>
 
     </div>
 
     <script>
+        // --- SCRIPT COMPTE A REBOURS ---
         const targetDate = new Date(2026, 6, 29, 12, 0, 0).getTime();
 
         setInterval(() => {
@@ -234,6 +246,7 @@
             }
         }, 1000);
 
+        // --- SCRIPT PLUIE D'OR ---
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
             const particleCount = 40; 
@@ -253,6 +266,22 @@
             }
         }
         createGoldRain();
+
+        // --- SCRIPT ANIMATION LIVRE (NOUVEAU) ---
+        document.getElementById('open-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Empêche le changement de page immédiat
+            
+            const link = this.getAttribute('href'); // Récupère le lien
+            const card = document.getElementById('invitation-card');
+            
+            // Ajoute la classe qui déclenche la rotation CSS
+            card.classList.add('book-open-active');
+            
+            // Attend 800ms (durée de l'animation) avant de changer de page
+            setTimeout(function() {
+                window.location.href = link;
+            }, 800);
+        });
     </script>
 
 </body>
