@@ -44,7 +44,7 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND FLORAL (DÉCALÉ GAUCHE) --- */
+        /* --- FOND FLORAL (MODIFIÉ) --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -52,13 +52,11 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             
-            /* MODIFICATION : Décalé vers la GAUCHE (-25%) */
-            background-position: -25% center; 
-            
-            /* ZOOM SUR L'IMAGE (150%) */
-            background-size: 150%; 
+            /* MODIFICATION ICI : Décalage prononcé vers la GAUCHE (-25%) */
+            background-position: -25% 35%; 
             
             background-repeat: no-repeat;
+            background-size: cover;
             opacity: 1; 
         }
 
@@ -81,11 +79,10 @@
         /* --- CONTENEUR CENTRAL --- */
         .card-wrapper {
             position: absolute;
-            top: 50%; 
-            left: 50%;
+            top: 40%; left: 50%;
             transform: translate(-50%, -50%);
-            
             z-index: 10;
+            
             width: 100%; 
             max-width: 380px; 
             padding: 20px;
@@ -136,24 +133,25 @@
             font-family: 'Pinyon Script', cursive;
             font-size: 2.4rem; 
             color: var(--or-luxe);
-            
-            /* Marge du bas réduite */
-            margin: 0 0 5px 0;
-            
+            margin: 0 0 15px 0;
             line-height: 1;
             text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
         }
 
-        /* SEPARATEUR SUPPRIMÉ */
+        /* --- SÉPARATEUR --- */
+        .separator {
+            width: 40px;
+            height: 1px;
+            background-color: var(--or-luxe);
+            margin-bottom: 25px;
+            opacity: 0.6;
+        }
 
         /* --- COMPTEUR --- */
         .countdown {
             display: flex;
             gap: 20px; 
-            
-            /* Marge du bas réduite */
-            margin-bottom: 20px; 
-            
+            margin-bottom: 35px; 
             color: var(--or-luxe);
             justify-content: center;
         }
@@ -216,6 +214,8 @@
             </div>
             
             <h1>Eliah & Dov</h1>
+            
+            <div class="separator"></div>
             
             <div class="countdown" id="countdown">
                 <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
