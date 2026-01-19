@@ -11,10 +11,10 @@
 
     <style>
         :root {
-            --or-fonce: #8E793E;
-            --or-clair: #AD9C65;
-            --texte: #4A3F35;
-            --creme: #FDFCF8;
+            --or-luxe: #A08954; 
+            --or-clair: #D4C59A;
+            --blanc-creme: #FFFEFA;
+            --texte-gris: #4A4A4A;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,76 +23,58 @@
             height: 100%;
             width: 100%;
             font-family: 'Cormorant Garamond', serif;
-            /* On met un fond sombre derrière pour accentuer l'effet 3D quand la page tourne */
-            background-color: #2c2c2c; 
+            background-color: #222; 
             overflow: hidden; 
-            
-            /* EFFET 3D GLOBAL */
             perspective: 2000px;
         }
 
-        /* --- CONTENEUR GLOBAL DE LA PAGE (CE QUI VA TOURNER) --- */
+        /* --- PAGE GLOBALE --- */
         #global-page-content {
             position: relative;
             width: 100%;
             height: 100%;
-            background-color: var(--creme); /* La couleur papier de la page */
-            
-            /* Configuration 3D */
+            background-color: var(--blanc-creme);
             transform-style: preserve-3d;
-            transform-origin: left center; /* Pivote sur la gauche (reliure) */
+            transform-origin: left center;
             transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-            
-            /* Ombre pour effet de page */
-            box-shadow: inset 10px 0 30px rgba(0,0,0,0.1);
+            box-shadow: inset 20px 0 50px rgba(0,0,0,0.05);
         }
 
-        /* CLASSE D'ANIMATION ACTIVÉE PAR JS */
         .page-turn-active {
-            /* Tourne la page entière à -120 degrés */
-            transform: rotateY(-120deg);
+            transform: rotateY(-130deg);
         }
 
         /* --- FOND FLORAL --- */
         .background-container {
-            position: absolute; /* Devient absolute par rapport au conteneur qui tourne */
+            position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
-            background-position: 75% center; 
+            /* Position conservée comme tu aimais */
+            background-position: 40% 35%; 
             background-repeat: no-repeat;
-            background-size: cover; 
-            opacity: 0.90;      
+            background-size: cover;
+            opacity: 1; 
         }
 
         /* --- PLUIE D'OR --- */
         #gold-rain-container {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5; overflow: hidden;
         }
-
         .gold-speck {
-            position: absolute;
-            width: 3px; height: 3px;
-            background-color: var(--or-clair);
-            border-radius: 50%;
-            opacity: 0;
+            position: absolute; width: 3px; height: 3px;
+            background-color: var(--or-luxe); border-radius: 50%; opacity: 0;
             animation: fall linear infinite;
         }
-
         @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0px); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+            0% { transform: translateY(-10vh); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(110vh); opacity: 0; }
         }
 
-        /* --- CONTENEUR CARTE (SANS ANIMATION PROPRE, ELLE SUIT LA PAGE) --- */
+        /* --- CONTENEUR CENTRAL --- */
         .card-wrapper {
             position: absolute;
             top: 50%; left: 50%;
@@ -100,11 +82,10 @@
             z-index: 10;
             
             width: 100%; 
-            max-width: 400px; 
+            max-width: 380px; 
             padding: 20px;
             
             background-color: transparent;
-            box-shadow: none;
             border: none;
             outline: none;
             
@@ -113,97 +94,110 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+
+            /* Petite animation d'entrée douce */
+            animation: fadeInUp 1s ease-out;
         }
 
-        /* --- ÉLÉMENTS --- */
-        
-        .logo-img {
-            width: 100px;
-            margin-bottom: 20px;
-            mix-blend-mode: multiply; 
-            filter: drop-shadow(0 2px 2px rgba(255,255,255,0.5));
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translate(-50%, -45%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
         }
 
+        /* --- PHOTO --- */
         .photo-container {
-            width: 170px;
-            height: 230px;
+            width: 160px; /* Taille optimisée */
+            height: 220px;
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             
-            border: 2px solid var(--or-fonce);
+            /* Bordure plus fine et élégante */
+            border: 1px solid var(--or-luxe);
             padding: 4px; 
             background: #fff; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            box-shadow: 0 15px 35px rgba(160, 137, 84, 0.2); /* Ombre douce dorée */
             
-            border-top-left-radius: 85px;
-            border-top-right-radius: 85px;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
         }
 
         .photo-container img {
             width: 100%; height: 100%; 
             object-fit: cover; display: block;
-            border-top-left-radius: 80px; 
-            border-top-right-radius: 80px;
+            border-top-left-radius: 76px; 
+            border-top-right-radius: 76px;
         }
 
+        /* --- TITRE --- */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3rem; 
-            color: var(--or-fonce);
+            font-size: 3.2rem; 
+            color: var(--or-luxe);
             margin: 0 0 15px 0;
             line-height: 1;
-            text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 5px rgba(255,255,255,0.5);
+            /* Ombre portée légère pour détacher du fond */
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
         }
 
+        /* --- SÉPARATEUR --- */
         .separator {
-            width: 50px;
+            width: 40px;
             height: 1px;
-            background-color: var(--or-fonce);
-            margin-bottom: 20px;
-            box-shadow: 0 0 5px rgba(255,255,255,0.5);
+            background-color: var(--or-luxe);
+            margin-bottom: 25px;
+            opacity: 0.6;
         }
 
+        /* --- COMPTEUR --- */
         .countdown {
             display: flex;
             gap: 20px; 
-            margin-bottom: 30px; 
-            color: var(--or-fonce);
+            margin-bottom: 35px; 
+            color: var(--or-luxe);
             justify-content: center;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 10px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(2px);
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; } 
-        .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; font-weight: 600; }
+        .count-num { 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            font-family: 'Cormorant Garamond', serif; 
+        } 
+        .count-label { 
+            font-size: 0.55rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-top: 5px; 
+            font-weight: 500;
+            opacity: 0.8; 
+        }
 
+        /* --- BOUTON --- */
         .btn {
-            background-color: var(--or-fonce);
+            background-color: var(--or-luxe);
             color: #fff;
             text-decoration: none;
-            padding: 14px 35px; 
+            padding: 15px 40px; 
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            transition: all 0.3s;
-            border: 1px solid var(--or-fonce);
+            transition: all 0.4s ease;
+            border: 1px solid var(--or-luxe);
             font-weight: 600;
-            box-shadow: 0 5px 15px rgba(142, 121, 62, 0.3);
-            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(160, 137, 84, 0.25);
         }
 
         .btn:hover { 
-            background-color: #fff; 
-            color: var(--or-fonce); 
+            background-color: transparent; 
+            color: var(--or-luxe); 
+            transform: translateY(-2px);
         }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 380px) {
-            .logo-img { width: 90px; }
-            .photo-container { width: 150px; height: 200px; }
-            h1 { font-size: 2.5rem; }
-            .btn { padding: 12px 25px; }
+            .photo-container { width: 140px; height: 200px; }
+            h1 { font-size: 2.8rem; }
+            .btn { padding: 12px 30px; }
         }
     </style>
 </head>
@@ -216,8 +210,6 @@
 
         <div class="card-wrapper">
             
-            <img src="logo.png" alt="Logo" class="logo-img">
-
             <div class="photo-container">
                 <img src="photo.jpeg" alt="Eliah et Dov">
             </div>
@@ -260,36 +252,26 @@
 
         function createGoldRain() {
             const container = document.getElementById('gold-rain-container');
-            const particleCount = 40; 
+            const particleCount = 30; 
 
             for (let i = 0; i < particleCount; i++) {
                 const speck = document.createElement('div');
                 speck.classList.add('gold-speck');
                 speck.style.left = Math.random() * 100 + '%';
-                const duration = Math.random() * 5 + 3;
+                const duration = Math.random() * 5 + 4;
                 speck.style.animationDuration = duration + 's';
                 speck.style.animationDelay = Math.random() * 5 + 's';
-                const size = Math.random() * 3 + 1;
-                speck.style.width = size + 'px';
-                speck.style.height = size + 'px';
-                speck.style.opacity = Math.random();
+                speck.style.opacity = Math.random() * 0.7;
                 container.appendChild(speck);
             }
         }
         createGoldRain();
 
-        // --- SCRIPT ANIMATION PAGE ENTIERE ---
         document.getElementById('open-btn').addEventListener('click', function(e) {
             e.preventDefault(); 
             const link = this.getAttribute('href'); 
-            
-            // On cible le conteneur global
             const pageContent = document.getElementById('global-page-content');
-            
-            // On active la rotation sur toute la page
             pageContent.classList.add('page-turn-active');
-            
-            // On attend que la page ait "tourné" pour changer d'URL
             setTimeout(function() {
                 window.location.href = link;
             }, 1000);
