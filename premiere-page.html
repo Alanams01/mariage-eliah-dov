@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -22,7 +22,7 @@
             --font-script: 'Great Vibes', cursive;
             --font-serif: 'Cinzel', serif;
             --font-sans: 'Montserrat', sans-serif;
-            --font-main: 'Cormorant Garamond', serif; /* La même que "Ont la joie..." */
+            --font-main: 'Cormorant Garamond', serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,7 +64,7 @@
             padding-top: 40px; 
         }
 
-        /* STYLE DES CARTES */
+        /* CARTES */
         .card {
             position: relative; 
             padding: 60px 40px; 
@@ -101,31 +101,47 @@
             letter-spacing: 3px; font-size: 1.4rem; margin-bottom: 15px; 
             color: var(--gold-flowers);
         }
+
+        /* NOUVELLE POLICE STYLEE POUR LES PRENOMS */
         .couple-names {
-            font-family: var(--font-script); font-size: 3.5rem; 
-            margin: 10px 0; line-height: 1.2; color: var(--gold-flowers);
+            font-family: 'Great Vibes', cursive !important; 
+            font-size: 4rem; 
+            margin: 15px 0; 
+            line-height: 1; 
+            color: var(--gold-flowers);
+            font-weight: 400;
         }
         
-        /* Harmonisation Demandée : Même police et taille que "Ont la joie..." */
-        .houppa-intro-text, .date-main, .address-name, .address-line, .grand-parents-text {
+        .houppa-intro-text, .date-main, .address-name, .address-line {
              font-family: var(--font-main) !important;
              font-size: 0.75rem !important; 
              text-transform: uppercase;
              letter-spacing: 1px;
         }
 
-        .date-main { font-weight: 700; margin-bottom: 4px; }
-        .address-name { display: block; font-weight: 700; margin-top: 10px; }
+        /* GRAS LEGER POUR LES HEURES ET ADRESSES */
+        .date-main, .address-name { 
+            font-weight: 600 !important; 
+            margin-bottom: 4px; 
+        }
 
-        /* REDUCTION ET CHANGEMENT DATE HEBREU */
         .date-sub { 
             font-family: var(--font-sans) !important; 
-            font-size: 0.65rem !important; /* Réduction maximale */
+            font-size: 0.65rem !important;
             font-weight: 300;
             color: var(--gold-flowers); 
             margin-top: 2px; 
             letter-spacing: 3px;
             text-transform: uppercase;
+        }
+
+        /* GRAS LEGER POUR LA PENSEE AFFECTUEUSE */
+        .grand-parents-text {
+            font-family: var(--font-main) !important;
+            font-size: 0.85rem !important; /* Taille un peu plus grande pour la lisibilité */
+            font-weight: 600 !important; 
+            text-transform: none; 
+            letter-spacing: 0.5px;
         }
 
         .serif-italic { 
@@ -212,7 +228,7 @@
                 <div class="divider"></div>
                 
                 <div class="date-main">Lundi 27 Juillet 2026</div>
-                <div class="date-main" style="font-weight: 400;">À 15h30</div>
+                <div class="date-main" style="font-weight: 600;">À 15h30</div>
 
                 <div style="margin-top: 20px;">
                     <span class="address-name">Mairie de Joinville-le-Pont</span>
@@ -250,7 +266,7 @@
                 <div class="divider"></div>
                 <div class="date-main">Mercredi 29 Juillet 2026</div>
                 <div class="date-sub">15 AV 5786</div>
-                <div class="date-main" style="margin-top: 4px; font-weight: 400;">À 17H30</div>
+                <div class="date-main" style="margin-top: 4px; font-weight: 600;">À 17H30</div>
 
                 <div style="margin-top: 25px;">
                     <span class="address-name">La Verrière 91</span>
@@ -260,7 +276,7 @@
                     <i class="fa-brands fa-waze"></i> S'y rendre
                 </a>
                 
-                <p class="grand-parents-text" style="margin-top: 40px; border-top: 1px solid var(--gold-light); padding-top: 25px; text-transform: none; letter-spacing: 0.5px;">
+                <p class="grand-parents-text" style="margin-top: 40px; border-top: 1px solid var(--gold-light); padding-top: 25px;">
                     <br>Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
                 </p>
             </div>
@@ -281,10 +297,6 @@
                             <label class="radio-label"><input type="radio" name="mairie" value="oui" onclick="toggle('mairie', true)" required> Présent</label>
                             <label class="radio-label"><input type="radio" name="mairie" value="non" onclick="toggle('mairie', false)" required> Absent</label>
                         </div>
-                        <select id="mairie-guest" style="display:none; margin-top: 15px; width: 100%; border: none; border-bottom: 1px solid #ddd; background: transparent;">
-                            <option value="1">1 Personne</option>
-                            <option value="2">2 Personnes</option>
-                        </select>
                     </div>
                     <div>
                         <label class="form-label">Houppa *</label>
@@ -292,10 +304,6 @@
                             <label class="radio-label"><input type="radio" name="houppa" value="oui" onclick="toggle('houppa', true)" required> Présent</label>
                             <label class="radio-label"><input type="radio" name="houppa" value="non" onclick="toggle('houppa', false)" required> Absent</label>
                         </div>
-                        <select id="houppa-guest" style="display:none; margin-top: 15px; width: 100%; border: none; border-bottom: 1px solid #ddd; background: transparent;">
-                            <option value="1">1 Personne</option>
-                            <option value="2">2 Personnes</option>
-                        </select>
                     </div>
                     <div>
                         <label class="form-label">Message *</label>
