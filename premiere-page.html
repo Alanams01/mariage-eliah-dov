@@ -79,7 +79,7 @@
         }
         .card-content { position: relative; z-index: 5; }
 
-        /* DECORATIONS */
+        /* DECORATIONS FEUILLES GÉNÉRALES */
         .deco-leaf {
             position: absolute; top: 0; bottom: 0; width: 100px; 
             background-size: contain; background-repeat: repeat-y; 
@@ -88,6 +88,7 @@
         .leaf-left { left: -20px; background-image: url('feuille-gauche.png'); background-position: left center; }
         .leaf-right { right: -20px; background-image: url('feuille-droite.png'); background-position: right center; }
 
+        /* NOUVELLES CLASSES POUR LA MAIRIE (Feuilles différentes) */
         .leaf-left-mairie { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
         .leaf-right-mairie { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
 
@@ -96,7 +97,7 @@
             z-index: 1; opacity: 0.95; pointer-events: none;
         }
         .flower-specific-top { top: 515px; right: -35px; transform: rotate(-10deg); }
-        .flower-specific-bottom { bottom: 90px; left: -5px; transform: rotate(-10deg); }
+        .flower-specific-bottom { bottom: 90px; left: -5px; transform: rotate(-10deg); }}
 
         /* TYPOGRAPHIE */
         h3 { 
@@ -121,16 +122,9 @@
              letter-spacing: 1px;
         }
 
-        /* GRAS ACCENTUÉ POUR LES INFOS CLÉS */
         .date-main, .address-name { 
-            font-weight: 700 !important; /* Gras plus prononcé */
+            font-weight: 600 !important; 
             margin-bottom: 4px; 
-        }
-
-        /* CORRECTION DU "3" ET DU GRAS PRONONCÉ POUR L'ADRESSE */
-        .address-line {
-            font-weight: 700 !important; /* Gras plus prononcé */
-            font-variant-numeric: lining-nums; /* Force les chiffres à être alignés sur la même ligne */
         }
 
         .date-sub { 
@@ -174,9 +168,13 @@
         }
         .btn-waze:hover { color: var(--text-color); border-bottom-color: var(--text-color); }
 
+        /* HOUPPA SPECIFIQUE */
+        .houppa-img-top { width: 100%; height: auto; border-radius: 2px; margin-bottom: 5px; border: 1px solid var(--gold-light); }
+        .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 20px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
         .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
         .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
 
+        /* FORMULAIRE */
         form { display: flex; flex-direction: column; gap: 30px; text-align: left; margin-top: 30px; }
         .form-label { font-family: var(--font-serif); font-size: 0.75rem; color: var(--gold-flowers); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 1.5px; }
         input[type="text"], textarea, select { width: 100%; padding: 10px 0; border: none; border-bottom: 1px solid #ddd; background: transparent; font-family: var(--font-sans); font-size: 1rem; color: var(--text-color); border-radius: 0; }
