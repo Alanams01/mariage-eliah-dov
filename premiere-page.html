@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -17,11 +17,12 @@
             --card-bg: #FFFFFF;
             --gold-flowers: #BFA466; 
             --gold-light: #EBE3D3;
-            --text-color: #A08954; /* Texte Or/Beige */
+            --text-color: #A08954; 
             
             --font-script: 'Great Vibes', cursive;
             --font-serif: 'Cinzel', serif;
             --font-sans: 'Montserrat', sans-serif;
+            --font-main: 'Cormorant Garamond', serif; /* La même que "Ont la joie..." */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,7 +32,7 @@
         body {
             margin: 0; padding: 0;
             width: 100%;
-            font-family: var(--font-sans);
+            font-family: var(--font-main);
             background-color: var(--bg-color);
             color: var(--text-color);
             font-weight: 400;
@@ -63,7 +64,7 @@
             padding-top: 40px; 
         }
 
-        /* CARTES */
+        /* STYLE DES CARTES */
         .card {
             position: relative; 
             padding: 60px 40px; 
@@ -105,32 +106,31 @@
             margin: 10px 0; line-height: 1.2; color: var(--gold-flowers);
         }
         
-        /* APPLICATION DE LA POLICE CURSIVE AUX ELEMENTS DEMANDÉS */
-        .houppa-intro-text, 
-        .date-main, 
-        .address-name, 
-        .address-line,
-        .grand-parents-text {
-             font-family: var(--font-script) !important;
-             font-size: 1.3rem !important; /* Taille ajustée pour la lisibilité de cette police */
-             line-height: 1.2;
+        /* Harmonisation Demandée : Même police et taille que "Ont la joie..." */
+        .houppa-intro-text, .date-main, .address-name, .address-line, .grand-parents-text {
+             font-family: var(--font-main) !important;
+             font-size: 0.75rem !important; 
+             text-transform: uppercase;
+             letter-spacing: 1px;
         }
 
-        /* Cas particulier Mairie : Date et Heure */
-        .date-block-civil {
-            font-family: var(--font-script);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
+        .date-main { font-weight: 700; margin-bottom: 4px; }
+        .address-name { display: block; font-weight: 700; margin-top: 10px; }
 
-        /* REDUCTION DE LA DATE EN HEBREU */
+        /* REDUCTION ET CHANGEMENT DATE HEBREU */
         .date-sub { 
-            font-family: var(--font-serif); 
-            font-size: 0.7rem; /* Très réduit */
+            font-family: var(--font-sans) !important; 
+            font-size: 0.65rem !important; /* Réduction maximale */
+            font-weight: 300;
             color: var(--gold-flowers); 
-            margin-top: 5px; 
-            letter-spacing: 2px;
+            margin-top: 2px; 
+            letter-spacing: 3px;
             text-transform: uppercase;
+        }
+
+        .serif-italic { 
+            font-family: var(--font-serif); font-style: normal; font-weight: 400;
+            font-size: 1rem; letter-spacing: 1px; color: var(--gold-flowers);
         }
 
         .divider { width: 50px; height: 1px; background-color: var(--gold-flowers); margin: 30px auto; }
@@ -146,7 +146,7 @@
             display: inline-block; margin-top: 25px; 
             color: var(--gold-flowers); border-bottom: 1px solid var(--gold-flowers);
             padding-bottom: 5px; text-decoration: none; 
-            font-family: var(--font-serif); font-size: 0.75rem;
+            font-family: var(--font-main); font-size: 0.75rem;
             text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s;
         }
         .btn-waze:hover { color: var(--text-color); border-bottom-color: var(--text-color); }
@@ -155,12 +155,14 @@
         .houppa-img-top { width: 100%; height: auto; border-radius: 2px; margin-bottom: 5px; border: 1px solid var(--gold-light); }
         .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 20px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
         .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
-        .parent-col { font-family: var(--font-serif); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
+        .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
 
         /* FORMULAIRE */
         form { display: flex; flex-direction: column; gap: 30px; text-align: left; margin-top: 30px; }
         .form-label { font-family: var(--font-serif); font-size: 0.75rem; color: var(--gold-flowers); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 1.5px; }
         input[type="text"], textarea, select { width: 100%; padding: 10px 0; border: none; border-bottom: 1px solid #ddd; background: transparent; font-family: var(--font-sans); font-size: 1rem; color: var(--text-color); border-radius: 0; }
+        .radio-group { display: flex; gap: 25px; margin-top: 5px; padding: 5px 0; }
+        .radio-label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; color: var(--text-color); }
         .btn-submit { background-color: var(--gold-flowers); color: #fff; border: none; padding: 18px; width: 100%; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; font-weight: 600; cursor: pointer; margin-top: 20px; transition: all 0.4s ease; }
         footer { text-align: center; padding: 40px 0; font-family: var(--font-serif); font-size: 0.8rem; color: var(--gold-flowers); letter-spacing: 2px; text-transform: uppercase; }
 
@@ -209,10 +211,8 @@
                 <p class="serif-italic">Se diront "Oui"</p>
                 <div class="divider"></div>
                 
-                <div class="date-block-civil">
-                    <div>Lundi 27 Juillet 2026</div>
-                    <div style="margin-top: 5px;">À 15h30</div>
-                </div>
+                <div class="date-main">Lundi 27 Juillet 2026</div>
+                <div class="date-main" style="font-weight: 400;">À 15h30</div>
 
                 <div style="margin-top: 20px;">
                     <span class="address-name">Mairie de Joinville-le-Pont</span>
@@ -238,11 +238,9 @@
                     <div class="parent-col">Famille<br>Saada-Dos Santos</div>
                     <div class="parent-col">Famille<br>Guigui-Halioua</div>
                 </div>
-                
                 <p class="houppa-intro-text">
                     Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
                 </p>
-                
                 <div class="couple-names">Eliah & Dov</div>
                 
                 <p class="houppa-intro-text" style="margin: 10px 0;">
@@ -250,22 +248,20 @@
                 </p>
 
                 <div class="divider"></div>
-                
                 <div class="date-main">Mercredi 29 Juillet 2026</div>
                 <div class="date-sub">15 AV 5786</div>
-                <div class="date-main" style="margin-top: 10px;">À 17H30</div>
+                <div class="date-main" style="margin-top: 4px; font-weight: 400;">À 17H30</div>
 
                 <div style="margin-top: 25px;">
                     <span class="address-name">La Verrière 91</span>
                     <p class="address-line">3 rue Marvingt, 91700 Fleury-Mérogis</p>
                 </div>
-                
                 <a href="https://waze.com/ul?q=La%20Verriere%2091%20Fleury-Merogis" target="_blank" class="btn-waze">
                     <i class="fa-brands fa-waze"></i> S'y rendre
                 </a>
                 
-                <p class="grand-parents-text" style="margin-top: 40px; border-top: 1px solid var(--gold-light); padding-top: 25px;">
-                    Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
+                <p class="grand-parents-text" style="margin-top: 40px; border-top: 1px solid var(--gold-light); padding-top: 25px; text-transform: none; letter-spacing: 0.5px;">
+                    <br>Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
                 </p>
             </div>
         </div>
@@ -281,9 +277,9 @@
                     </div>
                     <div>
                         <label class="form-label">Mairie *</label>
-                        <div class="radio-group" style="display: flex; gap: 25px; margin-top: 5px;">
-                            <label style="display: flex; align-items: center; gap: 10px;"><input type="radio" name="mairie" value="oui" onclick="toggle('mairie', true)" required> Présent</label>
-                            <label style="display: flex; align-items: center; gap: 10px;"><input type="radio" name="mairie" value="non" onclick="toggle('mairie', false)" required> Absent</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="mairie" value="oui" onclick="toggle('mairie', true)" required> Présent</label>
+                            <label class="radio-label"><input type="radio" name="mairie" value="non" onclick="toggle('mairie', false)" required> Absent</label>
                         </div>
                         <select id="mairie-guest" style="display:none; margin-top: 15px; width: 100%; border: none; border-bottom: 1px solid #ddd; background: transparent;">
                             <option value="1">1 Personne</option>
@@ -292,9 +288,9 @@
                     </div>
                     <div>
                         <label class="form-label">Houppa *</label>
-                        <div class="radio-group" style="display: flex; gap: 25px; margin-top: 5px;">
-                            <label style="display: flex; align-items: center; gap: 10px;"><input type="radio" name="houppa" value="oui" onclick="toggle('houppa', true)" required> Présent</label>
-                            <label style="display: flex; align-items: center; gap: 10px;"><input type="radio" name="houppa" value="non" onclick="toggle('houppa', false)" required> Absent</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="houppa" value="oui" onclick="toggle('houppa', true)" required> Présent</label>
+                            <label class="radio-label"><input type="radio" name="houppa" value="non" onclick="toggle('houppa', false)" required> Absent</label>
                         </div>
                         <select id="houppa-guest" style="display:none; margin-top: 15px; width: 100%; border: none; border-bottom: 1px solid #ddd; background: transparent;">
                             <option value="1">1 Personne</option>
