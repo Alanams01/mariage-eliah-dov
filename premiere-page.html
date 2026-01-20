@@ -64,7 +64,7 @@
             padding-top: 40px; 
         }
 
-        /* CARTES */
+        /* STYLE DES CARTES */
         .card {
             position: relative; 
             padding: 60px 40px; 
@@ -79,7 +79,7 @@
         }
         .card-content { position: relative; z-index: 5; }
 
-        /* DECORATIONS */
+        /* DECORATIONS FEUILLES GÉNÉRALES */
         .deco-leaf {
             position: absolute; top: 0; bottom: 0; width: 100px; 
             background-size: contain; background-repeat: repeat-y; 
@@ -87,6 +87,10 @@
         }
         .leaf-left { left: -20px; background-image: url('feuille-gauche.png'); background-position: left center; }
         .leaf-right { right: -20px; background-image: url('feuille-droite.png'); background-position: right center; }
+
+        /* NOUVELLES CLASSES POUR LA MAIRIE (Feuilles différentes) */
+        .leaf-left-mairie { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
+        .leaf-right-mairie { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
 
         .flower-specific {
             position: absolute; width: 170px; height: auto; 
@@ -102,24 +106,22 @@
             color: var(--gold-flowers);
         }
 
-        /* NOUVELLE POLICE STYLEE POUR LES PRENOMS - TAILLE RÉDUITE ICI */
         .couple-names {
             font-family: 'Great Vibes', cursive !important; 
-            font-size: 2.8rem; /* Réduit de 4rem à 2.8rem */
+            font-size: 2.8rem; 
             margin: 10px 0; 
             line-height: 1.1; 
             color: var(--gold-flowers);
             font-weight: 400;
         }
         
-        .houppa-intro-text, .date-main, .address-name, .address-line {
+        .houppa-intro-text, .date-main, .address-name, .address-line, .grand-parents-text {
              font-family: var(--font-main) !important;
              font-size: 0.75rem !important; 
              text-transform: uppercase;
              letter-spacing: 1px;
         }
 
-        /* GRAS LEGER POUR LES HEURES ET ADRESSES */
         .date-main, .address-name { 
             font-weight: 600 !important; 
             margin-bottom: 4px; 
@@ -135,7 +137,6 @@
             text-transform: uppercase;
         }
 
-        /* GRAS LEGER POUR LA PENSEE AFFECTUEUSE */
         .grand-parents-text {
             font-family: var(--font-main) !important;
             font-size: 0.85rem !important; 
@@ -215,8 +216,8 @@
         </div>
 
         <div id="mairie" class="card reveal">
-            <div class="deco-leaf leaf-left"></div>
-            <div class="deco-leaf leaf-right"></div>
+            <div class="deco-leaf leaf-left-mairie"></div>
+            <div class="deco-leaf leaf-right-mairie"></div>
             <div class="card-content">
                 <svg class="rings-icon" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
@@ -277,7 +278,7 @@
                 </a>
                 
                 <p class="grand-parents-text" style="margin-top: 40px; border-top: 1px solid var(--gold-light); padding-top: 25px;">
-                    <br>Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
+                    Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
                 </p>
             </div>
         </div>
@@ -367,4 +368,3 @@
     </script>
 </body>
 </html>
-
