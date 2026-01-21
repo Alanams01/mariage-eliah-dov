@@ -339,7 +339,7 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Script d'envoi vers Google Sheets
+       // Script d'envoi vers Google Sheets
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = e.target.querySelector('.btn-submit');
@@ -349,11 +349,15 @@
 
             const formData = new FormData(this);
             
+            // On utilise fetch avec no-cors pour autoriser l'envoi vers Google
             fetch(SCRIPT_URL, {
                 method: 'POST',
+                mode: 'no-cors', // <--- LA CORRECTION EST ICI
                 body: new URLSearchParams(formData)
             })
-            .then(response => {
+            .then(() => {
+                // Avec no-cors, on ne peut pas lire la réponse, 
+                // mais si on arrive ici, c'est que la requête est partie !
                 alert('Merci ! Votre réponse a bien été enregistrée.');
                 e.target.reset();
                 document.getElementById('mairie_qty').style.display = 'none';
@@ -371,5 +375,6 @@
     </script>
 </body>
 </html>
+
 
 
