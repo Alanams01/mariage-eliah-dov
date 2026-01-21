@@ -314,7 +314,7 @@
     <footer style="text-align: center; padding: 40px 0; font-family: var(--font-serif); font-size: 0.8rem; color: var(--gold-flowers); letter-spacing: 2px; text-transform: uppercase;">&copy; 2026 Eliah & Dov</footer>
 
    <script>
-    // --- COLLE TA NOUVELLE URL CI-DESSOUS ---
+    // COLLEZ VOTRE NOUVELLE URL ICI
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2g8Sha2bPtqJMgGVNSixjlq4rm8Vas3PcatcsWXyzNl2cca_jrv5tVOoLR5HphaIrjg/exec";
 
     const audio = document.getElementById("bg-music");
@@ -339,40 +339,43 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // LE SCRIPT D'ENVOI CORRIGÉ
+    // Script d'envoi vers Google Sheets simplifié
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = e.target.querySelector('.btn-submit');
+        const originalText = btn.textContent;
+        
         btn.textContent = "Envoi en cours...";
         btn.disabled = true;
 
-        // On prépare les données proprement
         const formData = new FormData(this);
-        const data = new URLSearchParams(formData);
+        const params = new URLSearchParams(formData);
 
+        // Méthode fetch compatible avec le script ci-dessus
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Obligatoire pour Google Script
-            body: data
+            mode: 'no-cors', // Permet l'envoi sans erreur de sécurité
+            body: params
         })
         .then(() => {
-            // Avec no-cors, on arrive ici même si Google ne renvoie rien
             alert('Merci ! Votre réponse a bien été enregistrée.');
-            e.target.reset();
-            btn.textContent = "Confirmer ma présence";
-            btn.disabled = false;
+            e.target.reset(); // Vide le formulaire
             document.getElementById('mairie_qty').style.display = 'none';
             document.getElementById('houppa_qty').style.display = 'none';
         })
         .catch(error => {
             console.error('Erreur:', error);
-            alert('Erreur réseau. Vérifiez votre URL de script.');
+            alert('Une erreur est survenue, mais votre réponse a peut-être été envoyée.');
+        })
+        .finally(() => {
+            btn.textContent = originalText;
             btn.disabled = false;
         });
     });
-   </script>
+</script>
 </body>
 </html>
+
 
 
 
