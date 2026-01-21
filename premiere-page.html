@@ -83,6 +83,8 @@
         }
         .leaf-left { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
         .leaf-right { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
+        .leaf-left-mairie { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
+        .leaf-right-mairie { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
 
         .flower-specific {
             position: absolute; width: 170px; height: auto; 
@@ -103,6 +105,12 @@
             color: var(--gold-flowers); font-weight: 400;
         }
         
+        .houppa-intro-text, .date-main, .address-name, .address-line, .grand-parents-text {
+             font-family: var(--font-main) !important;
+             font-size: 0.75rem !important; 
+             text-transform: uppercase; letter-spacing: 1px;
+        }
+
         .date-main { 
             font-family: var(--font-main) !important;
             font-size: 1.1rem !important; 
@@ -145,15 +153,11 @@
         }
 
         .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 10px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
-        
-        .houppa-img-top { 
-            width: 100%; max-width: 100%; height: auto; display: block;
-            margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); 
-        }
-
+        .houppa-img-top { width: 100%; max-width: 60%; height: auto; display: block; margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); }
         .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
         .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
 
+        /* FORMULAIRE */
         form { display: flex; flex-direction: column; gap: 25px; text-align: left; margin-top: 20px; }
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-label { font-family: var(--font-serif); font-size: 0.75rem; color: var(--gold-flowers); text-transform: uppercase; letter-spacing: 1px; }
@@ -197,7 +201,13 @@
         </div>
 
         <div id="mairie" class="card reveal">
+            <div class="deco-leaf leaf-left-mairie"></div>
+            <div class="deco-leaf leaf-right-mairie"></div>
             <div class="card-content">
+                <svg style="width: 40px; margin-bottom: 20px; color: var(--gold-flowers);" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
+                    <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
+                </svg>
                 <h3>Cérémonie Civile</h3>
                 <div class="couple-names">Eliah & Dov</div>
                 <div class="divider"></div>
@@ -214,15 +224,23 @@
         <div id="houppa" class="card reveal">
             <img src="haut-droite.png" alt="" class="flower-specific flower-specific-top">
             <img src="bas-gauche.png" alt="" class="flower-specific flower-specific-bottom">
+
             <div class="card-content">
                 <img src="hebreu.png" alt="Kol Sasson" class="hebrew-img">
                 <img src="houppa.png" alt="Houppa" class="houppa-img-top">
                 <h3 style="margin: 5px 0 0 0;">Houppa & Soirée</h3>
+
                 <div class="parents-grid">
-                    <div class="parent-col">Famille Saada-Dos Santos</div>
-                    <div class="parent-col">Famille Guigui-Halioua</div>
+                    <div class="parent-col">Famille<br>Saada-Dos Santos</div>
+                    <div class="parent-col">Famille<br>Guigui-Halioua</div>
                 </div>
+                <p class="houppa-intro-text">
+                    Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
+                </p>
                 <div class="couple-names">Eliah & Dov</div>
+                <p class="houppa-intro-text" style="margin: 10px 0;">
+                    Et seront honorés de votre présence à la cérémonie religieuse qui aura lieu :
+                </p>
                 <div class="divider"></div>
                 <div class="date-main">Mercredi 29 Juillet 2026</div>
                 <div class="date-sub">15 AV 5786</div>
@@ -241,18 +259,18 @@
         <div id="confirmation" class="card reveal">
             <div class="card-content">
                 <h3>Confirmations</h3>
-                <p style="font-size: 0.9rem; margin-bottom: 20px;">Réponse souhaitée avant le 1er Juin 2026</p>
+                <p class="serif-italic" style="font-size: 0.9rem; margin-bottom: 20px;">Réponse souhaitée avant le 1er Juin 2026</p>
                 <form id="rsvpForm">
                     <div class="form-group">
-                        <label class="form-label">Nom & Prénoms *</label>
+                        <label class="form-label">Nom & Prénoms (Single/couple) *</label>
                         <input type="text" name="nom" placeholder="Ex: David & Sarah Cohen" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Présent à la Mairie ? *</label>
                         <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="mairie_pres" value="Oui" onclick="toggleQty('mairie', true)" required> Oui</label>
-                            <label class="radio-label"><input type="radio" name="mairie_pres" value="Non" onclick="toggleQty('mairie', false)"> Non</label>
+                            <label class="radio-label"><input type="radio" name="mairie_pres" value="oui" onclick="toggleQty('mairie', true)" required> Oui</label>
+                            <label class="radio-label"><input type="radio" name="mairie_pres" value="non" onclick="toggleQty('mairie', false)"> Non</label>
                         </div>
                         <div id="mairie_qty" class="hidden-option">
                             <label class="form-label">Nombre de personnes à la Mairie</label>
@@ -266,8 +284,8 @@
                     <div class="form-group">
                         <label class="form-label">Présent à la Houppa ? *</label>
                         <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="houppa_pres" value="Oui" onclick="toggleQty('houppa', true)" required> Oui</label>
-                            <label class="radio-label"><input type="radio" name="houppa_pres" value="Non" onclick="toggleQty('houppa', false)"> Non</label>
+                            <label class="radio-label"><input type="radio" name="houppa_pres" value="oui" onclick="toggleQty('houppa', true)" required> Oui</label>
+                            <label class="radio-label"><input type="radio" name="houppa_pres" value="non" onclick="toggleQty('houppa', false)"> Non</label>
                         </div>
                         <div id="houppa_qty" class="hidden-option">
                             <label class="form-label">Nombre de personnes à la Houppa</label>
@@ -349,4 +367,5 @@
     </script>
 </body>
 </html>
+
 
