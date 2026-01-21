@@ -105,7 +105,7 @@
             color: var(--gold-flowers); font-weight: 400;
         }
         
-        .houppa-intro-text, .date-main, .address-name, .address-line, .grand-parents-text {
+        .houppa-intro-text, .address-name, .address-line, .grand-parents-text {
              font-family: var(--font-main) !important;
              font-size: 0.75rem !important; 
              text-transform: uppercase; letter-spacing: 1px;
@@ -153,11 +153,15 @@
         }
 
         .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 10px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
-        .houppa-img-top { width: 100%; max-width: 60%; height: auto; display: block; margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); }
+        
+        .houppa-img-top { 
+            width: 100%; max-width: 100%; height: auto; display: block;
+            margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); 
+        }
+
         .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
         .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
 
-        /* FORMULAIRE */
         form { display: flex; flex-direction: column; gap: 25px; text-align: left; margin-top: 20px; }
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-label { font-family: var(--font-serif); font-size: 0.75rem; color: var(--gold-flowers); text-transform: uppercase; letter-spacing: 1px; }
@@ -310,26 +314,59 @@
     <footer style="text-align: center; padding: 40px 0; font-family: var(--font-serif); font-size: 0.8rem; color: var(--gold-flowers); letter-spacing: 2px; text-transform: uppercase;">&copy; 2026 Eliah & Dov</footer>
 
     <script>
+        // --- COLLEZ VOTRE URL GOOGLE APPS SCRIPT CI-DESSOUS ---
+        const SCRIPT_URL = "VOTRE_URL_ICI";
+
         const audio = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-toggle");
         let isPlaying = false;
+
         function toggleMusic() {
             if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
             else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
             isPlaying = !isPlaying;
         }
+
         function toggleQty(section, show) {
             const element = document.getElementById(section + '_qty');
             element.style.display = show ? 'block' : 'none';
         }
+
         document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Script d'envoi vers Google Sheets
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Merci ! Votre réponse a bien été enregistrée.');
+            const btn = e.target.querySelector('.btn-submit');
+            const originalText = btn.textContent;
+            btn.textContent = "Envoi en cours...";
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+            
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => {
+                alert('Merci ! Votre réponse a bien été enregistrée.');
+                e.target.reset();
+                document.getElementById('mairie_qty').style.display = 'none';
+                document.getElementById('houppa_qty').style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue. Vérifiez votre connexion.');
+            })
+            .finally(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            });
         });
     </script>
 </body>
