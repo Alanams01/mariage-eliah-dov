@@ -76,20 +76,16 @@
         }
         .card-content { position: relative; z-index: 5; }
 
-        /* DECORATIONS FEUILLES */
         .deco-leaf {
             position: absolute; top: 0; bottom: 0; width: 100px; 
             background-size: contain; background-repeat: repeat-y; 
             z-index: 1; opacity: 0.8; pointer-events: none;
         }
-        /* Feuilles pour "Notre Histoire" */
         .leaf-left { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
         .leaf-right { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
-        /* Feuilles pour "Mairie" */
         .leaf-left-mairie { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
         .leaf-right-mairie { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
 
-        /* FLEURS HOUPPA ANGLES */
         .flower-specific {
             position: absolute; width: 170px; height: auto; 
             z-index: 2; opacity: 0.95; pointer-events: none;
@@ -109,13 +105,23 @@
             color: var(--gold-flowers); font-weight: 400;
         }
         
-        .houppa-intro-text, .date-main, .address-name, .address-line, .grand-parents-text {
+        .houppa-intro-text, .address-name, .address-line, .grand-parents-text {
              font-family: var(--font-main) !important;
              font-size: 0.75rem !important; 
              text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .date-main, .address-name { font-weight: 600 !important; margin-bottom: 4px; }
+        /* MODIFICATION : Dates plus grandes (passées de 0.75rem à 1rem) */
+        .date-main { 
+            font-family: var(--font-main) !important;
+            font-size: 1.1rem !important; 
+            font-weight: 600 !important; 
+            margin-bottom: 4px; 
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .address-name { font-weight: 600 !important; margin-bottom: 4px; }
         .address-line { font-variant-numeric: lining-nums; }
 
         .date-sub { 
@@ -148,11 +154,16 @@
         }
 
         .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 10px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
-        .houppa-img-top { width: 100%; max-width: 60%; height: auto; display: block; margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); }
+        
+        /* MODIFICATION : Image Houppa plus grande (passée de 60% à 85%) */
+        .houppa-img-top { 
+            width: 100%; max-width: 85%; height: auto; display: block;
+            margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); 
+        }
+
         .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
         .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
 
-        /* FORMULAIRE */
         form { display: flex; flex-direction: column; gap: 25px; text-align: left; margin-top: 20px; }
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-label { font-family: var(--font-serif); font-size: 0.75rem; color: var(--gold-flowers); text-transform: uppercase; letter-spacing: 1px; }
@@ -189,7 +200,7 @@
                 <img src="logo.png" alt="Logo" class="section-logo">
                 <h3>Notre Histoire</h3>
                 <div class="divider"></div>
-                <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; line-height: 1.5;">
+                <p style="font-family: 'Great Vibes', cursive; font-size: 1.3rem; line-height: 1.4; padding: 0 15px;">
                     "De meilleurs amis au collège à partenaires pour la vie, D.ieu a guidé notre chemin depuis nos 15 ans jusqu'au jour où nous nous unissons sous la Houppa."
                 </p>
             </div>
