@@ -2,340 +2,387 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mariage de Eliah & Dov</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mélanie & Kévin - L'Union</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --bg-color: #FFFEFA; 
-            --card-bg: #FFFFFF;
-            --gold-flowers: #BFA466; 
-            --gold-light: #EBE3D3;
-            --text-color: #A08954; 
-            --font-script: 'Great Vibes', cursive;
-            --font-serif: 'Cinzel', serif;
-            --font-sans: 'Montserrat', sans-serif;
-            --font-main: 'Cormorant Garamond', serif;
-        }
-
+        /* --- RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body {
-            margin: 0; padding: 0;
-            width: 100%;
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-weight: 400;
-            line-height: 1.7;
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            color: #1a1a1a; 
+            background-color: #fcfcfc; 
+            background-image: url('fond-page.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
             overflow-x: hidden;
+            font-weight: 500; 
+            letter-spacing: 0.5px;
         }
 
-        nav {
-            position: sticky; top: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 254, 250, 0.98);
-            border-bottom: 1px solid var(--gold-light);
-            padding: 20px 0;
-            display: flex; justify-content: center; gap: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        /* --- PARALLAXE --- */
+        .parallax-container {
+            position: sticky; top: 0;
+            height: 100vh; height: 100dvh;
+            width: 100%; overflow: hidden; z-index: 1;
+            display: flex; justify-content: center; align-items: center;
         }
-        nav a {
-            text-decoration: none; color: var(--text-color);
-            font-family: var(--font-sans); text-transform: uppercase; 
-            letter-spacing: 2px; font-size: 0.7rem; font-weight: 500; 
-            transition: color 0.3s;
+        .parallax-container img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1;
         }
-
-        .main-wrapper {
-            max-width: 600px;
-            margin: 0 auto; padding: 20px 10px;
-            display: flex; flex-direction: column; gap: 60px; padding-bottom: 120px; 
-            padding-top: 40px; 
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.2); z-index: 0;
         }
 
-        .card {
-            position: relative; 
-            padding: 60px 40px; 
-            background-color: var(--card-bg);
-            border: 1px solid var(--gold-flowers); 
-            box-shadow: 0 10px 30px rgba(191, 164, 102, 0.1);
-            text-align: center; 
-            overflow: hidden;
+        /* --- PHOTO 4 --- */
+        .final-container {
+            position: relative; z-index: 20; height: 100vh; width: 100%;
+            overflow: hidden; display: block; background-color: #fff; 
+        }
+        .final-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- HERO --- */
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; color: white;
+            animation: fadeIn 1.5s ease-out;
+        }
+        .hero-names {
+            font-family: 'Pinyon Script', cursive; font-size: 6rem; 
+            text-shadow: 0 5px 20px rgba(0,0,0,0.4); margin-bottom: 15px;
+            line-height: 1.1; font-weight: 400; 
+        }
+        .hero-date {
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.3rem; letter-spacing: 8px; font-weight: 700;
+            text-transform: uppercase; border-top: 2px solid rgba(255,255,255,0.9); 
+            border-bottom: 2px solid rgba(255,255,255,0.9); padding: 15px 0; display: inline-block;
         }
 
-        #houppa.card { overflow: visible !important; z-index: 10; }
-
-        .card::after {
-            content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 1px solid var(--gold-light); pointer-events: none; z-index: 3;
-        }
-        .card-content { position: relative; z-index: 5; }
-
-        .deco-leaf {
-            position: absolute; top: 0; bottom: 0; width: 100px; 
-            background-size: contain; background-repeat: repeat-y; 
-            z-index: 1; opacity: 0.8; pointer-events: none;
-        }
-        .leaf-left { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
-        .leaf-right { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
-        .leaf-left-mairie { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
-        .leaf-right-mairie { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
-
-        .flower-specific {
-            position: absolute; width: 170px; height: auto; 
-            z-index: 2; opacity: 0.95; pointer-events: none;
-        }
-        .flower-specific-top { top: -20px; right: -20px; transform: rotate(-5deg); }
-        .flower-specific-bottom { bottom: -20px; left: -20px; transform: rotate(-15deg); }
-
-        h3 { 
-            font-family: var(--font-serif); font-weight: 400; text-transform: uppercase; 
-            letter-spacing: 3px; font-size: 1.4rem; margin-bottom: 15px; 
-            color: var(--gold-flowers);
+        /* --- SECTIONS --- */
+        .white-section {
+            position: relative; z-index: 10; padding: 100px 20px; text-align: center;
+            background-image: url('fond-page.png'); background-size: cover;
+            background-position: center; background-repeat: no-repeat;
+            background-color: #fcfcfc; box-shadow: 0 -10px 40px rgba(0,0,0,0.08);
         }
 
-        .couple-names {
-            font-family: 'Great Vibes', cursive !important; 
-            font-size: 2.8rem; margin: 10px 0; line-height: 1.1; 
-            color: var(--gold-flowers); font-weight: 400;
+        .section-logo-img { width: 280px; height: auto; margin-bottom: 40px; display: inline-block; }
+        
+        .hebrew-phrase-img {
+            display: block; margin: -65px auto 30px auto; 
+            max-width: 90%; width: 400px; height: auto;
+        }
+
+        /* --- TYPO --- */
+        h2 {
+            font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; 
+            text-transform: uppercase; font-weight: 600; letter-spacing: 6px; 
+            margin-bottom: 15px; color: #000;
+        }
+        .names-script {
+            font-family: 'Pinyon Script', cursive; font-size: 4.5rem; color: #111;
+            margin: 10px 0 20px 0; line-height: 1.1;
+        }
+        .action-text {
+            font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem;
+            color: #444; margin-bottom: 40px;
+        }
+        .info-block { margin-bottom: 50px; }
+        .time-location {
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 3px; font-weight: 600; margin-bottom: 15px; color: #555; display: block;
+        }
+        .venue {
+            font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; 
+            font-weight: 700; color: #111; line-height: 1.2; margin-bottom: 10px;
+        }
+        .address {
+            font-style: italic; font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.4rem; color: #333; font-weight: 500;
+        }
+
+        /* PARENTS */
+        .parents-columns-container {
+            display: flex; justify-content: center; gap: 40px; margin-bottom: 25px;
+        }
+        .parents-col {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+            line-height: 1.6; color: #222; font-weight: 600; text-align: center;
+        }
+
+        .invitation-phrase-standalone {
+            display: block; font-family: 'Cormorant Garamond', serif; font-weight: 500;
+            font-style: italic; font-size: 1.3rem; color: #444; margin-bottom: 40px;
         }
         
-        .houppa-intro-text, .address-name, .address-line, .grand-parents-text {
-             font-family: var(--font-main) !important;
-             font-size: 0.75rem !important; 
-             text-transform: uppercase; letter-spacing: 1px;
+        .honor-phrase {
+            display: block; font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.2rem; color: #666; margin-top: 10px; margin-bottom: 40px;
         }
 
-        .date-main { 
-            font-family: var(--font-main) !important;
-            font-size: 1.1rem !important; 
-            font-weight: 600 !important; 
-            margin-bottom: 4px; 
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+        .couple-block-new { margin-bottom: 20px; }
+        .couple-names-fr {
+            font-family: 'Pinyon Script', cursive; font-size: 4.5rem; color: #111; line-height: 1; margin-bottom: 10px;
+        }
+        .couple-names-he {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #555; font-weight: 500;
         }
 
-        .address-name { font-weight: 600 !important; margin-bottom: 4px; }
-        .address-line { font-variant-numeric: lining-nums; }
-
-        .date-sub { 
-            font-family: var(--font-sans) !important; 
-            font-size: 0.65rem !important; font-weight: 300;
-            color: var(--gold-flowers); margin-top: 2px; 
-            letter-spacing: 3px; text-transform: uppercase;
+        /* DATE SEPARATOR */
+        .date-separator {
+            display: flex; align-items: center; justify-content: center;
+            margin: 35px auto; width: 100%; max-width: 500px;
         }
-
-        .grand-parents-text {
-            font-family: var(--font-main) !important;
-            font-size: 0.85rem !important; font-weight: 600 !important; 
-            text-transform: none; letter-spacing: 0.5px;
+        .line { height: 1px; background-color: #111; flex-grow: 1; opacity: 0.2; }
+        .date-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; margin: 0 20px; color: #111;
         }
-
-        .section-logo {
-            width: 160px; margin: 0 auto 20px; display: block;
-            filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%);
-            opacity: 0.9;
-        }
-
-        .divider { width: 50px; height: 1px; background-color: var(--gold-flowers); margin: 30px auto; }
 
         .btn-waze {
-            display: inline-block; margin-top: 25px; 
-            color: var(--gold-flowers); border-bottom: 1px solid var(--gold-flowers);
-            padding-bottom: 5px; text-decoration: none; 
-            font-family: var(--font-main); font-size: 0.75rem;
-            text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s;
+            display: inline-block; text-decoration: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 3px; color: #111; border: 1px solid #111; 
+            padding: 12px 30px; transition: 0.4s; margin-top: 20px; font-weight: 700;
+        }
+        .btn-waze:hover { background-color: #111; color: white; }
+
+        /* FOND BLANC POUR TEXTE GP */
+        .footer-text-box {
+            margin-top: 80px; 
+            padding: 30px;
+            background-color: rgba(255,255,255,0.7); /* Fond semi-transparent pour lisibilité */
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .footer-text {
+            font-size: 1.1rem; color: #555; font-family: 'Cormorant Garamond', serif; 
+            font-style: italic; max-width: 700px; margin: 0 auto; line-height: 1.6; font-weight: 500;
         }
 
-        .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 10px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
-        
-        /* MODIFICATION : Image Houppa agrandie pour la voir de plus près */
-        .houppa-img-top { 
-            width: 100%; max-width: 100%; height: auto; display: block;
-            margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); 
+        /* --- FORMULAIRE --- */
+        .rsvp-container { max-width: 600px; margin: 0 auto; text-align: left; }
+        .input-group { margin-bottom: 45px; position: relative; }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%; padding: 15px 0; border: none; border-bottom: 1px solid #ccc;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #111;
+            background: transparent; outline: none; transition: 0.4s; border-radius: 0; font-weight: 600;
+        }
+        input:focus { border-bottom: 1px solid #000; }
+        .radio-title {
+            font-family: 'Montserrat', sans-serif; font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 2px; display: block; margin-bottom: 20px; color: #444; text-align: center; font-weight: 700;
+        }
+        .radio-options { display: flex; gap: 15px; justify-content: center; }
+        .radio-options label {
+            min-width: 120px; text-align: center; padding: 12px; border: 1px solid #ddd;
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; letter-spacing: 2px; color: #888;
+            background: rgba(255,255,255,0.8); font-weight: 600;
+        }
+        .radio-options input[type="radio"]:checked + label { background-color: #111; color: white; border-color: #111; }
+        .guest-input { display: none; margin-top: 25px; animation: slideDown 0.6s ease; }
+        .submit-btn {
+            width: 100%; padding: 25px; background-color: #111; color: white; border: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 4px; cursor: pointer; transition: 0.4s; margin-top: 30px; font-weight: 700;
         }
 
-        .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
-        .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
-        form { display: flex; flex-direction: column; gap: 25px; text-align: left; margin-top: 20px; }
-        .form-group { display: flex; flex-direction: column; gap: 8px; }
-        .form-label { font-family: var(--font-serif); font-size: 0.75rem; color: var(--gold-flowers); text-transform: uppercase; letter-spacing: 1px; }
-        input[type="text"], textarea, select { width: 100%; padding: 10px 0; border: none; border-bottom: 1px solid #ddd; background: transparent; font-family: var(--font-sans); font-size: 1rem; color: var(--text-color); outline: none; border-radius: 0; }
-        .radio-group { display: flex; gap: 20px; margin: 5px 0; }
-        .radio-label { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; color: var(--text-color); }
-        .btn-submit { background-color: var(--gold-flowers); color: #fff; border: none; padding: 18px; width: 100%; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .hidden-option { display: none; margin-top: 10px; animation: fadeIn 0.5s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .music-btn { position: fixed; bottom: 30px; right: 20px; z-index: 2147483647; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg, #BFA466, #DBC082); border: 2px solid #fff; box-shadow: 0 5px 15px rgba(191, 164, 102, 0.4); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        @media (max-width: 768px) {
+            .hero-names { font-size: 3.8rem; }
+            h2 { font-size: 1.8rem; }
+            .names-script, .couple-names-fr { font-size: 2.8rem; }
+            .section-logo-img { width: 150px; } 
+            .hebrew-phrase-img { width: 150px; margin-top: -75px; }
+            .parents-columns-container { flex-direction: row; gap: 10px; }
+            .parents-col { font-size: 0.85rem; flex: 1; }
+        }
     </style>
 </head>
 <body>
 
-    <audio id="bg-music" loop><source src="musique.mp4" type="audio/mp4"></audio>
-    <button id="music-toggle" class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></button>
-
-    <nav>
-        <a href="#histoire">Histoire</a>
-        <a href="#mairie">Mairie</a>
-        <a href="#houppa">Houppa</a>
-        <a href="#confirmation">Réponses</a>
-    </nav>
-
-    <div class="main-wrapper">
-
-        <div id="histoire" class="card reveal">
-            <div class="deco-leaf leaf-left"></div>
-            <div class="deco-leaf leaf-right"></div>
-            <div class="card-content">
-                <img src="logo.png" alt="Logo" class="section-logo">
-                <h3>Notre Histoire</h3>
-                <div class="divider"></div>
-                <p style="font-family: 'Great Vibes', cursive; font-size: 1.1rem; line-height: 1.5; padding: 0 40px;">
-                    "De meilleurs amis au collège à partenaires pour la vie, D.ieu a guidé notre chemin depuis nos 15 ans jusqu'au jour où nous nous unissons sous la Houppa."
-                </p>
-            </div>
-        </div>
-
-        <div id="mairie" class="card reveal">
-            <div class="deco-leaf leaf-left-mairie"></div>
-            <div class="deco-leaf leaf-right-mairie"></div>
-            <div class="card-content">
-                <svg style="width: 40px; margin-bottom: 20px; color: var(--gold-flowers);" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
-                    <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
-                </svg>
-                <h3>Cérémonie Civile</h3>
-                <div class="couple-names">Eliah & Dov</div>
-                <div class="divider"></div>
-                <div class="date-main">Lundi 27 Juillet 2026</div>
-                <div class="date-main" style="font-weight: 400; font-size: 0.9rem !important;">À 15h30</div>
-                <div style="margin-top: 20px;">
-                    <span class="address-name">Mairie de Joinville-le-Pont</span>
-                    <p class="address-line">23 rue de Paris</p>
-                </div>
-                <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont%2023%20rue%20de%20Paris" target="_blank" class="btn-waze"><i class="fa-brands fa-waze"></i> S'y rendre</a>
-            </div>
-        </div>
-
-        <div id="houppa" class="card reveal">
-            <img src="haut-droite.png" alt="" class="flower-specific flower-specific-top">
-            <img src="bas-gauche.png" alt="" class="flower-specific flower-specific-bottom">
-
-            <div class="card-content">
-                <img src="hebreu.png" alt="Kol Sasson" class="hebrew-img">
-                <img src="houppa.png" alt="Houppa" class="houppa-img-top">
-                <h3 style="margin: 5px 0 0 0;">Houppa & Soirée</h3>
-
-                <div class="parents-grid">
-                    <div class="parent-col">Famille<br>Saada-Dos Santos</div>
-                    <div class="parent-col">Famille<br>Guigui-Halioua</div>
-                </div>
-                <p class="houppa-intro-text">
-                    Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
-                </p>
-                <div class="couple-names">Eliah & Dov</div>
-                <p class="houppa-intro-text" style="margin: 10px 0;">
-                    Et seront honorés de votre présence à la cérémonie religieuse qui aura lieu :
-                </p>
-                <div class="divider"></div>
-                <div class="date-main">Mercredi 29 Juillet 2026</div>
-                <div class="date-sub">15 AV 5786</div>
-                <div class="date-main" style="margin-top: 4px; font-weight: 400; font-size: 0.9rem !important;">À 17H30</div>
-                <div style="margin-top: 25px;">
-                    <span class="address-name">La Verrière 91</span>
-                    <p class="address-line">3 rue Marvingt, 91700 Fleury-Mérogis</p>
-                </div>
-                <a href="https://waze.com/ul?q=La%20Verriere%2091%203%20rue%20Marvingt%20Fleury-Merogis" target="_blank" class="btn-waze"><i class="fa-brands fa-waze"></i> S'y rendre</a>
-                <p class="grand-parents-text" style="margin-top: 40px; border-top: 1px solid var(--gold-light); padding-top: 25px;">
-                    Pensée affectueuse pour nos grands-parents Muriel Rachel Dos Santos et Amram Halioua.
-                </p>
-            </div>
-        </div>
-
-        <div id="confirmation" class="card reveal">
-            <div class="card-content">
-                <h3>Confirmations</h3>
-                <p class="serif-italic" style="font-size: 0.9rem; margin-bottom: 20px;">Réponse souhaitée avant le 1er Juin 2026</p>
-                <form id="rsvpForm">
-                    <div class="form-group">
-                        <label class="form-label">Nom & Prénoms (Single/couple) *</label>
-                        <input type="text" name="nom" placeholder="Ex: David & Sarah Cohen" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Présent à la Mairie ? *</label>
-                        <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="mairie_pres" value="oui" onclick="toggleQty('mairie', true)" required> Oui</label>
-                            <label class="radio-label"><input type="radio" name="mairie_pres" value="non" onclick="toggleQty('mairie', false)"> Non</label>
-                        </div>
-                        <div id="mairie_qty" class="hidden-option">
-                            <label class="form-label">Nombre de personnes</label>
-                            <select name="mairie_nombre">
-                                <option value="1">1 personne</option>
-                                <option value="2">2 personnes</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Présent à la Houppa ? *</label>
-                        <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="houppa_pres" value="oui" onclick="toggleQty('houppa', true)" required> Oui</label>
-                            <label class="radio-label"><input type="radio" name="houppa_pres" value="non" onclick="toggleQty('houppa', false)"> Non</label>
-                        </div>
-                        <div id="houppa_qty" class="hidden-option">
-                            <label class="form-label">Nombre de personnes</label>
-                            <select name="houppa_nombre">
-                                <option value="1">1 personne</option>
-                                <option value="2">2 personnes</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Mot pour les mariés</label>
-                        <textarea name="message" rows="2" placeholder="Votre message..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Confirmer ma présence</button>
-                </form>
-            </div>
+    <div class="parallax-container">
+        <img src="photo1.jpeg" alt="Hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <div class="hero-names">Mélanie & Kévin</div>
+            <div class="hero-date">25 . 05 . 2026</div>
+            <div style="margin-top: 60px; font-size: 1.5rem; animation: bounce 2s infinite; opacity: 0.8;">↓</div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px 0; font-family: var(--font-serif); font-size: 0.8rem; color: var(--gold-flowers); letter-spacing: 2px; text-transform: uppercase;">&copy; 2026 Eliah & Dov</footer>
+    <section class="white-section">
+        <img src="logo.png" alt="Logo" class="section-logo-img">
+        
+        <h2>Cérémonie Civile</h2>
+        
+        <div class="names-script">Mélanie & Kévin</div>
+        <div class="action-text">Se diront "Oui"</div>
+
+        <div class="date-separator">
+            <span class="line"></span>
+            <span class="date-text">Mercredi 20 Mai 2026</span>
+            <span class="line"></span>
+        </div>
+
+        <div class="info-block">
+            <span class="time-location">À 14H00 PRÉCISES</span>
+            <div class="venue">Mairie de Levallois-Perret</div>
+            <div class="address">1 Place de la République<br>92300 Levallois-Perret</div>
+        </div>
+
+        <div class="info-block">
+            <span class="time-location" style="margin-top: 40px; display: block;">SUIVI D'UN AFTER HENNÉ</span>
+            <div class="venue">Pavillons des Fêtes</div>
+            <div class="address">
+                1 Place de Verdun, Levallois-Perret<br>
+                <span style="font-size: 1.1rem; font-style: italic;">(5 min à pied)</span>
+            </div>
+        </div>
+
+        <a href="https://waze.com/ul?q=Mairie%20de%20Levallois-Perret" target="_blank" class="btn-waze">Itinéraire Waze</a>
+    </section>
+
+    <div class="parallax-container">
+        <img src="photo2.jpeg" alt="Transition">
+        <div class="overlay"></div>
+    </div>
+
+    <section class="white-section">
+        <img src="logo.png" alt="Logo" class="section-logo-img">
+        <img src="hebreu.png" alt="Phrase Hébraïque" class="hebrew-phrase-img">
+
+        <h2>Houppa & Soirée</h2>
+
+        <div class="parents-columns-container">
+            <div class="parents-col">
+                Daisy Mamou<br>
+                Lydia & Elias Azoura
+            </div>
+            <div class="parents-col">
+                Véronique & James Azoura<br>
+                Maguy & Joseph Zana
+            </div>
+        </div>
+
+        <span class="invitation-phrase-standalone">
+            Remercient Hachem de vous convier au mariage de leurs enfants et petits enfants
+        </span>
+
+        <div class="couple-block-new">
+            <div class="couple-names-fr">Mélanie & Kevin</div>
+            <div class="couple-names-he">‎רחל & ישראל</div>
+        </div>
+
+        <span class="honor-phrase">
+            et seront honorés de votre présence à la cérémonie religieuse qui sera célébrée le<br>
+            Lundi 25 mai 2026 à 17h30 précises
+        </span>
+
+        <div class="info-block">
+            <div class="venue">Salle des Pyramides</div>
+            <div class="address">La Marquise<br>16 avenue de Saint Germain, Le Port Marly</div>
+        </div>
+
+        <div class="address" style="margin-bottom: 30px; font-size: 1.2rem;">
+            La cérémonie religieuse sera suivie d’une réception
+        </div>
+
+        <a href="https://waze.com/ul?q=Les%20Pyramides%20Le%20Port-Marly" target="_blank" class="btn-waze">Itinéraire Waze</a>
+
+        <div class="footer-text-box">
+            <div class="footer-text">
+                Une pensée très émue pour nos grands-parents Élie Mamou, Jacques & Germaine Habib, Saidou Edmond Benmoussa & Germaine Benmoussa, Gaston Israel & Emilie Zana qui nous manqueront tant en ce jour unique.<br>Que vos bénédictions illuminent notre vie.
+            </div>
+        </div>
+    </section>
+
+    <div class="parallax-container">
+        <img src="photo3.jpeg" alt="Transition">
+        <div class="overlay"></div>
+    </div>
+
+    <section class="white-section">
+        <img src="logo.png" alt="Logo" class="section-logo-img">
+        <h2>Confirmation</h2>
+        <p style="color:#444; margin-bottom:60px; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 600;">
+            Merci de confirmer votre présence dès réception.
+        </p>
+
+        <form class="rsvp-container" action="mailto:melanie.kevin@gmail.com" method="post" enctype="text/plain">
+            
+            <div class="input-group">
+                <input type="text" name="nom" required placeholder="Vos Noms & Prénoms">
+            </div>
+
+            <div class="input-group">
+                <span class="radio-title">Serez-vous présents à la Mairie ?</span>
+                <div class="radio-options">
+                    <input type="radio" id="mairie-oui" name="mairie" value="Oui" required onclick="toggleGuestInput('mairie-guests', true)">
+                    <label for="mairie-oui">Présent</label>
+
+                    <input type="radio" id="mairie-non" name="mairie" value="Non" required onclick="toggleGuestInput('mairie-guests', false)">
+                    <label for="mairie-non">Absent</label>
+                </div>
+                <div id="mairie-guests" class="guest-input">
+                    <input type="number" name="nb_mairie" placeholder="Nombre de personnes (Mairie)" min="1">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="radio-title">Serez-vous présents à la Houppa ?</span>
+                <div class="radio-options">
+                    <input type="radio" id="houppa-oui" name="houppa" value="Oui" required onclick="toggleGuestInput('houppa-guests', true)">
+                    <label for="houppa-oui">Présent</label>
+
+                    <input type="radio" id="houppa-non" name="houppa" value="Non" required onclick="toggleGuestInput('houppa-guests', false)">
+                    <label for="houppa-non">Absent</label>
+                </div>
+                <div id="houppa-guests" class="guest-input">
+                    <input type="number" name="nb_houppa" placeholder="Nombre de personnes (Houppa)" min="1">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <textarea name="message" rows="1" placeholder="Un message pour les mariés..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Confirmer ma présence</button>
+        </form>
+    </section>
+
+    <div class="final-container">
+        <img src="photo4.jpeg" alt="Final">
+        <div class="overlay"></div>
+    </div>
 
     <script>
-        const audio = document.getElementById("bg-music");
-        const musicBtn = document.getElementById("music-toggle");
-        let isPlaying = false;
-        function toggleMusic() {
-            if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
-            else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
-            isPlaying = !isPlaying;
+        function toggleGuestInput(elementId, show) {
+            var element = document.getElementById(elementId);
+            var input = element.querySelector('input');
+            if (show) {
+                element.style.display = 'block';
+                input.setAttribute('required', 'required');
+            } else {
+                element.style.display = 'none';
+                input.removeAttribute('required');
+                input.value = '';
+            }
         }
-        function toggleQty(section, show) {
-            const element = document.getElementById(section + '_qty');
-            element.style.display = show ? 'block' : 'none';
-        }
-        document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci ! Votre réponse a bien été enregistrée.');
-        });
     </script>
+
 </body>
 </html>
