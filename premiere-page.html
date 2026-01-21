@@ -83,8 +83,6 @@
         }
         .leaf-left { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
         .leaf-right { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
-        .leaf-left-mairie { left: -20px; background-image: url('feuille-gauche1.png'); background-position: left center; }
-        .leaf-right-mairie { right: -20px; background-image: url('feuille-droite1.png'); background-position: right center; }
 
         .flower-specific {
             position: absolute; width: 170px; height: auto; 
@@ -105,12 +103,6 @@
             color: var(--gold-flowers); font-weight: 400;
         }
         
-        .houppa-intro-text, .address-name, .address-line, .grand-parents-text {
-             font-family: var(--font-main) !important;
-             font-size: 0.75rem !important; 
-             text-transform: uppercase; letter-spacing: 1px;
-        }
-
         .date-main { 
             font-family: var(--font-main) !important;
             font-size: 1.1rem !important; 
@@ -205,13 +197,7 @@
         </div>
 
         <div id="mairie" class="card reveal">
-            <div class="deco-leaf leaf-left-mairie"></div>
-            <div class="deco-leaf leaf-right-mairie"></div>
             <div class="card-content">
-                <svg style="width: 40px; margin-bottom: 20px; color: var(--gold-flowers);" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="35" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
-                    <circle cx="65" cy="30" r="22" stroke="currentColor" stroke-width="1.5" />
-                </svg>
                 <h3>Cérémonie Civile</h3>
                 <div class="couple-names">Eliah & Dov</div>
                 <div class="divider"></div>
@@ -228,23 +214,15 @@
         <div id="houppa" class="card reveal">
             <img src="haut-droite.png" alt="" class="flower-specific flower-specific-top">
             <img src="bas-gauche.png" alt="" class="flower-specific flower-specific-bottom">
-
             <div class="card-content">
                 <img src="hebreu.png" alt="Kol Sasson" class="hebrew-img">
                 <img src="houppa.png" alt="Houppa" class="houppa-img-top">
                 <h3 style="margin: 5px 0 0 0;">Houppa & Soirée</h3>
-
                 <div class="parents-grid">
-                    <div class="parent-col">Famille<br>Saada-Dos Santos</div>
-                    <div class="parent-col">Famille<br>Guigui-Halioua</div>
+                    <div class="parent-col">Famille Saada-Dos Santos</div>
+                    <div class="parent-col">Famille Guigui-Halioua</div>
                 </div>
-                <p class="houppa-intro-text">
-                    Ont la joie de vous faire part du mariage de leurs enfants et petits-enfants
-                </p>
                 <div class="couple-names">Eliah & Dov</div>
-                <p class="houppa-intro-text" style="margin: 10px 0;">
-                    Et seront honorés de votre présence à la cérémonie religieuse qui aura lieu :
-                </p>
                 <div class="divider"></div>
                 <div class="date-main">Mercredi 29 Juillet 2026</div>
                 <div class="date-sub">15 AV 5786</div>
@@ -263,18 +241,18 @@
         <div id="confirmation" class="card reveal">
             <div class="card-content">
                 <h3>Confirmations</h3>
-                <p class="serif-italic" style="font-size: 0.9rem; margin-bottom: 20px;">Réponse souhaitée avant le 1er Juin 2026</p>
+                <p style="font-size: 0.9rem; margin-bottom: 20px;">Réponse souhaitée avant le 1er Juin 2026</p>
                 <form id="rsvpForm">
                     <div class="form-group">
-                        <label class="form-label">Nom & Prénoms (Single/couple) *</label>
+                        <label class="form-label">Nom & Prénoms *</label>
                         <input type="text" name="nom" placeholder="Ex: David & Sarah Cohen" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Présent à la Mairie ? *</label>
                         <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="mairie_pres" value="oui" onclick="toggleQty('mairie', true)" required> Oui</label>
-                            <label class="radio-label"><input type="radio" name="mairie_pres" value="non" onclick="toggleQty('mairie', false)"> Non</label>
+                            <label class="radio-label"><input type="radio" name="mairie_pres" value="Oui" onclick="toggleQty('mairie', true)" required> Oui</label>
+                            <label class="radio-label"><input type="radio" name="mairie_pres" value="Non" onclick="toggleQty('mairie', false)"> Non</label>
                         </div>
                         <div id="mairie_qty" class="hidden-option">
                             <label class="form-label">Nombre de personnes à la Mairie</label>
@@ -288,8 +266,8 @@
                     <div class="form-group">
                         <label class="form-label">Présent à la Houppa ? *</label>
                         <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="houppa_pres" value="oui" onclick="toggleQty('houppa', true)" required> Oui</label>
-                            <label class="radio-label"><input type="radio" name="houppa_pres" value="non" onclick="toggleQty('houppa', false)"> Non</label>
+                            <label class="radio-label"><input type="radio" name="houppa_pres" value="Oui" onclick="toggleQty('houppa', true)" required> Oui</label>
+                            <label class="radio-label"><input type="radio" name="houppa_pres" value="Non" onclick="toggleQty('houppa', false)"> Non</label>
                         </div>
                         <div id="houppa_qty" class="hidden-option">
                             <label class="form-label">Nombre de personnes à la Houppa</label>
@@ -313,71 +291,61 @@
 
     <footer style="text-align: center; padding: 40px 0; font-family: var(--font-serif); font-size: 0.8rem; color: var(--gold-flowers); letter-spacing: 2px; text-transform: uppercase;">&copy; 2026 Eliah & Dov</footer>
 
-   <script>
-    // COLLEZ VOTRE NOUVELLE URL ICI
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2g8Sha2bPtqJMgGVNSixjlq4rm8Vas3PcatcsWXyzNl2cca_jrv5tVOoLR5HphaIrjg/exec";
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2g8Sha2bPtqJMgGVNSixjlq4rm8Vas3PcatcsWXyzNl2cca_jrv5tVOoLR5HphaIrjg/exec";
 
-    const audio = document.getElementById("bg-music");
-    const musicBtn = document.getElementById("music-toggle");
-    let isPlaying = false;
+        const audio = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-toggle");
+        let isPlaying = false;
 
-    function toggleMusic() {
-        if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
-        else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
-        isPlaying = !isPlaying;
-    }
+        function toggleMusic() {
+            if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
+            else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
+            isPlaying = !isPlaying;
+        }
 
-    function toggleQty(section, show) {
-        const element = document.getElementById(section + '_qty');
-        element.style.display = show ? 'block' : 'none';
-    }
+        function toggleQty(section, show) {
+            const element = document.getElementById(section + '_qty');
+            if(element) element.style.display = show ? 'block' : 'none';
+        }
 
-    document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Script d'envoi vers Google Sheets simplifié
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const btn = e.target.querySelector('.btn-submit');
-        const originalText = btn.textContent;
+        document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
         
-        btn.textContent = "Envoi en cours...";
-        btn.disabled = true;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        const formData = new FormData(this);
-        const params = new URLSearchParams(formData);
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            const originalText = btn.textContent;
+            btn.textContent = "Envoi en cours...";
+            btn.disabled = true;
 
-        // Méthode fetch compatible avec le script ci-dessus
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Permet l'envoi sans erreur de sécurité
-            body: params
-        })
-        .then(() => {
-            alert('Merci ! Votre réponse a bien été enregistrée.');
-            e.target.reset(); // Vide le formulaire
-            document.getElementById('mairie_qty').style.display = 'none';
-            document.getElementById('houppa_qty').style.display = 'none';
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert('Une erreur est survenue, mais votre réponse a peut-être été envoyée.');
-        })
-        .finally(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
+            const formData = new FormData(this);
+            const params = new URLSearchParams(formData);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: params
+            })
+            .then(() => {
+                alert('Merci ! Votre réponse a bien été enregistrée.');
+                e.target.reset();
+                btn.textContent = originalText;
+                btn.disabled = false;
+                document.getElementById('mairie_qty').style.display = 'none';
+                document.getElementById('houppa_qty').style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'envoi.');
+                btn.disabled = false;
+                btn.textContent = originalText;
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
-
-
-
-
-
-
