@@ -313,68 +313,67 @@
 
     <footer style="text-align: center; padding: 40px 0; font-family: var(--font-serif); font-size: 0.8rem; color: var(--gold-flowers); letter-spacing: 2px; text-transform: uppercase;">&copy; 2026 Eliah & Dov</footer>
 
-    <script>
-        // --- COLLEZ VOTRE URL GOOGLE APPS SCRIPT CI-DESSOUS ---
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2g8Sha2bPtqJMgGVNSixjlq4rm8Vas3PcatcsWXyzNl2cca_jrv5tVOoLR5HphaIrjg/exec";
+   <script>
+    // --- COLLE TA NOUVELLE URL CI-DESSOUS ---
+    const SCRIPT_URL = "TON_URL_ICI";
 
-        const audio = document.getElementById("bg-music");
-        const musicBtn = document.getElementById("music-toggle");
-        let isPlaying = false;
+    const audio = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-toggle");
+    let isPlaying = false;
 
-        function toggleMusic() {
-            if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
-            else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
-            isPlaying = !isPlaying;
-        }
+    function toggleMusic() {
+        if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
+        else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
+        isPlaying = !isPlaying;
+    }
 
-        function toggleQty(section, show) {
-            const element = document.getElementById(section + '_qty');
-            element.style.display = show ? 'block' : 'none';
-        }
+    function toggleQty(section, show) {
+        const element = document.getElementById(section + '_qty');
+        element.style.display = show ? 'block' : 'none';
+    }
 
-        document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-       // Script d'envoi vers Google Sheets
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('.btn-submit');
-            const originalText = btn.textContent;
-            btn.textContent = "Envoi en cours...";
-            btn.disabled = true;
+    // LE SCRIPT D'ENVOI CORRIGÉ
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('.btn-submit');
+        btn.textContent = "Envoi en cours...";
+        btn.disabled = true;
 
-            const formData = new FormData(this);
-            
-            // On utilise fetch avec no-cors pour autoriser l'envoi vers Google
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', // <--- LA CORRECTION EST ICI
-                body: new URLSearchParams(formData)
-            })
-            .then(() => {
-                // Avec no-cors, on ne peut pas lire la réponse, 
-                // mais si on arrive ici, c'est que la requête est partie !
-                alert('Merci ! Votre réponse a bien été enregistrée.');
-                e.target.reset();
-                document.getElementById('mairie_qty').style.display = 'none';
-                document.getElementById('houppa_qty').style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                alert('Une erreur est survenue. Vérifiez votre connexion.');
-            })
-            .finally(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            });
+        // On prépare les données proprement
+        const formData = new FormData(this);
+        const data = new URLSearchParams(formData);
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Obligatoire pour Google Script
+            body: data
+        })
+        .then(() => {
+            // Avec no-cors, on arrive ici même si Google ne renvoie rien
+            alert('Merci ! Votre réponse a bien été enregistrée.');
+            e.target.reset();
+            btn.textContent = "Confirmer ma présence";
+            btn.disabled = false;
+            document.getElementById('mairie_qty').style.display = 'none';
+            document.getElementById('houppa_qty').style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Erreur réseau. Vérifiez votre URL de script.');
+            btn.disabled = false;
         });
-    </script>
+    });
+   </script>
 </body>
 </html>
+
 
 
 
