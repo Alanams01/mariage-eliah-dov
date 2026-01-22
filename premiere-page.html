@@ -153,7 +153,10 @@
         }
 
         .hebrew-img { width: 100%; max-width: none; height: auto; margin: 0 auto 10px auto; display: block; opacity: 0.9; filter: brightness(0) saturate(100%) invert(73%) sepia(11%) saturate(1561%) hue-rotate(357deg) brightness(93%) contrast(89%); }
-        .houppa-img-top { width: 100%; max-width: 60%; height: auto; display: block; margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); }
+        
+        /* --- CORRECTION IMAGE HOUPPA : max-width 100% pour qu'elle soit grande --- */
+        .houppa-img-top { width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto 15px auto; border-radius: 2px; border: 1px solid var(--gold-light); }
+        
         .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; margin-bottom: 30px; border-bottom: 1px solid var(--gold-light); padding-bottom: 30px; }
         .parent-col { font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-color); }
 
@@ -325,12 +328,12 @@
 
             if (isPlaying) {
                 audio.pause();
-                musicIcon.className = "fa-solid fa-play";
+                musicIcon.className = "fa-solid fa-play"; // Change l'icône en Play
                 isPlaying = false;
             } else {
                 // Utilisation de la promesse play() pour éviter les erreurs sur mobile
                 audio.play().then(() => {
-                    musicIcon.className = "fa-solid fa-pause";
+                    musicIcon.className = "fa-solid fa-pause"; // Change l'icône en Pause
                     isPlaying = true;
                 }).catch(error => {
                     console.log("Lecture bloquée : interaction requise", error);
