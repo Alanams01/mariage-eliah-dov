@@ -175,8 +175,9 @@
 </head>
 <body>
 
-    <audio id="bg-music" loop><source src="musique.mp3" type="audio/mp4"></audio>
-    <button id="music-toggle" class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></button>
+    <audio id="bg-music" loop preload="auto"><source src="musique.mp3" type="audio/mpeg"></audio>
+    
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic(event)"><i class="fa-solid fa-play"></i></button>
 
     <nav>
         <a href="#histoire">Histoire</a>
@@ -314,12 +315,27 @@
 
         const audio = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-toggle");
+        const musicIcon = musicBtn.querySelector("i");
         let isPlaying = false;
 
-        function toggleMusic() {
-            if (isPlaying) { audio.pause(); musicBtn.querySelector("i").className = "fa-solid fa-music"; } 
-            else { audio.play(); musicBtn.querySelector("i").className = "fa-solid fa-slash"; }
-            isPlaying = !isPlaying;
+        // Fonction corrigée pour gérer la musique avec Event
+        function toggleMusic(event) {
+            // Empêche le clic de remonter au body et de causer un conflit
+            if(event) event.stopPropagation();
+
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.className = "fa-solid fa-play";
+                isPlaying = false;
+            } else {
+                // Utilisation de la promesse play() pour éviter les erreurs sur mobile
+                audio.play().then(() => {
+                    musicIcon.className = "fa-solid fa-pause";
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log("Lecture bloquée : interaction requise", error);
+                });
+            }
         }
 
         function toggleQty(section, show) {
@@ -327,13 +343,20 @@
             if(element) element.style.display = show ? 'block' : 'none';
         }
 
-        document.body.addEventListener('click', function() { if(!isPlaying) toggleMusic(); }, { once: true });
+        // Tente de lancer la musique au premier clic n'importe où (sauf si c'est le bouton musique)
+        document.body.addEventListener('click', function() { 
+            if(!isPlaying) {
+                toggleMusic();
+            }
+        }, { once: true });
         
+        // Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Formulaire
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = e.target.querySelector('.btn-submit');
@@ -354,6 +377,7 @@
                 e.target.reset();
                 btn.textContent = originalText;
                 btn.disabled = false;
+                // Masquer les options après envoi
                 document.getElementById('mairie_qty').style.display = 'none';
                 document.getElementById('houppa_qty').style.display = 'none';
             })
@@ -367,6 +391,3 @@
     </script>
 </body>
 </html>
-
-
-
